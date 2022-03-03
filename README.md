@@ -58,5 +58,13 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
         </sub>
       </a>
     </td>
+    <td align="center">
+      <a href="https://github.com/abacchi00">
+        <img src="https://github.com/abacchi00.png" width="100px;"/><br>
+        <sub>
+          <b>André Bacchi</b>
+        </sub>
+      </a>
+    </td>
   </tr>
 </table>
