@@ -1,6 +1,6 @@
 # Projeto ENGENHARIA DE SOFTWARE
 
-> O projeto é baseado ...
+> O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões de estudos da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações.
 
 
 ## Pré-requisitos
