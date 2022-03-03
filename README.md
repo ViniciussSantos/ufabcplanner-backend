@@ -50,5 +50,13 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
         </sub>
       </a>
     </td>
+    <td align="center">
+      <a href="https://github.com/estevesHERE">
+        <img src="https://github.com/estevesHERE.png" width="100px;"/><br>
+        <sub>
+          <b>Leonardo Esteves</b>
+        </sub>
+      </a>
+    </td>
   </tr>
 </table>
