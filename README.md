@@ -1,9 +1,54 @@
-# Grupo-1.11
-Agricultura Familiar
+# Projeto ENGENHARIA DE SOFTWARE
 
-1. Hichard Silveira
-1. Lucas Antonio dos Santos
-1. Gabriel Sena de Queiroz
-1. Leonardo Esteves Conceição
-1. Mateus Marinho
-1. Vinicius Santana Santos
+> O projeto é baseado ...
+
+
+## Pré-requisitos
+
+...
+
+
+## 🚀 Instalando
+
+...
+
+## 🤝 Colaboradores
+
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/marinhomateus">
+        <img src="https://github.com/marinhomateus.png" width="100px;"/><br>
+        <sub>
+          <b>Mateus Marinho</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/gabrielsqueiroz">
+        <img src="https://github.com/gabrielsqueiroz.png" width="100px;"/><br>
+        <sub>
+          <b>Gabriel Queiroz</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/ViniciussSantos">
+        <img src="https://github.com/ViniciussSantos.png" width="100px;"/><br>
+        <sub>
+          <b>Vinicius Santos</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/lucasajs">
+        <img src="https://github.com/lucasajs.png" width="100px;"/><br>
+        <sub>
+          <b>Lucas Santos</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
