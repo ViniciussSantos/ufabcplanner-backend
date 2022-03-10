@@ -27,7 +27,7 @@
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-instalando">Instalando</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-como-contribuir">Como contribuir</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-licenca">Licença</a>
+  <a href="#-Licença">Licença</a>
 </p>
 
 ## 👨🏻‍💻 Sobre o projeto
@@ -91,6 +91,39 @@ $ yarn
 # Inicie o client
 $ yarn start
 ```
+
+## 🤔 Como Contribuir
+
+**Faça um fork do repo**
+
+```bash
+# Fork usando a CLI oficial do  GitHub
+# Se você não tem a CLI do github instalada, utilize o site.
+
+$ gh repo fork ES-UFABC/UFABCplanner
+```
+
+**Siga os passos abaixo**
+
+```bash
+# Clone seu fork
+$ git clone your-fork-url && cd NOME_DO_REPO
+
+# Crie uma branch
+$ git checkout -b NOME_BRANCH
+
+# Faça um commit com as suas mudanças
+$ git commit -m 'mensagem de commit'
+
+# faça o push para a origin
+$ git push origin NOME_BRANCH
+```
+
+Depois que o seu pull request for mergeado, você pode deletar a sua branch
+
+## 📝 Licença
+
+Este projeto está licenciado sobre a licença MIT - Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 🤝 Colaboradores
 
