@@ -32,7 +32,7 @@
 
 ## 👨🏻‍💻 Sobre o projeto
 
-<p >O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões de estudos da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações.</p>
+<p >O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações.</p>
 
 ## 🚀 Tecnologias
 
