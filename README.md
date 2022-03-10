@@ -27,8 +27,8 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/gabrielsqueiroz">
-        <img src="https://github.com/gabrielsqueiroz.png" width="100px;"/><br>
+      <a href="https://github.com/wendellhichard">
+        <img src="https://github.com/wendellhichard.png" width="100px;"/><br>
         <sub>
           <b>Gabriel Queiroz</b>
         </sub>
