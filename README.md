@@ -30,7 +30,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="https://github.com/wendellhichard">
         <img src="https://github.com/wendellhichard.png" width="100px;"/><br>
         <sub>
-          <b>Gabriel Queiroz</b>
+          <b>Hichard Wendell</b>
         </sub>
       </a>
     </td>
