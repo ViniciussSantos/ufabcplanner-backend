@@ -1,16 +1,129 @@
-# Projeto ENGENHARIA DE SOFTWARE
+<h1 align="center">
+	<!-- <img alt="Logo" src=".github/logo.png" width="200px" /> -->
+  Logo da aplicação (Em construção)
+</h1>
 
-> O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões de estudos da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações.
+<h3 align="center">
+  UFABCplanner - da UFABC para a UFABC.
+</h3>
 
+<p align="center">
 
-## Pré-requisitos
+<a href="https://github.com/ES-UFABC/UFABCplanner/commits/main">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ES-UFABC/UFABCplanner">
+  </a>
+  
+  <a href="https://github.com/ES-UFABC/UFABCplanner/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/ES-UFABC/UFABCplanner">
+  </a>
 
-...
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ES-UFABC/UFABCplanner">  
+  
+  <img alt="GitHub" src="https://img.shields.io/github/license/ES-UFABC/UFABCplanner">
+</p>
 
+<p align="center">
+  <a href="#-sobre-o-projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-instalando">Instalando</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-como-contribuir">Como contribuir</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-Licença">Licença</a>
+</p>
 
-## 🚀 Instalando
+## 👨🏻‍💻 Sobre o projeto
 
-...
+<p >O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações.</p>
+
+## 🚀 Tecnologias
+
+- [Node.js](https://nodejs.org/en/)
+- [ReactJS](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## 💻 Instalando
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
+- [Docker](https://www.docker.com/)
+
+**Clone o repo e acesse a pasta**
+
+```bash
+$ git clone https://github.com/ES-UFABC/UFABCplanner.git && cd UFABCplanner
+```
+
+**Siga os passos abaixo**
+
+### Backend
+
+```bash
+# Dentro da pasta root, vá para a pasta backend
+$ cd backend
+
+# Instale as dependências
+$ yarn
+
+# Suba um container do docker com uma instância do postgreSQL
+$ docker-compose up
+
+# Quando o container for criado com sucesso, rode as migrations
+$ yarn migration:run
+
+# para finalizar, inicie a API
+$ yarn dev
+
+# Parabéns, você iniciou o projeto!
+```
+
+### Frontend
+
+_Obs.: Antes de continuar, verifique se a API foi iniciada_
+
+```bash
+# Dentro da pasta root, vá para a pasta frontend
+$ cd frontend
+
+# Instale as dependências
+$ yarn
+
+# Inicie o client
+$ yarn start
+```
+
+## 🤔 Como Contribuir
+
+**Faça um fork do repo**
+
+```bash
+# Fork usando a CLI oficial do  GitHub
+# Se você não tem a CLI do github instalada, utilize o site.
+
+$ gh repo fork ES-UFABC/UFABCplanner
+```
+
+**Siga os passos abaixo**
+
+```bash
+# Clone seu fork
+$ git clone your-fork-url && cd NOME_DO_REPO
+
+# Crie uma branch
+$ git checkout -b NOME_BRANCH
+
+# Faça um commit com as suas mudanças
+$ git commit -m 'mensagem de commit'
+
+# faça o push para a origin
+$ git push origin NOME_BRANCH
+```
+
+Depois que o seu pull request for mergeado, você pode deletar a sua branch
+
+## 📝 Licença
+
+Este projeto está licenciado sobre a licença MIT - Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 🤝 Colaboradores
 
