@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './styles/global.scss';
+import styles from './App.module.scss';
+import { Sidebar } from './components/Sidebar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.app_container}>
+      <Sidebar />
+
+      <div className={styles.main}>
+        <div className={styles.content}>
+          Conteúdo, provavelmente o Router vai vir aqui
+        </div>
+
+        <div className={styles.footer}>
+          Footer legalzinho pro UFABCplanner | 2022
+        </div>
+      </div>
     </div>
   );
 }
