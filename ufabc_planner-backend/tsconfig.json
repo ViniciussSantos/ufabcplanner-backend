@@ -18,9 +18,7 @@
     "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied `any` type.. */
     "strictPropertyInitialization": true,             /* Check for class properties that are declared but not set in the constructor. */ 
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
-    "paths": {
-      "@test/*": ["test/*"]
-    }
+   
   },
 
 
