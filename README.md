@@ -60,7 +60,7 @@ $ git clone https://github.com/ES-UFABC/UFABCplanner.git && cd UFABCplanner
 
 ```bash
 # Dentro da pasta root, vá para a pasta backend
-$ cd backend
+$ cd ufabc_planner-backend
 
 # Instale as dependências
 $ yarn
@@ -83,7 +83,7 @@ _Obs.: Antes de continuar, verifique se a API foi iniciada_
 
 ```bash
 # Dentro da pasta root, vá para a pasta frontend
-$ cd frontend
+$ cd ufabc_planner-frontend
 
 # Instale as dependências
 $ yarn
