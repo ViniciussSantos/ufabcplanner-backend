@@ -1,16 +1,12 @@
 import { SidebarButton } from '../SidebarButton';
 import styles from './Sidebar.module.scss';
 import { FiBookOpen, FiCalendar, FiCoffee, FiFileText, FiLayers, FiSkipBack } from 'react-icons/fi'
+import { MainLogo } from '../MainLogo';
 
 const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
-      <div className={styles.logo}>
-        <FiCoffee />
-
-        <p style={{ fontWeight: 'bold' }}>UFABC</p>
-        <p style={{ fontSize: '16px', fontWeight: 'light' }}>planner</p>
-      </div>
+      <MainLogo />
 
       <div className={styles.btns_container}>
         <SidebarButton>
@@ -19,11 +15,11 @@ const Sidebar = () => {
           Calendário
         </SidebarButton>
 
-        <SidebarButton>
+        <SidebarButton selected>
           <FiLayers />
 
           Matérias
-        </SidebarButton>
+        </SidebarButton> 
 
         <SidebarButton>
           <FiSkipBack />
