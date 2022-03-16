@@ -1,0 +1,26 @@
+.logo {
+  font-size: 32px;
+  color: var(--primary);
+  text-align: center;
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #111111;
+
+  p {
+    margin: 0;
+    color: var(--lighter);
+  }
+
+  svg {
+    margin-right: 8px;
+  }
+
+  border-bottom: 1px solid rgba(211, 211, 211, 0.2);
+}
+
+.logo_text {
+  display: flex;
+  align-items: flex-end;
+}

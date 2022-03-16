@@ -1,6 +1,8 @@
 import './styles/global.scss';
 import styles from './App.module.scss';
 import { Sidebar } from './components/Sidebar';
+import { DashboardPage } from './pages/dashboard';
+import { MainHeader } from './components/MainHeader';
 
 function App() {
   return (
@@ -8,12 +10,14 @@ function App() {
       <Sidebar />
 
       <div className={styles.main}>
+        <MainHeader />
+        
         <div className={styles.content}>
-          Conteúdo, provavelmente o Router vai vir aqui
-        </div>
-
-        <div className={styles.footer}>
-          Footer legalzinho pro UFABCplanner | 2022
+          <DashboardPage />
+        
+          <div className={styles.footer}>
+            Footer legalzinho pro UFABCplanner | 2022
+          </div>
         </div>
       </div>
     </div>
