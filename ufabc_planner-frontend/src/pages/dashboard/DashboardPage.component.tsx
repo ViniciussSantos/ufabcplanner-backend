@@ -16,17 +16,17 @@ const DashboardPage = () => {
         </Box>
 
         <Box>
-          Testeee  
+          Testeee
         </Box>
       </BoxesContainer>
 
       <BoxesContainer>
         <Box>
-          Testeee  
+          Testeee
         </Box>
 
         <Box>
-          Testeee  
+          Testeee
         </Box>
 
         <Box>
@@ -39,15 +39,15 @@ const DashboardPage = () => {
         </Box>
 
         <Box>
-          Testeee  
+          Testeee
         </Box>
       </BoxesContainer>
 
       <BoxesContainer>
         <Box>
-          Testeee  
+          Testeee
         </Box>
-        
+
         <Box>
           <p>Testeasdf AS</p>
           <p>Testeasdf AS</p>
@@ -58,7 +58,7 @@ const DashboardPage = () => {
         </Box>
 
         <Box>
-          Testeee  
+          Testeee
         </Box>
       </BoxesContainer>
 
@@ -73,7 +73,7 @@ const DashboardPage = () => {
         </Box>
 
         <Box>
-          Testeee  
+          Testeee
         </Box>
       </BoxesContainer>
     </PageLayout>
