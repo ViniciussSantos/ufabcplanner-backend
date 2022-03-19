@@ -1,6 +1,6 @@
 import { SidebarButton } from '../SidebarButton';
 import styles from './Sidebar.module.scss';
-import { FiBookOpen, FiCalendar, FiCoffee, FiFileText, FiLayers, FiSkipBack } from 'react-icons/fi'
+import { FiBookOpen, FiCalendar, FiFileText, FiLayers, FiSkipBack } from 'react-icons/fi'
 import { MainLogo } from '../MainLogo';
 
 const Sidebar = () => {
@@ -9,34 +9,34 @@ const Sidebar = () => {
       <MainLogo />
 
       <div className={styles.btns_container}>
-        <SidebarButton>
+        <SidebarButton linkTo="/dashboard" selected>
+          <FiLayers />
+
+          Dashboard
+        </SidebarButton>
+
+        <SidebarButton linkTo="/calendar">
           <FiCalendar />
 
           Calendário
         </SidebarButton>
 
-        <SidebarButton selected>
-          <FiLayers />
-
-          Matérias
-        </SidebarButton> 
-
-        <SidebarButton>
+        <SidebarButton linkTo="/tasks">
           <FiSkipBack />
 
-          Histórico
+          Tarefas
         </SidebarButton>
 
-        <SidebarButton>
+        <SidebarButton linkTo="/exams">
           <FiBookOpen />
 
-          Diário
+          Provas
         </SidebarButton>
 
-        <SidebarButton>
+        <SidebarButton linkTo="/schedule">
           <FiFileText />
 
-          Avaliações
+          Períodos e Matérias
         </SidebarButton>
       </div>
     </div>

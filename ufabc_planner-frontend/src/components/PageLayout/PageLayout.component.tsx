@@ -7,7 +7,13 @@ interface Props {
 const PageLayout = ({ children }: Props) => {
   return (
     <div className={styles.page_layout}>
-      {children}
+      <div className={styles.page_content}>
+        {children}
+      </div>
+
+      <div className={styles.footer}>
+        Footer legalzinho pro UFABCplanner | 2022
+      </div>
     </div>
   );
 };

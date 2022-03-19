@@ -19,13 +19,3 @@
   min-height: calc(100vh - 96px - 32px); // 96px from header and 32px from top padding
   overflow-y: auto;
 }
-
-.footer {
-  font-size: 12px;
-  color: var(--darker);
-  margin-top: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
