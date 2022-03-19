@@ -11,10 +11,10 @@ function App() {
 
       <div className={styles.main}>
         <MainHeader />
-        
+
         <div className={styles.content}>
           <DashboardPage />
-        
+
           <div className={styles.footer}>
             Footer legalzinho pro UFABCplanner | 2022
           </div>
