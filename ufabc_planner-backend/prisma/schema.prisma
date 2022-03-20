@@ -15,105 +15,105 @@ model User {
   email        String         @unique
   name         String
   password     String
-  academicYear AcademicYear[]
+  //academicYear AcademicYear[]
   created_at   DateTime       @default(now())
   updated_at   DateTime       @updatedAt
 
   @@map("users")
 }
 
-model AcademicYear {
-  id         String    @id @default(uuid())
-  user       User      @relation(fields: [userId], references: [id])
-  userId     String
-  year       String
-  // alterar para ser apenas date
-  start_date DateTime  @db.Date
-  end_date   DateTime
-  quarter    Quarter[]
-  created_at DateTime  @default(now())
+// model AcademicYear {
+//   id         String    @id @default(uuid())
+//   user       User      @relation(fields: [userId], references: [id])
+//   userId     String
+//   year       String
+//   // alterar para ser apenas date
+//   start_date DateTime  @db.Date
+//   end_date   DateTime
+//   quarter    Quarter[]
+//   created_at DateTime  @default(now())
 
 
-  @@map("academic_years")
-}
+//   @@map("academic_years")
+// }
 
-model Quarter {
-  id             String       @id @default(uuid())
-  academy_year   AcademicYear @relation(fields: [academy_yearId], references: [id])
-  academy_yearId String
-  Subject        Subject[]
-  start_date     DateTime
-  end_date       DateTime
+// model Quarter {
+//   id             String       @id @default(uuid())
+//   academy_year   AcademicYear @relation(fields: [academy_yearId], references: [id])
+//   academy_yearId String
+//   Subject        Subject[]
+//   start_date     DateTime
+//   end_date       DateTime
 
-  @@map("quarters")
-}
+//   @@map("quarters")
+// }
 
-model Subject {
-  id          String  @id @default(uuid())
-  name        String
-  description String
-  quarter     Quarter @relation(fields: [quarterId], references: [id])
-  quarterId   String
-  Class       Class[]
-  Task        Task[]
-  Exam        Exam[]
+// model Subject {
+//   id          String  @id @default(uuid())
+//   name        String
+//   description String
+//   quarter     Quarter @relation(fields: [quarterId], references: [id])
+//   quarterId   String
+//   Class       Class[]
+//   Task        Task[]
+//   Exam        Exam[]
 
-  @@map("subjects")
-}
+//   @@map("subjects")
+// }
 
-model Class {
-  id            String       @id @default(uuid())
-  professor     String?
-  room          String?
-  campus        String?
-  building      String?
-  //arrumar types do start_time, end_time e weekday
-  start_time    DateTime     @db.Time(4)
-  end_time      DateTime     @db.Time(4)
-  weekday       Weekdays
-  biweekly_type BiweeklyType
-  subject       Subject      @relation(fields: [subjectId], references: [id])
-  subjectId     String
+// model Class {
+//   id            String       @id @default(uuid())
+//   professor     String?
+//   room          String?
+//   campus        String?
+//   building      String?
+//   //arrumar types do start_time, end_time e weekday
+//   start_time    DateTime     @db.Time(4)
+//   end_time      DateTime     @db.Time(4)
+//   weekday       Weekdays
+//   biweekly_type BiweeklyType
+//   subject       Subject      @relation(fields: [subjectId], references: [id])
+//   subjectId     String
 
-  @@map("classes")
-}
+//   @@map("classes")
+// }
 
-model Task {
-  id          String   @id @default(uuid())
-  subject     Subject  @relation(fields: [subjectId], references: [id])
-  subjectId   String
-  title       String
-  dueDate     DateTime
-  description String?
+// model Task {
+//   id          String   @id @default(uuid())
+//   subject     Subject  @relation(fields: [subjectId], references: [id])
+//   subjectId   String
+//   title       String
+//   dueDate     DateTime
+//   description String?
 
 
-  @@map("tasks")
-}
+//   @@map("tasks")
+// }
 
-model Exam {
-  id          String   @id @default(uuid())
-  subject     Subject  @relation(fields: [subjectId], references: [id])
-  subjectId   String
-  name        String
-  // arrumar dateTime
-  startDate   DateTime
-  time        DateTime
-  description String?
+// model Exam {
+//   id          String   @id @default(uuid())
+//   subject     Subject  @relation(fields: [subjectId], references: [id])
+//   subjectId   String
+//   name        String
+//   // arrumar dateTime
+//   startDate   DateTime
+//   time        DateTime
+//   description String?
 
-  @@map("exams")
-}
+//   @@map("exams")
+// }
 
-enum BiweeklyType {
-  week1
-  week2
-}
+// enum BiweeklyType {
+//   week1
+//   week2
+// }
 
-enum Weekdays {
-  seg
-  ter
-  quar
-  quin
-  sex
-  sab
-  dom
-}
+// enum Weekdays {
+//   seg
+//   ter
+//   quar
+//   quin
+//   sex
+//   sab
+//   dom
+// }
