@@ -1,43 +1,33 @@
+import { useMemo } from 'react';
+
 import { SidebarButton } from '../SidebarButton';
-import styles from './Sidebar.module.scss';
-import { FiBookOpen, FiCalendar, FiFileText, FiLayers, FiSkipBack } from 'react-icons/fi'
 import { MainLogo } from '../MainLogo';
 
+import { pagesProps } from '../../hooks/usePageProps.hook';
+
+import styles from './Sidebar.module.scss';
+
 const Sidebar = () => {
+  const sidebarButtons = useMemo(() => {
+    return Object.keys(pagesProps).map(key => {
+      const { icon: Icon, title } = pagesProps[key];
+
+      return (
+        <SidebarButton linkTo={`/${key}`}>
+          <Icon />
+
+          {title}
+        </SidebarButton>
+      );
+    });
+  }, []);
+
   return (
     <div className={styles.sidebar}>
       <MainLogo />
 
       <div className={styles.btns_container}>
-        <SidebarButton linkTo="/dashboard" selected>
-          <FiLayers />
-
-          Dashboard
-        </SidebarButton>
-
-        <SidebarButton linkTo="/calendar">
-          <FiCalendar />
-
-          Calendário
-        </SidebarButton>
-
-        <SidebarButton linkTo="/tasks">
-          <FiSkipBack />
-
-          Tarefas
-        </SidebarButton>
-
-        <SidebarButton linkTo="/exams">
-          <FiBookOpen />
-
-          Provas
-        </SidebarButton>
-
-        <SidebarButton linkTo="/schedule">
-          <FiFileText />
-
-          Períodos e Matérias
-        </SidebarButton>
+       {sidebarButtons}
       </div>
     </div>
   );
