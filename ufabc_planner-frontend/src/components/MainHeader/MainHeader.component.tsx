@@ -9,10 +9,7 @@ const MainHeader = () => {
     <div className={styles.main_header}>
       <h2><Icon />{title}</h2>
 
-      <>
-        André Rossini Bacchi
-        | configurações
-      </>
+      {/* Aqui vai a imagem do usuário, o nome, e o botao de sair ?? */}
     </div>
   );
 };
