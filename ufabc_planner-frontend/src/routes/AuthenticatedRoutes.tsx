@@ -6,7 +6,7 @@ import { ExamsPage } from "../pages/exams";
 import { SchedulePage } from "../pages/schedule";
 import { TasksPage } from "../pages/tasks";
 
-const UFABCPlannerRouter = () => {
+const AuthenticatedRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace/>} />
@@ -24,4 +24,4 @@ const UFABCPlannerRouter = () => {
   );
 }
 
-export default UFABCPlannerRouter;
+export default AuthenticatedRoutes;

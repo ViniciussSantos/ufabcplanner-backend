@@ -19,3 +19,8 @@
   min-height: calc(100vh - 96px - 32px); // 96px from header and 32px from top padding
   overflow-y: auto;
 }
+
+.not_authenticated_container {
+  min-height: 100vh;
+  background-color: var(--lighter);
+}
