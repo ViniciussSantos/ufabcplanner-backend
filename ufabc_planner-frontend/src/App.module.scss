@@ -20,12 +20,7 @@
   overflow-y: auto;
 }
 
-.footer {
-  font-size: 12px;
-  color: var(--darker);
-  margin-top: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.not_authenticated_container {
+  min-height: 100vh;
+  background-color: var(--lighter);
 }
