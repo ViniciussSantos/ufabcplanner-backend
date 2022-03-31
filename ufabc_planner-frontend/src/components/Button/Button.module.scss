@@ -1,13 +1,25 @@
-button.primary_btn {
+button.default_btn {
   width: 100%;
-  background-color: var(--primary);
-  color: var(--lighter);
   height: 48px;
   border: none;
   border-radius: 4px;
   font-size: 16px;
   font-weight: 600;
   transition: box-shadow 100ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  &.primary {
+    background-color: var(--primary);
+    color: var(--lighter);
+  }
+
+  &.secondary {
+    background-color: var(--light);
+    color: var(--dark);
+  }
 
   &:hover {
     cursor: pointer;

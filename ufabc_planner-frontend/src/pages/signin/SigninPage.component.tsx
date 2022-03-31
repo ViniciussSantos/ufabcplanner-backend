@@ -1,10 +1,14 @@
 import { useCallback, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Form } from '@unform/web'
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { InitialPageLayout } from '../../components/InitialPageLayout';
+
 import { IUser } from '../../interfaces/user';
+
+import api from '../../services/api';
 
 interface FormData extends IUser {
   passwordConfirmation: string;
@@ -13,19 +17,19 @@ interface FormData extends IUser {
 const SigninPage = () => {
   const formRef = useRef(null);
 
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(async (data: FormData) => {
     setLoading(true);
 
-    setTimeout(() => { setLoading(false); alert(`mandando para a api: ${JSON.stringify(data)}`)}, 2000);
-
-    // await api
-    //   .post('/signin', userData)
-    //   .then(() => alert('Usuário criado com sucesso!'))
-    //   .catch(error => alert(error))
-    //   .finally(() => setLoading(false))
-  }, []);
+    await api
+      .post('/users', data)
+      .then(() => { alert('Usuário criado com sucesso!'); navigate('/login') })
+      .catch(error => error?.response?.data?.message ? alert(error?.response?.data?.message) : alert('Houve um erro ao tentar cadastrar o usuário...'))
+      .finally(() => setLoading(false))
+  }, [navigate]);
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>

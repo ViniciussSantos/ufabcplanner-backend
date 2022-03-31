@@ -9,7 +9,7 @@ import { TasksPage } from "../pages/tasks";
 const AuthenticatedRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/dashboard" replace/>} />
+      <Route path="*" element={<Navigate to="/dashboard" replace/>} />
 
       <Route path="/dashboard" element={<DashboardPage />} />
 

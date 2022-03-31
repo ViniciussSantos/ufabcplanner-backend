@@ -16,6 +16,8 @@ input.basic_input {
   border-radius: 4px;
   padding: 16px;
   box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  color: var(--darker);
 
   &:focus {
     border-color: green;

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Sidebar } from './components/Sidebar';
@@ -10,7 +11,11 @@ import './styles/global.scss';
 import styles from './App.module.scss';
 
 function App() {
-  const authenticated = false;
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setAuthenticated(!!localStorage.getItem('auth_token'));
+  }, []);
 
   if (!authenticated) return (
     <div className={styles.not_authenticated_container}>
