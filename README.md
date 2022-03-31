@@ -68,7 +68,7 @@ $ yarn
 $ docker-compose up
 
 # Quando o container for criado com sucesso, rode as migrations
-$ yarn migration:run
+$ yarn dev:migration
 
 # para finalizar, inicie a API
 $ yarn dev
