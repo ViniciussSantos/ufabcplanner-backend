@@ -1,5 +1,5 @@
 interface CreateAcademyYearDTO {
-  userId: string;
+  id: string;
   year: string;
   startDate: string;
   endDate: string;
