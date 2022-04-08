@@ -5,11 +5,11 @@ import { CreateAcademicYearService } from '../services/CreateAcademicYearService
 export class CreateAcademyYearController {
   async handle(request: Request, response: Response) {
     const { year, startDate, endDate } = request.body;
-    const { id } = request.user;
+    const { id: userId } = request.user;
 
     const createAcademicYearService = container.resolve(CreateAcademicYearService);
 
-    await createAcademicYearService.execute({ id, year, startDate, endDate });
+    await createAcademicYearService.execute({ userId, year, startDate, endDate });
 
     return response.status(201).send();
   }

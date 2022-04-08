@@ -9,7 +9,7 @@ export class CreateAcademicYearService {
   constructor(private readonly dateProvider: DateProvider) {}
 
   async execute(params: CreateAcademyYearDTO): Promise<void> {
-    const { id, year, startDate, endDate } = params;
+    const { userId, year, startDate, endDate } = params;
 
     const startDateUTC = this.dateProvider.toDate(startDate);
     const endDateUTC = this.dateProvider.toDate(endDate);
@@ -20,7 +20,7 @@ export class CreateAcademicYearService {
 
     await prisma.academicYear.create({
       data: {
-        userId: id,
+        userId: userId,
         year: year,
         start_date: startDateUTC,
         end_date: endDateUTC,
