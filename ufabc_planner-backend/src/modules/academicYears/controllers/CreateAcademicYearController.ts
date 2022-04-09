@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateAcademicYearService } from '../services/CreateAcademicYearService';
 
-export class CreateAcademyYearController {
+export class CreateAcademicYearController {
   async handle(request: Request, response: Response) {
     const { year, startDate, endDate } = request.body;
     const { id } = request.user;
