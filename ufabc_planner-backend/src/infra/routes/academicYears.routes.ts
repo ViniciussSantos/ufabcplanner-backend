@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import { ensureAuthenticated } from 'infra/middlewares/ensureAuthenticated';
-import { CreateAcademyYearController } from 'modules/academicYears/controllers/CreateAcademyYearController';
+import { CreateAcademicYearController } from 'modules/academicYears/controllers/CreateAcademicYearController';
 import { DeleteAcademicYearController } from 'modules/academicYears/controllers/DeleteAcademicYearController';
 
 const academicYearRoutes = Router();
 
-const createAcademyYearController = new CreateAcademyYearController();
-const deleteAcademyYearController = new DeleteAcademicYearController();
+const createAcademicYearController = new CreateAcademicYearController();
+const deleteAcademicYearController = new DeleteAcademicYearController();
 
-academicYearRoutes.post('/', ensureAuthenticated, createAcademyYearController.handle);
-academicYearRoutes.delete('delete/:id', ensureAuthenticated, deleteAcademyYearController.handle);
+academicYearRoutes.post('/', ensureAuthenticated, createAcademicYearController.handle);
+academicYearRoutes.delete('/delete/:id', ensureAuthenticated, deleteAcademicYearController.handle);
 
 export { academicYearRoutes };

@@ -2,9 +2,10 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { DeleteAcademicYearService } from '../services/DeleteAcademicYearService';
 
-export class CreateAcademyYearController {
+export class DeleteAcademicYearController {
   async handle(request: Request, response: Response) {
-    const { id } = request.param;
+    const { id } = request.params;
+
     const { id: user_id } = request.user;
 
     const createAcademicYearService = container.resolve(DeleteAcademicYearService);
