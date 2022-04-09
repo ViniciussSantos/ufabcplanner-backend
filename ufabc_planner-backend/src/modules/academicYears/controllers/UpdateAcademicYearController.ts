@@ -2,15 +2,15 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { UpdateAcademicYearService } from '../services/UpdateAcademicYearService';
 
-export class UpdateAcademyYearController {
+export class UpdateAcademicYearController {
   async handle(request: Request, response: Response) {
     const { year, startDate, endDate } = request.body;
-    const { id } = request.user;
+    const { id } = request.params;
 
-    const createAcademicYearService = container.resolve(UpdateAcademicYearService);
+    const updateAcademicYearService = container.resolve(UpdateAcademicYearService);
 
-    await createAcademicYearService.execute({ id, year, startDate, endDate });
+    await updateAcademicYearService.execute(id, { year, start_date: startDate, end_date: endDate});
 
-    return response.status(201).send();
+    return response.status(204).send();
   }
 }

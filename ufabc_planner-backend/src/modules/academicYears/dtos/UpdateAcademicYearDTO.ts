@@ -1,7 +1,5 @@
 interface UpdateAcademyYearDTO {
-  user_id: string,
-  id: string;
-  year: string;
-  startDate: string;
-  endDate: string;
+  year: string | undefined;
+  start_date: string | undefined;
+  end_date: string | undefined;
 }
