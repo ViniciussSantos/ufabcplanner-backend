@@ -3,12 +3,13 @@ import { DateProvider } from 'providers/dateProvider';
 import { injectable } from 'tsyringe';
 import { AppError } from 'utils/errors/AppError';
 import { prisma } from 'utils/prisma';
+import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYearDTO';
 
 @injectable()
 export class DeleteAcademicYearService {
-  constructor(private readonly dateProvider: DateProvider) {}
+  async execute(params: DeleteAcademyYearDTO, userId: string): Promise<void> {
+    const { academicYearId } = params;
 
-  async delete(academicYearId: string, userId: string): Promise<void> {
     const academicYear = await prisma.academicYear.findUnique({
       where: {
         id: academicYearId,
