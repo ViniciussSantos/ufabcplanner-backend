@@ -9,7 +9,7 @@ export class UpdateAcademicYearController {
 
     const updateAcademicYearService = container.resolve(UpdateAcademicYearService);
 
-    await updateAcademicYearService.execute(id, { year, start_date: startDate, end_date: endDate});
+    await updateAcademicYearService.execute(id, { year, start_date: startDate, end_date: endDate });
 
     return response.status(204).send();
   }
