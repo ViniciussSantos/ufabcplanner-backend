@@ -7,6 +7,8 @@ interface Props {
 const Box = ({ children }: Props) => {
   // teste
 
+  //teste 2
+
   return (
     <div className={styles.box}>
       {children}
