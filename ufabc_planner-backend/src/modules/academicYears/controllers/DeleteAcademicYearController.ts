@@ -1,16 +1,20 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { validateInput } from 'utils/errors/validation';
+import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYearDTO';
 import { DeleteAcademicYearService } from '../services/DeleteAcademicYearService';
 
 export class DeleteAcademicYearController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params;
+    const { id: academicYearId } = request.params;
 
-    const { id: user_id } = request.user;
+    const { id: userId } = request.user;
 
     const createAcademicYearService = container.resolve(DeleteAcademicYearService);
 
-    await createAcademicYearService.delete(id, user_id);
+    const deleteAcademyYearDTO = await validateInput(DeleteAcademyYearDTO, { academicYearId });
+
+    await createAcademicYearService.execute(deleteAcademyYearDTO, userId);
 
     return response.status(204).send();
   }

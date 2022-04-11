@@ -4,11 +4,14 @@ import { sign } from 'jsonwebtoken';
 import { injectable } from 'tsyringe';
 import { AppError } from 'utils/errors/AppError';
 import { prisma } from 'utils/prisma';
-import { AuthenticateUserDTO, AuthenticateUserResponseDTO } from '../dtos/AuthenticateUserDTO';
+import { AuthenticateUserDTO } from '../dtos/AuthenticateUserDTO';
 
+interface IResponse {
+  token: string;
+}
 @injectable()
 export class AuthenticateUserService {
-  async execute({ email, password }: AuthenticateUserDTO): Promise<AuthenticateUserResponseDTO> {
+  async execute({ email, password }: AuthenticateUserDTO): Promise<IResponse> {
     const { expires_in_token, secret_token } = auth;
 
     const user = await prisma.user.findUnique({

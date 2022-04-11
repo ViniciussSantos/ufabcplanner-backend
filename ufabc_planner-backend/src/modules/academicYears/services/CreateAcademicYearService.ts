@@ -1,8 +1,8 @@
-import { CreateUserService } from 'modules/users/services/CreateUserService';
 import { DateProvider } from 'providers/dateProvider';
 import { injectable } from 'tsyringe';
 import { AppError } from 'utils/errors/AppError';
 import { prisma } from 'utils/prisma';
+import { CreateAcademyYearDTO } from '../dtos/CreateAcademyYearDTO';
 
 @injectable()
 export class CreateAcademicYearService {

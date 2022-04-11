@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { validateInput } from 'utils/errors/validation';
+import { CreateUserDTO } from '../dtos/CreateUserDTO';
 import { CreateUserService } from '../services/CreateUserService';
 
 export class CreateUserController {
@@ -8,11 +10,9 @@ export class CreateUserController {
 
     const createUserService = container.resolve(CreateUserService);
 
-    await createUserService.execute({
-      name,
-      email,
-      password,
-    });
+    const createUserDTO = await validateInput(CreateUserDTO, { name, email, password });
+
+    await createUserService.execute(createUserDTO);
 
     return response.status(201).send();
   }
