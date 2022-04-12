@@ -5,7 +5,7 @@ import { AuthenticateUserDTO } from '../dtos/AuthenticateUserDTO';
 import { AuthenticateUserService } from '../services/AuthenticateUserService';
 
 class AuthenticateUserController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
     const authenticateUserService = container.resolve(AuthenticateUserService);

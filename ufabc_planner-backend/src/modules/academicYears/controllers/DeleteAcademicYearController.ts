@@ -5,7 +5,7 @@ import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYearDTO';
 import { DeleteAcademicYearService } from '../services/DeleteAcademicYearService';
 
 export class DeleteAcademicYearController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { id: academicYearId } = request.params;
 
     const { id: userId } = request.user;
