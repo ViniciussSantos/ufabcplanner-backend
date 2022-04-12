@@ -5,7 +5,7 @@ import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYearDTO';
 import { UpdateAcademicYearService } from '../services/UpdateAcademicYearService';
 
 export class UpdateAcademicYearController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { year, startDate, endDate } = request.body;
     const { id } = request.params;
 
