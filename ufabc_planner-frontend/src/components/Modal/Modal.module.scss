@@ -1,0 +1,32 @@
+div.modal_container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+div.modal {
+  background-color: var(--lighter);
+  position: relative;
+
+  min-width: 400px;
+  min-height: 400px;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+div.modal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+b.modal_title {
+  font-size: 22px;
+}
