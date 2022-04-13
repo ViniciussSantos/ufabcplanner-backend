@@ -14,8 +14,8 @@ export class UpdateAcademicYearController {
     const updateAcademicYearDTO = await validateInput(UpdateAcademyYearDTO, {
       id,
       year,
-      start_date: startDate,
-      end_date: endDate,
+      startDate,
+      endDate,
     });
 
     await updateAcademicYearService.execute(updateAcademicYearDTO);
