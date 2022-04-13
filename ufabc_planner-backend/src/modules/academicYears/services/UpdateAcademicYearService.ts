@@ -9,45 +9,27 @@ import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYearDTO';
 export class UpdateAcademicYearService {
   constructor(private readonly dateProvider: DateProvider) {}
 
-  checkDates(originalAcademicYear: AcademicYear, validParams: Omit<UpdateAcademyYearDTO, 'id'>): void {
-    if (validParams.start_date) {
-      if (
-        this.dateProvider.compareIfBefore(
-          this.dateProvider.toDate(validParams.start_date),
-          originalAcademicYear.end_date
-        )
-      ) {
-        throw new AppError('Data final é antes da data inicial');
-      }
-    }
-
-    if (validParams.end_date) {
-      if (
-        this.dateProvider.compareIfBefore(
-          originalAcademicYear.start_date,
-          this.dateProvider.toDate(validParams.end_date)
-        )
-      ) {
-        throw new AppError('Data final é antes da data inicial');
-      }
-    }
-  }
-
   async execute(params: UpdateAcademyYearDTO): Promise<void> {
-    const originalAcademicYear = await prisma.academicYear.findUnique({ where: { id: params.id } });
+    const { id, year, startDate, endDate } = params;
+    const originalAcademicYear = await prisma.academicYear.findUnique({ where: { id: id } });
 
     if (!originalAcademicYear) {
       throw new AppError('Este ano acadêmico não existe!');
     }
 
-    this.checkDates(originalAcademicYear, params);
+    const startDateUTC = this.dateProvider.toDate(startDate);
+    const endDateUTC = this.dateProvider.toDate(endDate);
+
+    if (this.dateProvider.compareIfBefore(startDateUTC, endDateUTC)) {
+      throw new AppError('Data final é antes da data inicial');
+    }
 
     await prisma.academicYear.update({
-      where: { id: params.id },
+      where: { id: id },
       data: {
-        year: params.year,
-        start_date: params.start_date,
-        end_date: params.end_date,
+        year: year,
+        start_date: startDateUTC,
+        end_date: endDateUTC,
       },
     });
   }
