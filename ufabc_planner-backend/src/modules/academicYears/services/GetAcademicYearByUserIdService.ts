@@ -27,7 +27,7 @@ export class GetAcademicYearByUserIdService {
       return {
         id: value.id,
         year: value.year,
-        starDate: value.start_date.toISOString().split('T')[0],
+        startDate: value.start_date.toISOString().split('T')[0],
         endDate: value.end_date.toISOString().split('T')[0],
       };
     });
