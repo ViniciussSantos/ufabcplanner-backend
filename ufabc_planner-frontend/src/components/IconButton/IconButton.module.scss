@@ -1,0 +1,27 @@
+div.icon_button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--light);
+  }
+
+  transition: background-color 100ms;
+
+  &.primary {
+    color: var(--primary);
+  }
+
+  &.error {
+    color: var(--error);
+  }
+
+  &.standard {
+    color: var(--darker);
+  }
+}
