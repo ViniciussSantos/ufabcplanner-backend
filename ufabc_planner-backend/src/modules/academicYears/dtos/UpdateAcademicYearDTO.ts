@@ -8,13 +8,11 @@ export class UpdateAcademyYearDTO implements IUpdateAcademyYear {
   id: string;
 
   @IsNumberString({ message: messages.IsNumberString })
-  year: string;
+  year?: string;
 
-  @IsOptional()
   @IsDateString({ message: messages.IsDateString })
-  start_date?: string;
+  startDate: string;
 
-  @IsOptional()
   @IsDateString({ message: messages.IsDateString })
-  end_date?: string;
+  endDate: string;
 }
