@@ -7,17 +7,20 @@ import styles from './Modal.module.scss';
 interface Props {
   children: React.ReactNode;
   title: string;
+  onClose?: () => void;
 }
 
 export interface ModalRef {
   handleOpenModal: () => void;
+  handleCloseModal: () => void;
 }
 
-const Modal = forwardRef<ModalRef, Props>(({ children, title }, ref) => {
+const Modal = forwardRef<ModalRef, Props>(({ children, title, onClose }, ref) => {
   const [open, setOpen] = useState(false);
 
   useImperativeHandle(ref, () => ({
     handleOpenModal: () => setOpen(true),
+    handleCloseModal: () => setOpen(false),
   }), []);
 
   if (!open) return <></>;
@@ -28,7 +31,7 @@ const Modal = forwardRef<ModalRef, Props>(({ children, title }, ref) => {
         <div className={styles.modal_header}>
           <b className={styles.modal_title}>{title}</b>
 
-          <IconButton onClick={() => setOpen(false)} icon={FiX}/>
+          <IconButton onClick={() => { setOpen(false); if (onClose) onClose(); }} icon={FiX}/>
         </div>
 
         {children}
