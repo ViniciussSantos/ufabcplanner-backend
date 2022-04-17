@@ -5,7 +5,7 @@ import { IUsersRepository } from '../IUsersRepository';
 
 export class PrismaUserRepository implements IUsersRepository {
   async exists(email: string): Promise<boolean> {
-    const user = prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {
         email: email,
       },
