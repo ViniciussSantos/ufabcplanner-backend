@@ -1,27 +1,19 @@
 import { AcademicYear } from '@prisma/client';
 import { start } from 'repl';
-import { injectable } from 'tsyringe';
-import { AppError } from 'utils/errors/AppError';
-import { prisma } from 'utils/prisma';
+import { inject, injectable } from 'tsyringe';
+import { AppError } from 'infra/http/errors/AppError';
+import { prisma } from 'infra/prisma/client';
+import { IAcademicYearRepository } from '../repositories/IAcademicYearRepository';
 
 @injectable()
 export class GetAcademicYearByUserIdService {
-  async execute(userId: string): Promise<Partial<AcademicYear>[]> {
-    const academicYears = await prisma.academicYear.findMany({
-      where: {
-        userId: userId,
-      },
-      select: {
-        id: true,
-        year: true,
-        start_date: true,
-        end_date: true,
-      },
-    });
+  constructor(
+    @inject('PrismaAcademicYearRepository')
+    private academicYearRepository: IAcademicYearRepository
+  ) {}
 
-    if (academicYears.length == 0) {
-      throw new AppError('O usuário não tem nenhum ano acadêmico cadastrado');
-    }
+  async execute(userId: string): Promise<Partial<AcademicYear>[]> {
+    const academicYears = await this.academicYearRepository.getByUserId(userId);
 
     return academicYears.map((value) => {
       return {
