@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ensureAuthenticated } from 'infra/middlewares/ensureAuthenticated';
+import { ensureAuthenticated } from 'infra/http/middlewares/ensureAuthenticated';
 import { CreateAcademicYearController } from 'modules/academicYears/controllers/CreateAcademicYearController';
 import { DeleteAcademicYearController } from 'modules/academicYears/controllers/DeleteAcademicYearController';
 import { GetAcademicYearByUserIdController } from 'modules/academicYears/controllers/GetAcademicYearByUserIdController';

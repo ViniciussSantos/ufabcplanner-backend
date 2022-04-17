@@ -2,11 +2,11 @@ import 'reflect-metadata';
 import 'express-async-errors';
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
-import { AppError } from 'utils/errors/AppError';
+import { AppError } from 'infra/http/errors/AppError';
 import { router } from './routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from 'swagger.json';
-
+import '/infra/container';
 const app = express();
 
 app.use(express.json());
