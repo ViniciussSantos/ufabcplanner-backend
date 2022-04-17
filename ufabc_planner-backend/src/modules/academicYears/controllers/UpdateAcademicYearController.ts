@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { validateInput } from 'utils/errors/validation';
+import { validateInput } from 'infra/http/errors/validation';
 import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYearDTO';
 import { UpdateAcademicYearService } from '../services/UpdateAcademicYearService';
 
