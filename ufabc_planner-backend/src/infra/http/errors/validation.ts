@@ -1,6 +1,5 @@
 import { validate, ValidationError, ValidatorOptions } from 'class-validator';
 import { ClassConstructor, plainToClass, plainToInstance } from 'class-transformer';
-import e from 'cors';
 import { AppError } from './AppError';
 
 export async function validateInput<T extends Object>(Dto: ClassConstructor<T>, obj: any) {
