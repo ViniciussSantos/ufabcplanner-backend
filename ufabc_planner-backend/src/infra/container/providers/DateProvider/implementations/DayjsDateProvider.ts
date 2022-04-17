@@ -1,11 +1,12 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { injectable } from 'tsyringe';
+import { IDateProvider } from '../IDateProvider';
 
 dayjs.extend(utc);
 
 @injectable()
-export class DateProvider {
+export class DayjsDateProvider implements IDateProvider {
   toDate(date: string): Date {
     return dayjs(date).toDate();
   }
@@ -13,7 +14,7 @@ export class DateProvider {
     return dayjs(date).utc().format();
   }
 
-  compareInDays(startDate: Date, endDate: Date): Number {
+  compareInDays(startDate: Date, endDate: Date): number {
     const startDateUtc = this.convertToUTC(startDate);
     const endDateUtc = this.convertToUTC(endDate);
 
