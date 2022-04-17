@@ -1,5 +1,5 @@
 import { IsEmail, isNotEmpty, IsNotEmpty, IsString } from 'class-validator';
-import { messages } from 'utils/errors/messages';
+import { messages } from 'infra/http/errors/messages';
 import { ICreateUser } from './interfaces/ICreateUser';
 
 export class CreateUserDTO implements ICreateUser {
