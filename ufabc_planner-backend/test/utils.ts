@@ -5,8 +5,8 @@ export function pickRandomObject<T>(params: T[]): T | undefined {
   return lodash.sample(params);
 }
 
-export function pickRandomName(): string | undefined {
-  return pickRandomObject(randomNames);
+export function pickRandomName(): string {
+  return pickRandomObject(randomNames) || 'teste';
 }
 
 export function generateRandomEmail(): string {
