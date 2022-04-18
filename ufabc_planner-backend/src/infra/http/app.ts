@@ -6,7 +6,8 @@ import { AppError } from 'infra/http/errors/AppError';
 import { router } from './routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerFile from 'swagger.json';
-import '/infra/container';
+import 'infra/container';
+
 const app = express();
 
 app.use(express.json());
