@@ -1,5 +1,5 @@
 import { IsUUID, IsNotEmpty } from 'class-validator';
-import { messages } from 'utils/errors/messages';
+import { messages } from 'infra/http/errors/messages';
 import { IDeleteAcademyYear } from './interfaces/IDeleteAcademyYear';
 
 export class DeleteAcademyYearDTO implements IDeleteAcademyYear {

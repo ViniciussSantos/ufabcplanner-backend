@@ -1,5 +1,5 @@
 import { IsDateString, IsNotEmpty, IsNumberString, IsOptional, IsUUID } from 'class-validator';
-import { messages } from 'utils/errors/messages';
+import { messages } from 'infra/http/errors/messages';
 import { IUpdateAcademyYear } from './interfaces/IUpdateAcademicYear';
 
 export class UpdateAcademyYearDTO implements IUpdateAcademyYear {
