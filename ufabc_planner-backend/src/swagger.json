@@ -11,7 +11,7 @@
       "post": {
         "tag": ["academic Year"],
         "sumary": "create an academic year",
-        "description": "create a new academic year",
+        "description": "creates a new academic year",
         "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
@@ -52,8 +52,8 @@
     "/academicyears/get/user": {
       "get": {
         "tag": ["academic Year"],
-        "summary": "delete academic year",
-        "description": "delete an academic year",
+        "summary": "GET academic year by user",
+        "description": "Returns an array of all academic years created by a specific user",
         "security": [{ "bearerAuth": [] }],
         "responses": {
           "200": {
@@ -92,7 +92,7 @@
         "tag": ["academic Year"],
 
         "summary": "delete academic year",
-        "description": "delete an academic year",
+        "description": "deletes an academic year from the database",
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
@@ -118,8 +118,8 @@
     "/academicyears/update/{id}": {
       "patch": {
         "tag": ["academic Year"],
-        "summary": "update academic year",
-        "description": "update an academic year",
+        "summary": "updates academic year",
+        "description": "updates an academic year startDate and endDate",
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
@@ -138,9 +138,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "string"
-                  },
                   "year": {
                     "type": "string"
                   },
@@ -163,25 +160,7 @@
 
         "responses": {
           "204": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "year": {
-                      "type": "string"
-                    },
-                    "startDate": {
-                      "type": "string"
-                    },
-                    "endDate": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Success"
           },
           "400": {
             "description": "academic year doesn't exist"
