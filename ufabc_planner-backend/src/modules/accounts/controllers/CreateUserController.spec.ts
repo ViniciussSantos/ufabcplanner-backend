@@ -4,7 +4,7 @@ import { deleteAll, disconnect } from '../../../../test/database';
 import { getUserByEmail } from '../../../../test/entities/UserFactory';
 
 describe('Create User (e2e)', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     deleteAll();
   });
 

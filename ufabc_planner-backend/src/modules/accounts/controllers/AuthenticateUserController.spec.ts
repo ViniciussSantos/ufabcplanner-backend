@@ -5,7 +5,7 @@ import { createUser, getUserByEmail } from '../../../../test/entities/UserFactor
 import { generateRandomEmail } from '../../../../test/utils';
 
 describe('Create User (e2e)', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     deleteAll();
   });
 
@@ -15,7 +15,7 @@ describe('Create User (e2e)', () => {
   it('should authenticate user correctly', async () => {
     const email = generateRandomEmail();
 
-    await createUser('teste', email);
+    await createUser(email);
     const response = await supertest(app).post('/users/login').send({
       email: email,
       password: '123',
