@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/server.ts",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/infra/http/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --exit-child --respawn src/infra/http/server.ts",
     "dev:migration": "prisma migrate dev",
     "test": "jest --config ./jest.config.ts --runInBand",
     "pre:test": "docker-compose up && dev:migration"
