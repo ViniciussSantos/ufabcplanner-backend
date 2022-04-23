@@ -1,3 +1,4 @@
+import { Quarter } from '@prisma/client';
 import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvider';
 import { AppError } from 'infra/http/errors/AppError';
 import { IAcademicYearRepository } from 'modules/academicYears/repositories/IAcademicYearRepository';
@@ -14,7 +15,7 @@ export class GetQuarterByAcademicYearIdService {
     @inject('PrismaQuarterRepository')
     private QuarterRepository: IQuarterRepository
   ) {}
-  async execute(params: GetQuarterByAcademicYearIdDTO) {
+  async execute(params: GetQuarterByAcademicYearIdDTO): Promise<Quarter[]> {
     if (!(await this.academicYearRepository.exists(params.academicYearId))) {
       throw new AppError('Ano acadêmico não existe');
     }
