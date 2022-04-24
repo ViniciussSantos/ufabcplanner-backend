@@ -13,11 +13,10 @@ describe('Create User (e2e)', () => {
     disconnect();
   });
   it('should authenticate user correctly', async () => {
-    const email = generateRandomEmail();
+    const user = await createUser();
 
-    await createUser(email);
     const response = await supertest(app).post('/users/login').send({
-      email: email,
+      email: user.email,
       password: '123',
     });
 

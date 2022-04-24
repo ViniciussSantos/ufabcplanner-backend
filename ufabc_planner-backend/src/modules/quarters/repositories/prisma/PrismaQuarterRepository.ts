@@ -45,12 +45,10 @@ export class PrismaQuarterRepository implements IQuarterRepository {
   }
 
   async getQuarterByAcademicYearId(academicYearId: string): Promise<Quarter[]> {
-    const quarters = await prisma.quarter.findMany({
+    return prisma.quarter.findMany({
       where: {
         academyYearId: academicYearId,
       },
     });
-
-    return quarters;
   }
 }

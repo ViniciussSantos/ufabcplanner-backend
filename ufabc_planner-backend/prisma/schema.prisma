@@ -42,27 +42,26 @@ model User {
    //https://www.prisma.io/docs/concepts/components/prisma-schema/relations/referential-actions 
    //TODO: adicionar referential actions para que quando deletarmos um ano acadêmico
    //deletar todos os quadrimestres atrelados
-   academy_year   AcademicYear @relation(fields: [academyYearId], references: [id]) 
+   academy_year   AcademicYear @relation(fields: [academyYearId], references: [id], onDelete: Cascade) 
    academyYearId String @map("academy_year_id")
    startDate     DateTime @map("start_date") @db.Date
    endDate       DateTime @map("end_date") @db.Date
-  // Subject        Subject[]
+   Subject        Subject[]
 
    @@map("quarters")
  }
 
-// model Subject {
-//   id          String  @id @default(uuid())
-//   name        String
-//   description String
-//   quarter     Quarter @relation(fields: [quarterId], references: [id])
-//   quarterId   String
+ model Subject {
+   id          String  @id @default(uuid())
+   name        String
+   description String?
+   quarter     Quarter @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+   quarterId   String @map("quarter_id")
 //   Class       Class[]
 //   Task        Task[]
 //   Exam        Exam[]
-
-//   @@map("subjects")
-// }
+   @@map("subjects")
+ }
 
 // model Class {
 //   id            String       @id @default(uuid())

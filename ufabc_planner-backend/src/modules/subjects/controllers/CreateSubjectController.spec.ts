@@ -1,12 +1,12 @@
+import { prisma } from '@prisma/client';
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
 import { deleteAll, disconnect } from '../../../../test/database';
 import { CreateAcademicYear } from '../../../../test/entities/AcademicYearFactory';
 import { createQuarter } from '../../../../test/entities/QuarterFactory';
 import { createUser, authenticateUser } from '../../../../test/entities/UserFactory';
-import { generateRandomEmail } from '../../../../test/utils';
 
-describe('Delete Quarter (e2e)', () => {
+describe('create subject (e2e)', () => {
   beforeAll(async () => {
     deleteAll();
   });
@@ -15,16 +15,21 @@ describe('Delete Quarter (e2e)', () => {
     disconnect();
   });
 
-  it('should delete a quarter successfully', async () => {
+  it('Should create a subject successfully', async () => {
     const user = await createUser();
     const token = await authenticateUser(user);
     const academicYear = await CreateAcademicYear(user);
     const quarter = await createQuarter(academicYear);
 
     const response = await supertest(app)
-      .del('/quarters/delete/' + quarter.id)
-      .set('authorization', 'Bearer ' + token);
+      .post('/subjects/')
+      .set('authorization', 'Bearer ' + token)
+      .send({
+        quarterId: quarter.id,
+        name: 'matéria teste',
+        description: 'descrição teste',
+      });
 
-    expect(response.status).toBe(204);
+    expect(response.status).toBe(201);
   });
 });

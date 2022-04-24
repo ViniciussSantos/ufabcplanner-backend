@@ -32,13 +32,11 @@ export class PrismaAcademicYearRepository implements IAcademicYearRepository {
   }
 
   async getByUserId(userId: string): Promise<AcademicYear[]> {
-    const academicYears = await prisma.academicYear.findMany({
+    return prisma.academicYear.findMany({
       where: {
         userId: userId,
       },
     });
-
-    return academicYears;
   }
 
   async update(academicYear: updateAcademicYear): Promise<void> {
@@ -67,12 +65,10 @@ export class PrismaAcademicYearRepository implements IAcademicYearRepository {
   }
 
   async getByAcademicYearId(academicYearId: string): Promise<AcademicYear | null> {
-    const academicYear = await prisma.academicYear.findUnique({
+    return prisma.academicYear.findUnique({
       where: {
         id: academicYearId,
       },
     });
-
-    return academicYear;
   }
 }

@@ -3,10 +3,10 @@ import supertest from 'supertest';
 import { deleteAll, disconnect } from '../../../../test/database';
 import { CreateAcademicYear } from '../../../../test/entities/AcademicYearFactory';
 import { createQuarter } from '../../../../test/entities/QuarterFactory';
+import { createSubject } from '../../../../test/entities/SubjectFactory';
 import { createUser, authenticateUser } from '../../../../test/entities/UserFactory';
-import { generateRandomEmail } from '../../../../test/utils';
 
-describe('Delete Quarter (e2e)', () => {
+describe('create subject (e2e)', () => {
   beforeAll(async () => {
     deleteAll();
   });
@@ -15,14 +15,15 @@ describe('Delete Quarter (e2e)', () => {
     disconnect();
   });
 
-  it('should delete a quarter successfully', async () => {
+  it('should delete a subject successfully', async () => {
     const user = await createUser();
     const token = await authenticateUser(user);
     const academicYear = await CreateAcademicYear(user);
     const quarter = await createQuarter(academicYear);
+    const subject = await createSubject(quarter);
 
     const response = await supertest(app)
-      .del('/quarters/delete/' + quarter.id)
+      .del('/subjects/delete/' + subject.id)
       .set('authorization', 'Bearer ' + token);
 
     expect(response.status).toBe(204);

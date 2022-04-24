@@ -12,7 +12,7 @@ export async function createUser(email?: string, name?: string, password?: strin
   const user = await prisma.user.create({
     data: {
       name: name || 'teste',
-      email: email || 'teste@email.com',
+      email: email || generateRandomEmail(),
       password: await hash(password || '123', 8),
     },
   });
