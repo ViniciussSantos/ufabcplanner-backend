@@ -16,8 +16,7 @@ describe('Get quarters by academic year (e2e)', () => {
   });
 
   it('should return a quarter', async () => {
-    const email = generateRandomEmail();
-    const user = await createUser(email);
+    const user = await createUser();
     const token = await authenticateUser(user);
     const academicYear = await CreateAcademicYear(user);
     const quarter = await createQuarter(academicYear);
