@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FiEdit, FiPlus, FiTrash2 } from "react-icons/fi";
+import { AcademicYearFormModal } from "../../components/academic_years/AcademicYearFormModal";
+import { AcademicYearFormModalRef } from "../../components/academic_years/AcademicYearFormModal/AcademicYearFormModal.component";
 
 import { Box } from "../../components/Box";
 import { BoxesContainer } from "../../components/BoxesContainer";
 import { Button } from "../../components/Button";
 import { IconButton } from "../../components/IconButton";
-import { Modal, ModalRef } from "../../components/Modal";
 import { PageLayout } from "../../components/PageLayout";
 
 import { IAcademicYear } from "../../interfaces/academicYear";
@@ -18,7 +19,7 @@ import { toShortDate } from "../../utils/date";
 import styles from './SchedulePage.module.scss';
 
 const SchedulePage = () => {
-  const modalRef = useRef<ModalRef>(null);
+  const formModalRef = useRef<AcademicYearFormModalRef>(null);
 
   const [academicYears, setAcademicYears] = useState<IAcademicYear[]>([]);
   const [currentYear, setCurrentYear] = useState<IAcademicYear | null>(null);
@@ -26,31 +27,25 @@ const SchedulePage = () => {
   const handleGetAcademicYears = useCallback(async () => {
     await api
     .get('/academicyears/get/user', { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
-    .then(({ data }) => setAcademicYears(data))
+    .then(({ data }) => setAcademicYears(data.sort((a: IAcademicYear, b: IAcademicYear) => Number(a.year) - Number(b.year))))
     .catch(error => alert(error));
   }, []);
 
   const handleCreateAcademicYear = useCallback(async () => {
-    await api
-      .post('/academicyears/', { year: '2023', startDate: '2023-01-01', endDate: '2023-12-31' }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
-      .then(() => handleGetAcademicYears())
-      .catch(error => alert(error));
-  }, [handleGetAcademicYears]);
-
-  const handleDeleteAcademicYear = useCallback(async (academicYear: { id: string }) => {
-    await api
-      .delete(`/academicyears/delete/${academicYear.id}`, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
-      .then(() => setAcademicYears(prevYears => prevYears.filter(year => year.id !== academicYear.id)))
-      .catch(error => alert(error));
+    formModalRef.current?.handleOpenFormModal();
   }, []);
 
-  const handleEditAcademicYear = useCallback(async (academicYear: { id: string }) => {
-    // await api
-    //   .put(`/academicyears/update/${academicYear.id}`, { year: '2021', start_date: '2021-01-02', end_date: '2022-12-15' }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
-    //   .then(() => handleGetAcademicYears())
-    //   .catch(error => alert(error));
+  const handleDeleteAcademicYear = useCallback(async (academicYear: IAcademicYear) => {
+    if (window.confirm(`Tem certeza que quer deletar o ano acadêmico de ${academicYear.year}?`)) {
+      await api
+        .delete(`/academicyears/delete/${academicYear.id}`, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
+        .then(() => { setAcademicYears(prevYears => prevYears.filter(year => year.id !== academicYear.id)); alert('Ano acadêmico deletado com sucesso!') })
+        .catch(error => alert(error));
+    }
+  }, []);
 
-    modalRef.current?.handleOpenModal();
+  const handleEditAcademicYear = useCallback(async (academicYear: IAcademicYear) => {
+    formModalRef.current?.handleOpenFormModal(academicYear);
   }, []);
 
   useEffect(() => {
@@ -93,7 +88,7 @@ const SchedulePage = () => {
 
         <Box style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 192px' }}>
           <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>{currentYear ? 'Matérias do ano selecionado' : 'Nenhum ano acadêmico selecionado'}</b>
+            <b style={{ fontSize: '22px' }}>{currentYear ? `Matérias de ${currentYear.year}` : 'Nenhum ano acadêmico selecionado'}</b>
           </div>
 
           <div style={{ padding: '16px' }}>
@@ -102,7 +97,7 @@ const SchedulePage = () => {
         </Box>
       </BoxesContainer>
 
-      <Modal ref={modalRef} title="Editar/Criar Ano Acadêmico">a</Modal>
+      <AcademicYearFormModal ref={formModalRef} onSuccess={() => handleGetAcademicYears()} />
     </PageLayout>
   );
 };
