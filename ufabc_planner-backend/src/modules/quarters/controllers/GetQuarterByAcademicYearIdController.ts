@@ -6,7 +6,7 @@ import { GetQuarterByAcademicYearIdService } from '../services/GetQuarterByAcade
 
 export class GetQuarterByAcademicYearIdController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { academicYearId } = request.body;
+    const { id: academicYearId } = request.params;
 
     const GetQuarterByAcademicYearIdDto = await validateInput(GetQuarterByAcademicYearIdDTO, { academicYearId });
 

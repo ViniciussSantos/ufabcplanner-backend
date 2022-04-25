@@ -1,10 +1,10 @@
 import { Form } from "@unform/web";
 import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from "react";
-import { IAcademicYear } from "../../../interfaces/academicYear";
-import api from "../../../services/api";
-import { Button } from "../../Button";
-import { Input } from "../../Input";
-import { Modal, ModalRef } from "../../Modal";
+import { IAcademicYear } from "../../../../interfaces/academicYear";
+import api from "../../../../services/api";
+import { Button } from "../../../Button";
+import { Input } from "../../../Input";
+import { Modal, ModalRef } from "../../../Modal";
 
 interface Props {
   onSuccess?: () => void;
