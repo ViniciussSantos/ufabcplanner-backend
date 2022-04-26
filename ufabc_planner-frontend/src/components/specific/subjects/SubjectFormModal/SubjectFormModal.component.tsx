@@ -43,12 +43,12 @@ const SubjectFormModal = forwardRef<SubjectFormModalRef, Props>(({ onSuccess, qu
     try {
       if (currentSubject) {
         await api
-          .put(`/subjects/update/${currentSubject.id}`, { ...data, id: currentSubject.id, quarterId }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
+          .put(`/subjects/update/${currentSubject.id}`, { ...data, id: currentSubject.id, quarterId })
           .then(() => handleSuccess('Matéria editada com sucesso!'))
           .catch(error => alert(error));
       } else {
         await api
-          .post('/subjects/', { ...data, quarterId }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}` } })
+          .post('/subjects/', { ...data, quarterId })
           .then(() => handleSuccess('Matéria criada com sucesso!'))
           .catch(error => alert(error));
       }

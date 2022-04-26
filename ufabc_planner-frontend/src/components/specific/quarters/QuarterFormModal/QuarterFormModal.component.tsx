@@ -43,12 +43,12 @@ const QuarterFormModal = forwardRef<QuarterFormModalRef, Props>(({ onSuccess, ac
     try {
       if (currentQuarter) {
         await api
-          .put(`/quarters/update/${currentQuarter.id}`, { ...data, id: currentQuarter.id, academicYearId }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
+          .put(`/quarters/update/${currentQuarter.id}`, { ...data, id: currentQuarter.id, academicYearId })
           .then(() => handleSuccess('Quadrimestre editado com sucesso!'))
           .catch(error => alert(error));
       } else {
         await api
-          .post('/quarters/', { ...data, academicYearId }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}` } })
+          .post('/quarters/', { ...data, academicYearId })
           .then(() => handleSuccess('Quadrimestre criado com sucesso!'))
           .catch(error => alert(error));
       }

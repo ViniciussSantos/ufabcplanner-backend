@@ -42,12 +42,12 @@ const AcademicYearFormModal = forwardRef<AcademicYearFormModalRef, Props>(({ onS
     try {
       if (currentAcademicYear) {
         await api
-          .put(`/academicyears/update/${currentAcademicYear.id}`, { ...data, id: currentAcademicYear.id }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
+          .put(`/academicyears/update/${currentAcademicYear.id}`, { ...data, id: currentAcademicYear.id })
           .then(() => handleSuccess('Ano academico editado com sucesso!'))
           .catch(error => alert(error));
       } else {
         await api
-          .post('/academicyears/', data, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}` } })
+          .post('/academicyears/', data)
           .then(() => handleSuccess('Ano academico criado com sucesso!'))
           .catch(error => alert(error));
       }
