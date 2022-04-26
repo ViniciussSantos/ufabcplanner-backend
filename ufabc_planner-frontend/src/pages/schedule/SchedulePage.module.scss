@@ -15,6 +15,10 @@ div.year_item {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--light);
+
+  &.selected {
+    border-left: 4px solid var(--primary);
+  }
 }
 
 div.year_item_info {
@@ -27,14 +31,6 @@ div.year_item_info {
 
   &:hover {
     background-color: var(--light);
-  }
-
-  &.selected {
-    background-color: var(--gray);
-
-    b, div {
-      color: var(--lighter);
-    }
   }
 
   b {
