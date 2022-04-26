@@ -149,7 +149,7 @@ const SchedulePage = () => {
 
             {!academicYears.loading && academicYears.data?.map((academicYear: IAcademicYear) =>
               <div key={academicYear.id} className={clsx(styles.year_item, { [styles.selected]: academicYear.id === currentYear?.id })}>
-                <div className={styles.year_item_info} onClick={() => setCurrentYear(academicYear)}>
+                <div className={styles.year_item_info} onClick={() => { setCurrentYear(academicYear); setCurrentQuarter(null); setSubjects({ data: [], loading: false }) }}>
                   <b>{academicYear.year}</b>
 
                   <div>{toShortDate(new Date(academicYear.startDate))} até {toShortDate(new Date(academicYear.endDate))}</div>
@@ -175,6 +175,10 @@ const SchedulePage = () => {
           </div>
 
           <div className={styles.years_container}>
+            {!currentYear && <div className={styles.no_message}>Nenhum ano acadêmico selecionado</div>}
+
+            {!quarters.loading && !!currentYear && !quarters.data.length && <div className={styles.no_message}>Não há quadrimestres criados para esse ano acadêmico</div>}
+
             {quarters.loading && <Loader />}
 
             {!quarters.loading && quarters.data?.map((quarter: IQuarter, index) =>
@@ -205,6 +209,10 @@ const SchedulePage = () => {
           </div>
 
           <div className={styles.years_container}>
+            {!currentQuarter && <div className={styles.no_message}>Nenhum quadrimestre selecionado</div>}
+
+            {!subjects.loading && !!currentQuarter && !subjects.data.length && <div className={styles.no_message}>Não há matérias criadas para esse quadrimestre</div>}
+
             {subjects.loading && <Loader />}
 
             {!subjects.loading && subjects.data?.map((subject: ISubject) =>
