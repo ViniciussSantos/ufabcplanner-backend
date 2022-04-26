@@ -6,7 +6,7 @@ import { GetSubjectByQuarterIdService } from '../services/GetSubjectByQuarterIdS
 
 export class GetSubjectByQuarterIdController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { quarterId } = request.body;
+    const { id: quarterId } = request.params;
 
     const GetSubjectByQuarterIdDto = await validateInput(GetSubjectByQuarterIdDTO, { quarterId });
 

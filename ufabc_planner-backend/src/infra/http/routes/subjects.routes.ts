@@ -13,7 +13,7 @@ const updateSubjectController = new UpdateSubjectController();
 const getSubjectByQuarterIdController = new GetSubjectByQuarterIdController();
 
 subjectsRoutes.post('/', ensureAuthenticated, createSubjectController.handle);
-subjectsRoutes.get('/get/quarter', ensureAuthenticated, getSubjectByQuarterIdController.handle);
+subjectsRoutes.get('/get/quarter/:id', ensureAuthenticated, getSubjectByQuarterIdController.handle);
 subjectsRoutes.delete('/delete/:id', ensureAuthenticated, deleteSubjectController.handle);
 subjectsRoutes.put('/update/:id', ensureAuthenticated, updateSubjectController.handle);
 

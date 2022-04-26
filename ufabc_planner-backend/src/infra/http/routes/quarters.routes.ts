@@ -13,7 +13,7 @@ const updateQuarterController = new UpdateQuarterController();
 const getQuarterByACademicYearIdController = new GetQuarterByAcademicYearIdController();
 
 quartersRoutes.post('/', ensureAuthenticated, createQuarterController.handle);
-quartersRoutes.get('/get/academicyear', ensureAuthenticated, getQuarterByACademicYearIdController.handle);
+quartersRoutes.get('/get/academicyear/:id', ensureAuthenticated, getQuarterByACademicYearIdController.handle);
 quartersRoutes.delete('/delete/:id', ensureAuthenticated, deleteQuarterController.handle);
 quartersRoutes.put('/update/:id', ensureAuthenticated, updateQuarterController.handle);
 
