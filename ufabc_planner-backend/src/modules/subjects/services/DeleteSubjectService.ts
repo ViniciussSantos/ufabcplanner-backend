@@ -1,6 +1,6 @@
 import { AppError } from 'infra/http/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import { DeleteSubjectDTO } from '../dtos/DeleteSubjectDTO';
+import { DeleteSubjectDTO } from '../dtos/DeleteSubject.dto';
 import { ISubjectRepository } from '../repositories/ISubjectRepository';
 
 @injectable()

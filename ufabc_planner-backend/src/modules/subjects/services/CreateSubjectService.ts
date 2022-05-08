@@ -1,7 +1,7 @@
 import { AppError } from 'infra/http/errors/AppError';
 import { IQuarterRepository } from 'modules/quarters/repositories/IQuarterRepository';
 import { inject, injectable } from 'tsyringe';
-import { CreateSubjectDTO } from '../dtos/CreateSubjectDTO';
+import { CreateSubjectDTO } from '../dtos/CreateSubject.dto';
 import { ISubjectRepository } from '../repositories/ISubjectRepository';
 
 @injectable()

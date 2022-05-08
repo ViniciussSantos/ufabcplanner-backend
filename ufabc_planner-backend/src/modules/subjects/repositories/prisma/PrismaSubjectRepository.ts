@@ -1,7 +1,7 @@
 import { Subject } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
-import { CreateSubjectDTO } from 'modules/subjects/dtos/CreateSubjectDTO';
-import { UpdateSubjectDTO } from 'modules/subjects/dtos/UpdateSubjectDTO';
+import { CreateSubjectDTO } from 'modules/subjects/dtos/CreateSubject.dto';
+import { UpdateSubjectDTO } from 'modules/subjects/dtos/UpdateSubject.dto';
 import { ISubjectRepository } from '../ISubjectRepository';
 
 export class PrismaSubjectRepository implements ISubjectRepository {

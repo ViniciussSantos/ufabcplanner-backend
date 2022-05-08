@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { validateInput } from 'infra/http/errors/validation';
-import { CreateAcademyYearDTO } from '../dtos/CreateAcademyYearDTO';
+import { CreateAcademyYearDTO } from '../dtos/CreateAcademyYear.dto';
 import { CreateAcademicYearService } from '../services/CreateAcademicYearService';
 
 export class CreateAcademicYearController {

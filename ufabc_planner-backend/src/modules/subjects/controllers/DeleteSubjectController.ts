@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
-import { DeleteSubjectDTO } from '../dtos/DeleteSubjectDTO';
+import { DeleteSubjectDTO } from '../dtos/DeleteSubject.dto';
 import { DeleteSubjectService } from '../services/DeleteSubjectService';
 
 export class DeleteSubjectController {

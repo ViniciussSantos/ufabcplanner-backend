@@ -1,7 +1,4 @@
 import { AcademicYear } from '@prisma/client';
-import { type } from 'os';
-import { CreateAcademyYearDTO } from '../dtos/CreateAcademyYearDTO';
-import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYearDTO';
 
 type updateAcademicYear = {
   id: string;

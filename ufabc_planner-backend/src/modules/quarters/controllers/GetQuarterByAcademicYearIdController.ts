@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
-import { GetQuarterByAcademicYearIdDTO } from '../dtos/GetQuarterByAcademicYearIdDTO';
+import { GetQuarterByAcademicYearIdDTO } from '../dtos/GetQuarterByAcademicYearId.dto';
 import { GetQuarterByAcademicYearIdService } from '../services/GetQuarterByAcademicYearIdService';
 
 export class GetQuarterByAcademicYearIdController {

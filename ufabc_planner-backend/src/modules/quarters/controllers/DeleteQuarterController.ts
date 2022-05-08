@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
-import { DeleteQuarterDTO } from '../dtos/DeleteQuarterDTO';
+import { DeleteQuarterDTO } from '../dtos/DeleteQuarter.dto';
 import { DeleteQuarterService } from '../services/DeleteQuarterService';
 
 export class DeleteQuarterController {

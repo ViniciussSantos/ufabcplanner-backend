@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
-import { UpdateQuarterDTO } from '../dtos/UpdateQuarterDTO';
+import { UpdateQuarterDTO } from '../dtos/UpdateQuarter.dto';
 import { UpdateQuarterService } from '../services/UpdateQuarterService';
 
 export class UpdateQuarterController {

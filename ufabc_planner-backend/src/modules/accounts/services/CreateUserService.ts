@@ -2,7 +2,7 @@ import { hash } from 'bcryptjs';
 import { prisma } from 'infra/prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
-import { CreateUserDTO } from '../dtos/CreateUserDTO';
+import { CreateUserDTO } from '../dtos/CreateUser.dto';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 
 @injectable()

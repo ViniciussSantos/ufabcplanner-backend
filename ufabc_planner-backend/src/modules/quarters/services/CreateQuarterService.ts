@@ -2,7 +2,7 @@ import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvi
 import { AppError } from 'infra/http/errors/AppError';
 import { IAcademicYearRepository } from 'modules/academicYears/repositories/IAcademicYearRepository';
 import { inject, injectable } from 'tsyringe';
-import { createQuarterDTO } from '../dtos/CreateQuarterDTO';
+import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
 import { IQuarterRepository } from '../repositories/IQuarterRepository';
 
 @injectable()

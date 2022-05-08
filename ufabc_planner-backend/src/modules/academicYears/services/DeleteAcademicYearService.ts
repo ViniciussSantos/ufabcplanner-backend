@@ -1,7 +1,7 @@
 import { CreateUserService } from 'modules/accounts/services/CreateUserService';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
-import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYearDTO';
+import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYea.dto';
 import { prisma } from 'infra/prisma/client';
 import { IAcademicYearRepository } from '../repositories/IAcademicYearRepository';
 

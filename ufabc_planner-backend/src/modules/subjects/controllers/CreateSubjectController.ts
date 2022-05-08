@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
-import { CreateSubjectDTO } from '../dtos/CreateSubjectDTO';
+import { CreateSubjectDTO } from '../dtos/CreateSubject.dto';
 import { CreateSubjectService } from '../services/CreateSubjectService';
 
 export class CreateSubjectController {

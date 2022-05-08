@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { CreateUserDTO } from '../dtos/CreateUserDTO';
+import { CreateUserDTO } from '../dtos/CreateUser.dto';
 
 export interface IUsersRepository {
   exists(email: string): Promise<boolean>;

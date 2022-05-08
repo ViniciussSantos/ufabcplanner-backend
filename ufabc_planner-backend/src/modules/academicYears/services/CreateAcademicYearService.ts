@@ -1,7 +1,7 @@
 import { prisma } from 'infra/prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
-import { CreateAcademyYearDTO } from '../dtos/CreateAcademyYearDTO';
+import { CreateAcademyYearDTO } from '../dtos/CreateAcademyYear.dto';
 import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvider';
 import { IAcademicYearRepository } from '../repositories/IAcademicYearRepository';
 

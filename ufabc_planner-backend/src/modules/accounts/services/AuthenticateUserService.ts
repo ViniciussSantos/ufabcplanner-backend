@@ -4,7 +4,7 @@ import { prisma } from 'infra/prisma/client';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
-import { AuthenticateUserDTO } from '../dtos/AuthenticateUserDTO';
+import { AuthenticateUserDTO } from '../dtos/AuthenticateUser.dto';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 
 interface IResponse {

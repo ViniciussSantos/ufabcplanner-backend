@@ -1,7 +1,7 @@
 import { AcademicYear } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
-import { CreateAcademyYearDTO } from 'modules/academicYears/dtos/CreateAcademyYearDTO';
-import { UpdateAcademyYearDTO } from 'modules/academicYears/dtos/UpdateAcademicYearDTO';
+import { CreateAcademyYearDTO } from 'modules/academicYears/dtos/CreateAcademyYear.dto';
+import { UpdateAcademyYearDTO } from 'modules/academicYears/dtos/UpdateAcademicYear.dto';
 import { IAcademicYearRepository } from '../IAcademicYearRepository';
 
 type updateAcademicYear = {

@@ -1,6 +1,6 @@
 import { Subject } from '@prisma/client';
-import { CreateSubjectDTO } from '../dtos/CreateSubjectDTO';
-import { UpdateSubjectDTO } from '../dtos/UpdateSubjectDTO';
+import { CreateSubjectDTO } from '../dtos/CreateSubject.dto';
+import { UpdateSubjectDTO } from '../dtos/UpdateSubject.dto';
 
 export interface ISubjectRepository {
   subjectExists(id: string): Promise<boolean>;

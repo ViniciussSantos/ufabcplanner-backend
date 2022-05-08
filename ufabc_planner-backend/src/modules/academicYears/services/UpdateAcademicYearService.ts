@@ -2,7 +2,7 @@ import { AcademicYear } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
-import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYearDTO';
+import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYear.dto';
 import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvider';
 import { IAcademicYearRepository } from '../repositories/IAcademicYearRepository';
 

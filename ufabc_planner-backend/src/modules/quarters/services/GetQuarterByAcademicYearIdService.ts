@@ -3,8 +3,8 @@ import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvi
 import { AppError } from 'infra/http/errors/AppError';
 import { IAcademicYearRepository } from 'modules/academicYears/repositories/IAcademicYearRepository';
 import { injectable, inject } from 'tsyringe';
-import { createQuarterDTO } from '../dtos/CreateQuarterDTO';
-import { GetQuarterByAcademicYearIdDTO } from '../dtos/GetQuarterByAcademicYearIdDTO';
+import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
+import { GetQuarterByAcademicYearIdDTO } from '../dtos/GetQuarterByAcademicYearId.dto';
 import { IQuarterRepository } from '../repositories/IQuarterRepository';
 
 @injectable()
