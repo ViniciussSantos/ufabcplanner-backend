@@ -2,7 +2,7 @@ import { AcademicYear, User } from '@prisma/client';
 import dayjs from 'dayjs';
 import { prisma } from 'infra/prisma/client';
 
-export async function CreateAcademicYear(user: User): Promise<AcademicYear> {
+export async function createAcademicYear(user: User): Promise<AcademicYear> {
   const AcademicYear = await prisma.academicYear.create({
     data: {
       userId: user.id,
