@@ -3,9 +3,10 @@ import supertest from 'supertest';
 import { deleteAll, disconnect } from '../../../../test/database';
 import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
 import { createQuarter } from '../../../../test/entities/QuarterFactory';
-import { createUser, authenticateUser } from '../../../../test/entities/UserFactory';
+import { createSubject } from '../../../../test/entities/SubjectFactory';
+import { authenticateUser, createUser } from '../../../../test/entities/UserFactory';
 
-describe('Update Quarter (e2e)', () => {
+describe('Create class (e2e)', () => {
   beforeAll(async () => {
     deleteAll();
   });
@@ -14,20 +15,28 @@ describe('Update Quarter (e2e)', () => {
     disconnect();
   });
 
-  it('should update the quarter successfully', async () => {
+  it('Should create a class successfully', async () => {
     const user = await createUser();
     const token = await authenticateUser(user);
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
+    const subject = await createSubject(quarter);
 
     const response = await supertest(app)
-      .put('/quarters/update/' + quarter.id)
+      .post('/classes/')
       .set('authorization', 'Bearer ' + token)
       .send({
-        startDate: '2022-10-01',
-        endDate: '2022-11-01',
+        subjectId: subject.id,
+        professor: 'Paulo Meirelles',
+        room: 'A202',
+        campus: 'Santo André',
+        building: 'Bloco A',
+        startTime: '10:00',
+        endTime: '12:00',
+        weekday: 'seg',
+        biweeklyType: 'week1',
       });
 
-    expect(response.status).toBe(204);
+    expect(response.status).toBe(201);
   });
 });

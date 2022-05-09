@@ -1,6 +1,5 @@
 import { Quarter } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
-import { createQuarterDTO } from 'modules/quarters/dtos/CreateQuarterDTO';
 import { IQuarterRepository } from '../IQuarterRepository';
 
 export class PrismaQuarterRepository implements IQuarterRepository {

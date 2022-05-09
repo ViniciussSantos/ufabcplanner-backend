@@ -2,7 +2,7 @@ import { app } from 'infra/http/app';
 import { prisma } from 'infra/prisma/client';
 import supertest from 'supertest';
 import { deleteAll, disconnect } from '../../../../test/database';
-import { CreateAcademicYear } from '../../../../test/entities/AcademicYearFactory';
+import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
 import { authenticateUser, createUser } from '../../../../test/entities/UserFactory';
 import { generateRandomEmail } from '../../../../test/utils';
 
@@ -18,7 +18,7 @@ describe('Create Quarter (e2e)', () => {
   it('Should create a quarter successfully', async () => {
     const user = await createUser();
     const token = await authenticateUser(user);
-    const academicYear = await CreateAcademicYear(user);
+    const academicYear = await createAcademicYear(user);
 
     const response = await supertest(app)
       .post('/quarters/')

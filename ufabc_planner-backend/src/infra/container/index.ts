@@ -9,8 +9,11 @@ import { IQuarterRepository } from 'modules/quarters/repositories/IQuarterReposi
 import { PrismaQuarterRepository } from 'modules/quarters/repositories/prisma/PrismaQuarterRepository';
 import { ISubjectRepository } from 'modules/subjects/repositories/ISubjectRepository';
 import { PrismaSubjectRepository } from 'modules/subjects/repositories/prisma/PrismaSubjectRepository';
+import { IClassRepository } from 'modules/classes/repositories/IClassRepository';
+import { PrismaClassRepository } from 'modules/classes/repositories/prisma/PrismaClassRepository';
 
 container.registerSingleton<IUsersRepository>('PrismaUserRepository', PrismaUserRepository);
 container.registerSingleton<IAcademicYearRepository>('PrismaAcademicYearRepository', PrismaAcademicYearRepository);
 container.registerSingleton<IQuarterRepository>('PrismaQuarterRepository', PrismaQuarterRepository);
 container.registerSingleton<ISubjectRepository>('PrismaSubjectRepository', PrismaSubjectRepository);
+container.registerSingleton<IClassRepository>('PrismaClassRepository', PrismaClassRepository);

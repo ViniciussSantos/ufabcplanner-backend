@@ -8,6 +8,7 @@ export class CreateSubjectDTO implements ICreateSubject {
   name: string;
 
   @IsOptional()
+  @IsString({ message: messages.IsString })
   description?: string;
 
   @IsUUID('all', { message: messages.IsUUID })
