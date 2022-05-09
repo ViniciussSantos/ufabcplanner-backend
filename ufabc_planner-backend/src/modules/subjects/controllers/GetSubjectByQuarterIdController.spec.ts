@@ -1,7 +1,7 @@
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
 import { deleteAll, disconnect } from '../../../../test/database';
-import { CreateAcademicYear } from '../../../../test/entities/AcademicYearFactory';
+import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
 import { createQuarter } from '../../../../test/entities/QuarterFactory';
 import { createSubject } from '../../../../test/entities/SubjectFactory';
 import { createUser, authenticateUser } from '../../../../test/entities/UserFactory';
@@ -18,12 +18,12 @@ describe('get subject by quarter id (e2e)', () => {
   it('should return an array of subjects', async () => {
     const user = await createUser();
     const token = await authenticateUser(user);
-    const academicYear = await CreateAcademicYear(user);
+    const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
     const subject = await createSubject(quarter);
 
     const response = await supertest(app)
-      .get('/subjects/get/quarter')
+      .get('/subjects/get/quarter/' + quarter.id)
       .set('authorization', 'Bearer ' + token)
       .send({
         quarterId: quarter.id,
