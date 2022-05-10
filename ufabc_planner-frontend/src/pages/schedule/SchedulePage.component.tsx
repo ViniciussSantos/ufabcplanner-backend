@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FiEdit, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiCalendar, FiEdit, FiPlus, FiTrash2 } from "react-icons/fi";
 import { AcademicYearFormModal } from "../../components/specific/academic_years/AcademicYearFormModal";
 import { AcademicYearFormModalRef } from "../../components/specific/academic_years/AcademicYearFormModal/AcademicYearFormModal.component";
 
@@ -13,6 +13,7 @@ import { PageLayout } from "../../components/PageLayout";
 
 import { IAcademicYear } from "../../interfaces/academicYear";
 import { IQuarter } from "../../interfaces/quarter";
+import { ISubject } from "../../interfaces/subject";
 
 import api from "../../services/api";
 
@@ -20,13 +21,14 @@ import { toShortDate } from "../../utils/date";
 
 import styles from './SchedulePage.module.scss';
 import { QuarterFormModal, QuarterFormModalRef } from "../../components/specific/quarters/QuarterFormModal";
-import { ISubject } from "../../interfaces/subject";
 import { SubjectFormModal, SubjectFormModalRef } from "../../components/specific/subjects/SubjectFormModal";
+import { ClassesModal, ClassesModalRef } from "../../components/specific/classes/ClassesModal";
 
 const SchedulePage = () => {
   const formModalRef = useRef<AcademicYearFormModalRef>(null);
   const quarterFormModalRef = useRef<QuarterFormModalRef>(null);
   const subjectFormModalRef = useRef<SubjectFormModalRef>(null);
+  const classesModalRef = useRef<ClassesModalRef>(null);
 
   const [academicYears, setAcademicYears] = useState<{ data: IAcademicYear[], loading: boolean }>({ data: [], loading: false });
   const [quarters, setQuarters] = useState<{ data: IQuarter[], loading: boolean }>({ data: [], loading: false });
@@ -226,6 +228,8 @@ const SchedulePage = () => {
                 <div className={styles.actions_container}>
                   <IconButton btnType="primary" icon={FiEdit} onClick={() => subjectFormModalRef.current?.handleOpenFormModal(subject)} />
 
+                  <IconButton btnType="info" icon={FiCalendar} onClick={() => classesModalRef.current?.handleOpenModal(subject)} />
+
                   <IconButton btnType="error" icon={FiTrash2} onClick={() => handleDeleteSubject(subject)} />
                 </div>
               </div>
@@ -239,6 +243,8 @@ const SchedulePage = () => {
       <QuarterFormModal ref={quarterFormModalRef} academicYearId={currentYear?.id || ''} onSuccess={() => handleGetQuarters()}/>
 
       <SubjectFormModal ref={subjectFormModalRef} quarterId={currentQuarter?.id || ''} onSuccess={() => handleGetSubjects()}/>
+
+      <ClassesModal ref={classesModalRef} />
     </PageLayout>
   );
 };
