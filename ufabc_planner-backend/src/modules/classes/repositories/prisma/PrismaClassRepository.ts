@@ -20,11 +20,7 @@ export class PrismaClassRepository implements IClassRepository {
   }
   async createClass(params: CreateClassDTO): Promise<void> {
     await prisma.class.create({
-      data: {
-        ...params,
-        startTime: dayjs(params.startTime).format('HH:mm'),
-        endTime: dayjs(params.endTime).format('HH:mm'),
-      },
+      data: { ...params },
     });
   }
 
