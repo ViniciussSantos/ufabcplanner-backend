@@ -11,9 +11,12 @@ import { ISubjectRepository } from 'modules/subjects/repositories/ISubjectReposi
 import { PrismaSubjectRepository } from 'modules/subjects/repositories/prisma/PrismaSubjectRepository';
 import { IClassRepository } from 'modules/classes/repositories/IClassRepository';
 import { PrismaClassRepository } from 'modules/classes/repositories/prisma/PrismaClassRepository';
+import { ITaskRepository } from 'modules/tasks/repositories/ITaskRepository';
+import { PrismaTaskRepository } from 'modules/tasks/repositories/prisma/PrismaTaskRepository';
 
 container.registerSingleton<IUsersRepository>('PrismaUserRepository', PrismaUserRepository);
 container.registerSingleton<IAcademicYearRepository>('PrismaAcademicYearRepository', PrismaAcademicYearRepository);
 container.registerSingleton<IQuarterRepository>('PrismaQuarterRepository', PrismaQuarterRepository);
 container.registerSingleton<ISubjectRepository>('PrismaSubjectRepository', PrismaSubjectRepository);
 container.registerSingleton<IClassRepository>('PrismaClassRepository', PrismaClassRepository);
+container.registerSingleton<ITaskRepository>('PrismaTaskRepository', PrismaTaskRepository);
