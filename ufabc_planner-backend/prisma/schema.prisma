@@ -17,8 +17,9 @@ model User {
   password     String
   academicYear AcademicYear[]
   Class        Class[]
-  created_at   DateTime       @default(now())
-  updated_at   DateTime       @updatedAt
+  Task         Task[]
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
 
   @@map("users")
 }
@@ -59,7 +60,7 @@ model Subject {
   quarter     Quarter @relation(fields: [quarterId], references: [id], onDelete: Cascade)
   quarterId   String  @map("quarter_id")
   Class       Class[]
-  //   Task        Task[]
+  Task        Task[]
   //   Exam        Exam[]
 
   @@map("subjects")
@@ -83,16 +84,18 @@ model Class {
   @@map("classes")
 }
 
-// model Task {
-//   id          String   @id @default(uuid())
-//   subject     Subject  @relation(fields: [subjectId], references: [id])
-//   subjectId   String
-//   title       String
-//   dueDate     DateTime
-//   description String?
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  dueDate     DateTime @map("due_date") @db.Date
+  description String?
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId   String   @map("subject_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String   @map("user_id")
 
-//   @@map("tasks")
-// }
+  @@map("tasks")
+}
 
 // model Exam {
 //   id          String   @id @default(uuid())
