@@ -1,12 +1,11 @@
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FiCalendar, FiEdit, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiCalendar, FiEdit, FiTrash2 } from "react-icons/fi";
 import { AcademicYearFormModal } from "../../components/specific/academic_years/AcademicYearFormModal";
 import { AcademicYearFormModalRef } from "../../components/specific/academic_years/AcademicYearFormModal/AcademicYearFormModal.component";
 
 import { Box } from "../../components/Box";
 import { BoxesContainer } from "../../components/BoxesContainer";
-import { Button } from "../../components/Button";
 import { IconButton } from "../../components/IconButton";
 import { Loader } from "../../components/Loader";
 import { PageLayout } from "../../components/PageLayout";
@@ -137,15 +136,7 @@ const SchedulePage = () => {
   return (
     <PageLayout>
       <BoxesContainer>
-        <Box style={{ display: 'flex', flexDirection: 'column', maxWidth: '360px', height: 'calc(100vh - 192px)' }}>
-          <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>Anos acadêmicos</b>
-
-            <Button onClick={() => formModalRef.current?.handleOpenFormModal()} style={{ width: '40px', height: '40px' }}>
-              <FiPlus size={20}/>
-            </Button>
-          </div>
-
+        <Box flex maxWidth="360px" height="calc(100vh - 192px)" title="Anos acadêmicos" onAdd={() => formModalRef.current?.handleOpenFormModal()}>
           <div className={styles.years_container}>
             {academicYears.loading && <Loader />}
 
@@ -167,15 +158,7 @@ const SchedulePage = () => {
           </div>
         </Box>
 
-        <Box style={{ display: 'flex', maxWidth: '360px', flexDirection: 'column', height: 'calc(100vh - 192px)' }}>
-          <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>Quadrimestres</b>
-
-            <Button onClick={() => quarterFormModalRef.current?.handleOpenFormModal()} style={{ width: '40px', height: '40px' }}>
-              <FiPlus size={20}/>
-            </Button>
-          </div>
-
+        <Box flex maxWidth="360px" height="calc(100vh - 192px)" title="Quadrimestres" onAdd={() => quarterFormModalRef.current?.handleOpenFormModal()}>
           <div className={styles.years_container}>
             {!currentYear && <div className={styles.no_message}>Nenhum ano acadêmico selecionado</div>}
 
@@ -201,15 +184,7 @@ const SchedulePage = () => {
           </div>
         </Box>
 
-        <Box style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 192px)' }}>
-          <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>Matérias</b>
-
-            <Button onClick={() => subjectFormModalRef.current?.handleOpenFormModal()} style={{ width: '40px', height: '40px' }}>
-              <FiPlus size={20}/>
-            </Button>
-          </div>
-
+        <Box flex height="calc(100vh - 192px)" title="Matérias" onAdd={() => subjectFormModalRef.current?.handleOpenFormModal()}>
           <div className={styles.years_container}>
             {!currentQuarter && <div className={styles.no_message}>Nenhum quadrimestre selecionado</div>}
 

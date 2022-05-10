@@ -2,4 +2,15 @@ div.box {
   background-color: var(--lighter);
   border-radius: 4px;
   width: 100%;
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+div.box_header {
+  display: flex;
+  padding: 16px;
+  justify-content: space-between;
 }
