@@ -8,6 +8,7 @@ interface Props {
   children: React.ReactNode;
   title: string;
   onClose?: () => void;
+  width?: string;
 }
 
 export interface ModalRef {
@@ -15,7 +16,7 @@ export interface ModalRef {
   handleCloseModal: () => void;
 }
 
-const Modal = forwardRef<ModalRef, Props>(({ children, title, onClose }, ref) => {
+const Modal = forwardRef<ModalRef, Props>(({ children, title, onClose, width = '400px' }, ref) => {
   const [open, setOpen] = useState(false);
 
   useImperativeHandle(ref, () => ({
@@ -27,7 +28,7 @@ const Modal = forwardRef<ModalRef, Props>(({ children, title, onClose }, ref) =>
 
   return (
     <div className={styles.modal_container}>
-      <div className={styles.modal}>
+      <div className={styles.modal} style={{ width }}>
         <div className={styles.modal_header}>
           <b className={styles.modal_title}>{title}</b>
 

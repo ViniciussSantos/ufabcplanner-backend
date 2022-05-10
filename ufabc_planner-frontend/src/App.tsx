@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Sidebar } from './components/Sidebar';
 import { MainHeader } from './components/MainHeader';
+
+import { AuthProvider, useAuth } from './contexts/auth';
 
 import AuthenticatedRoutes from './routes/AuthenticatedRoutes';
 import NotAuthenticatedRoutes from './routes/NotAuthenticatedRoutes';
@@ -10,12 +11,8 @@ import NotAuthenticatedRoutes from './routes/NotAuthenticatedRoutes';
 import './styles/global.scss';
 import styles from './App.module.scss';
 
-function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-
-  useEffect(() => {
-    setAuthenticated(!!localStorage.getItem('auth_token'));
-  }, []);
+function AppContent() {
+  const { authenticated } = useAuth();
 
   if (!authenticated) return (
     <div className={styles.not_authenticated_container}>
@@ -39,6 +36,14 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

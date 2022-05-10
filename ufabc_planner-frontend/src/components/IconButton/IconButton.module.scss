@@ -24,4 +24,8 @@ div.icon_button {
   &.standard {
     color: var(--darker);
   }
+
+  &.info {
+    color: var(--info);
+  }
 }

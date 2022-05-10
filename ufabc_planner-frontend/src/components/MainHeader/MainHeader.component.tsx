@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
 import { FiLogOut } from 'react-icons/fi';
+import { useAuth } from '../../contexts/auth';
 
 import usePageProps from '../../hooks/usePageProps.hook';
 
@@ -10,17 +10,13 @@ import styles from './MainHeader.module.scss';
 const MainHeader = () => {
   const { pageProps: { title, icon: Icon } } = usePageProps();
 
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem('auth_token');
-
-    window.location.reload();
-  }, []);
+  const { logout } = useAuth();
 
   return (
     <div className={styles.main_header}>
       <h2><Icon />{title}</h2>
 
-      <Button btnType='secondary' style={{ width: '100px' }} onClick={handleLogout}>
+      <Button btnType='secondary' style={{ width: '100px' }} onClick={logout}>
         <FiLogOut/>Logout
       </Button>
     </div>
