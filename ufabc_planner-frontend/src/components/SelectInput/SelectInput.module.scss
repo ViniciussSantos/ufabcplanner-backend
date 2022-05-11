@@ -1,0 +1,29 @@
+// This styles are the same as Input!!
+// TODO:
+// Remove this and refactor styles or create re usable component
+
+div.input_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 16px;
+}
+
+label.input_label {
+  color: var(--darker);
+}
+
+select.basic_input {
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  padding: 16px;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  color: var(--darker);
+  background: white;
+  cursor: pointer;
+  flex: 1;
+  border: 0;
+}
