@@ -8,4 +8,5 @@ export interface ISubjectRepository {
   deleteSubject(id: string): Promise<void>;
   updateSubject(quarter: UpdateSubjectDTO): Promise<void>;
   getSubjectByQuarterId(quarterId: string): Promise<Subject[]>;
+  getSubjectByUserId(userId: string): Promise<Subject[]>;
 }
