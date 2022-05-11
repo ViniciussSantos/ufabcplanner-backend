@@ -16,8 +16,10 @@ model User {
   name         String
   password     String
   academicYear AcademicYear[]
+  Subject      Subject[]
   Class        Class[]
   Task         Task[]
+  Exam         Exam[]
   createdAt    DateTime       @default(now()) @map("created_at")
   updatedAt    DateTime       @updatedAt @map("updated_at")
 
@@ -59,9 +61,11 @@ model Subject {
   description String?
   quarter     Quarter @relation(fields: [quarterId], references: [id], onDelete: Cascade)
   quarterId   String  @map("quarter_id")
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String  @map("user_id")
   Class       Class[]
   Task        Task[]
-  //   Exam        Exam[]
+  Exam        Exam[]
 
   @@map("subjects")
 }
@@ -97,18 +101,19 @@ model Task {
   @@map("tasks")
 }
 
-// model Exam {
-//   id          String   @id @default(uuid())
-//   subject     Subject  @relation(fields: [subjectId], references: [id])
-//   subjectId   String
-//   name        String
-//   // arrumar dateTime
-//   startDate   DateTime
-//   time        DateTime
-//   description String?
+model Exam {
+  id          String   @id @default(uuid())
+  name        String
+  dueDate     DateTime @map("due_date") @db.Date
+  time        String
+  description String?
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId   String   @map("subject_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String   @map("user_id")
 
-//   @@map("exams")
-// }
+  @@map("exams")
+}
 
 enum BiweeklyType {
   week1

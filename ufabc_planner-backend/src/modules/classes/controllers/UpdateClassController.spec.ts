@@ -22,7 +22,7 @@ describe('Create class (e2e)', () => {
     const token = await authenticateUser(user);
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
-    const subject = await createSubject(quarter);
+    const subject = await createSubject(quarter, user);
     const classConst = await createClass(user, subject);
 
     const response = await supertest(app)

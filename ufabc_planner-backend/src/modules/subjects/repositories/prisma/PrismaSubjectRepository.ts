@@ -20,9 +20,7 @@ export class PrismaSubjectRepository implements ISubjectRepository {
   async createSubject(params: CreateSubjectDTO): Promise<void> {
     await prisma.subject.create({
       data: {
-        name: params.name,
-        description: params.description,
-        quarterId: params.quarterId,
+        ...params,
       },
     });
   }
@@ -50,6 +48,14 @@ export class PrismaSubjectRepository implements ISubjectRepository {
     return prisma.subject.findMany({
       where: {
         quarterId: quarterId,
+      },
+    });
+  }
+
+  getSubjectByUserId(userId: string): Promise<Subject[]> {
+    return prisma.subject.findMany({
+      where: {
+        userId: userId,
       },
     });
   }

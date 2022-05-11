@@ -13,6 +13,8 @@ import { IClassRepository } from 'modules/classes/repositories/IClassRepository'
 import { PrismaClassRepository } from 'modules/classes/repositories/prisma/PrismaClassRepository';
 import { ITaskRepository } from 'modules/tasks/repositories/ITaskRepository';
 import { PrismaTaskRepository } from 'modules/tasks/repositories/prisma/PrismaTaskRepository';
+import { IExamRepository } from 'modules/exams/repositories/IExamRepository';
+import { PrismaExamRepository } from 'modules/exams/repositories/prisma/PrismaExamRepository';
 
 container.registerSingleton<IUsersRepository>('PrismaUserRepository', PrismaUserRepository);
 container.registerSingleton<IAcademicYearRepository>('PrismaAcademicYearRepository', PrismaAcademicYearRepository);
@@ -20,3 +22,4 @@ container.registerSingleton<IQuarterRepository>('PrismaQuarterRepository', Prism
 container.registerSingleton<ISubjectRepository>('PrismaSubjectRepository', PrismaSubjectRepository);
 container.registerSingleton<IClassRepository>('PrismaClassRepository', PrismaClassRepository);
 container.registerSingleton<ITaskRepository>('PrismaTaskRepository', PrismaTaskRepository);
+container.registerSingleton<IExamRepository>('PrismaExamRepository', PrismaExamRepository);
