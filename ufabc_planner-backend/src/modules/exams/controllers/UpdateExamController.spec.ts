@@ -22,7 +22,7 @@ describe('update exam(e2e)', () => {
     const token = await authenticateUser(user);
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
-    const subject = await createSubject(quarter);
+    const subject = await createSubject(quarter, user);
     const exam = await createExam(subject, user);
 
     const response = await supertest(app)
