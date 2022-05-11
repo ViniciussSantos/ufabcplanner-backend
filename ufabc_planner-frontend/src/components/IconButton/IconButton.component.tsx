@@ -5,9 +5,11 @@ import { Loader } from '../Loader';
 
 import styles from './IconButton.module.scss';
 
+export type IconBtnType = 'standard' | 'primary' | 'info' | 'error';
+
 interface Props {
   icon: React.ComponentType<IconBaseProps>;
-  btnType?: 'standard' | 'primary' | 'info' | 'error';
+  btnType?: IconBtnType;
   onClick: () => void;
   loading?: boolean;
 }

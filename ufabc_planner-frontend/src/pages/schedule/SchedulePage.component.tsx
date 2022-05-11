@@ -1,15 +1,14 @@
-import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FiCalendar, FiEdit, FiPlus, FiTrash2 } from "react-icons/fi";
-import { AcademicYearFormModal } from "../../components/specific/academic_years/AcademicYearFormModal";
-import { AcademicYearFormModalRef } from "../../components/specific/academic_years/AcademicYearFormModal/AcademicYearFormModal.component";
+import { FiCalendar, FiEdit, FiTrash2 } from "react-icons/fi";
 
 import { Box } from "../../components/Box";
 import { BoxesContainer } from "../../components/BoxesContainer";
-import { Button } from "../../components/Button";
-import { IconButton } from "../../components/IconButton";
-import { Loader } from "../../components/Loader";
+import { List } from "../../components/List";
 import { PageLayout } from "../../components/PageLayout";
+import { AcademicYearFormModal, AcademicYearFormModalRef } from "../../components/specific/academic_years/AcademicYearFormModal";
+import { QuarterFormModal, QuarterFormModalRef } from "../../components/specific/quarters/QuarterFormModal";
+import { SubjectFormModal, SubjectFormModalRef } from "../../components/specific/subjects/SubjectFormModal";
+import { ClassesModal, ClassesModalRef } from "../../components/specific/classes/ClassesModal";
 
 import { IAcademicYear } from "../../interfaces/academicYear";
 import { IQuarter } from "../../interfaces/quarter";
@@ -18,11 +17,6 @@ import { ISubject } from "../../interfaces/subject";
 import api from "../../services/api";
 
 import { toShortDate } from "../../utils/date";
-
-import styles from './SchedulePage.module.scss';
-import { QuarterFormModal, QuarterFormModalRef } from "../../components/specific/quarters/QuarterFormModal";
-import { SubjectFormModal, SubjectFormModalRef } from "../../components/specific/subjects/SubjectFormModal";
-import { ClassesModal, ClassesModalRef } from "../../components/specific/classes/ClassesModal";
 
 const SchedulePage = () => {
   const formModalRef = useRef<AcademicYearFormModalRef>(null);
@@ -137,104 +131,74 @@ const SchedulePage = () => {
   return (
     <PageLayout>
       <BoxesContainer>
-        <Box style={{ display: 'flex', flexDirection: 'column', maxWidth: '360px', height: 'calc(100vh - 192px)' }}>
-          <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>Anos acadêmicos</b>
-
-            <Button onClick={() => formModalRef.current?.handleOpenFormModal()} style={{ width: '40px', height: '40px' }}>
-              <FiPlus size={20}/>
-            </Button>
-          </div>
-
-          <div className={styles.years_container}>
-            {academicYears.loading && <Loader />}
-
-            {!academicYears.loading && academicYears.data?.map((academicYear: IAcademicYear) =>
-              <div key={academicYear.id} className={clsx(styles.year_item, { [styles.selected]: academicYear.id === currentYear?.id })}>
-                <div className={styles.year_item_info} onClick={() => { setCurrentYear(academicYear); setCurrentQuarter(null); setSubjects({ data: [], loading: false }) }}>
-                  <b>{academicYear.year}</b>
-
-                  <div>{toShortDate(new Date(academicYear.startDate))} até {toShortDate(new Date(academicYear.endDate))}</div>
-                </div>
-
-                <div className={styles.actions_container}>
-                  <IconButton btnType="primary" icon={FiEdit} onClick={() => formModalRef.current?.handleOpenFormModal(academicYear)} />
-
-                  <IconButton btnType="error" icon={FiTrash2} onClick={() => handleDeleteAcademicYear(academicYear)} />
-                </div>
-              </div>
-            )}
-          </div>
+        <Box
+          flex
+          maxWidth="360px"
+          height="calc(100vh - 192px)"
+          title="Anos acadêmicos"
+          onAdd={() => formModalRef.current?.handleOpenFormModal()}
+        >
+          <List
+            data={{
+              items: academicYears.data,
+              loading: academicYears.loading,
+              selectors: { title: 'year', id: 'id', descriptionGenerator: (academicYear: IAcademicYear) => `${toShortDate(new Date(academicYear.startDate))} até ${toShortDate(new Date(academicYear.endDate))}` }
+            }}
+            actions={[
+              { type: 'primary', icon: FiEdit, method: (item: IAcademicYear) => formModalRef.current?.handleOpenFormModal(item) },
+              { type: 'error', icon: FiTrash2, method: (item: IAcademicYear) => handleDeleteAcademicYear(item) },
+            ]}
+            onSelect={(academicYear: IAcademicYear) => { setCurrentYear(academicYear); setCurrentQuarter(null); setSubjects({ data: [], loading: false }) }}
+          />
         </Box>
 
-        <Box style={{ display: 'flex', maxWidth: '360px', flexDirection: 'column', height: 'calc(100vh - 192px)' }}>
-          <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>Quadrimestres</b>
-
-            <Button onClick={() => quarterFormModalRef.current?.handleOpenFormModal()} style={{ width: '40px', height: '40px' }}>
-              <FiPlus size={20}/>
-            </Button>
-          </div>
-
-          <div className={styles.years_container}>
-            {!currentYear && <div className={styles.no_message}>Nenhum ano acadêmico selecionado</div>}
-
-            {!quarters.loading && !!currentYear && !quarters.data.length && <div className={styles.no_message}>Não há quadrimestres criados para esse ano acadêmico</div>}
-
-            {quarters.loading && <Loader />}
-
-            {!quarters.loading && quarters.data?.map((quarter: IQuarter, index) =>
-              <div key={quarter.id} className={clsx(styles.year_item, { [styles.selected]: quarter.id === currentQuarter?.id })}>
-                <div className={styles.year_item_info} onClick={() => setCurrentQuarter(quarter)}>
-                  <b>Q{index + 1}</b>
-
-                  <div>{toShortDate(new Date(quarter.startDate))} até {toShortDate(new Date(quarter.endDate))}</div>
-                </div>
-
-                <div className={styles.actions_container}>
-                  <IconButton btnType="primary" icon={FiEdit} onClick={() => quarterFormModalRef.current?.handleOpenFormModal(quarter)} />
-
-                  <IconButton btnType="error" icon={FiTrash2} onClick={() => handleDeleteQuarter(quarter)} />
-                </div>
-              </div>
-            )}
-          </div>
+        <Box
+          flex
+          maxWidth="360px"
+          height="calc(100vh - 192px)"
+          title="Quadrimestres"
+          onAdd={() => quarterFormModalRef.current?.handleOpenFormModal()}
+        >
+          <List
+            data={{
+              items: quarters.data,
+              loading: quarters.loading,
+              selectors: { id: 'id', descriptionGenerator: (quarter: IQuarter) => `${toShortDate(new Date(quarter.startDate))} até ${toShortDate(new Date(quarter.endDate))}` }
+            }}
+            actions={[
+              { type: 'primary', icon: FiEdit, method: (item: IQuarter) => quarterFormModalRef.current?.handleOpenFormModal(item) },
+              { type: 'error', icon: FiTrash2, method: (item: IQuarter) => handleDeleteQuarter(item) },
+            ]}
+            overlapMessages={[
+              { show: !currentYear, message: 'Nenhum ano acadêmico selecionado' },
+              { show: !quarters.loading && !!currentYear && !quarters.data.length, message: 'Não há quadrimestres criados para esse ano acadêmico' },
+            ]}
+            onSelect={(quarter: IQuarter) => setCurrentQuarter(quarter)}
+          />
         </Box>
 
-        <Box style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 192px)' }}>
-          <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>Matérias</b>
-
-            <Button onClick={() => subjectFormModalRef.current?.handleOpenFormModal()} style={{ width: '40px', height: '40px' }}>
-              <FiPlus size={20}/>
-            </Button>
-          </div>
-
-          <div className={styles.years_container}>
-            {!currentQuarter && <div className={styles.no_message}>Nenhum quadrimestre selecionado</div>}
-
-            {!subjects.loading && !!currentQuarter && !subjects.data.length && <div className={styles.no_message}>Não há matérias criadas para esse quadrimestre</div>}
-
-            {subjects.loading && <Loader />}
-
-            {!subjects.loading && subjects.data?.map((subject: ISubject) =>
-              <div key={subject.id} className={styles.year_item}>
-                <div className={styles.year_item_info}>
-                  <b>{subject.name}</b>
-
-                  <div>{subject.description || ''}</div>
-                </div>
-
-                <div className={styles.actions_container}>
-                  <IconButton btnType="primary" icon={FiEdit} onClick={() => subjectFormModalRef.current?.handleOpenFormModal(subject)} />
-
-                  <IconButton btnType="info" icon={FiCalendar} onClick={() => classesModalRef.current?.handleOpenModal(subject)} />
-
-                  <IconButton btnType="error" icon={FiTrash2} onClick={() => handleDeleteSubject(subject)} />
-                </div>
-              </div>
-            )}
-          </div>
+        <Box
+          flex
+          height="calc(100vh - 192px)"
+          title="Matérias"
+          onAdd={() => subjectFormModalRef.current?.handleOpenFormModal()}
+        >
+          <List
+            data={{
+              items: subjects.data,
+              loading: subjects.loading,
+              selectors: { title: 'name', id: 'id', description: 'description' }
+            }}
+            actions={[
+              { type: 'primary', icon: FiEdit, method: (item: ISubject) => subjectFormModalRef.current?.handleOpenFormModal(item) },
+              { type: 'info', icon: FiCalendar, method: (item: ISubject) => classesModalRef.current?.handleOpenModal(item) },
+              { type: 'error', icon: FiTrash2, method: (item: ISubject) => handleDeleteSubject(item) }
+            ]}
+            overlapMessages={[
+              { show: !currentQuarter, message: 'Nenhum quadrimestre selecionado' },
+              { show: !subjects.loading && !!currentQuarter && !subjects.data.length, message: 'Não há matérias criadas para esse quadrimestre' },
+            ]}
+          />
         </Box>
       </BoxesContainer>
 

@@ -1,16 +1,10 @@
-div.box_header {
-  display: flex;
-  padding: 16px;
-  justify-content: space-between;
-}
-
-div.years_container {
+div.list_container {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
 
-div.year_item {
+div.list_item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +15,7 @@ div.year_item {
   }
 }
 
-div.year_item_info {
+div.list_item_info {
   display: flex;
   flex-direction: column;
   gap: 4px;
