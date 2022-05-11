@@ -16,6 +16,7 @@ model User {
   name         String
   password     String
   academicYear AcademicYear[]
+  Subject      Subject[]
   Class        Class[]
   Task         Task[]
   Exam         Exam[]
@@ -60,6 +61,8 @@ model Subject {
   description String?
   quarter     Quarter @relation(fields: [quarterId], references: [id], onDelete: Cascade)
   quarterId   String  @map("quarter_id")
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String  @map("user_id")
   Class       Class[]
   Task        Task[]
   Exam        Exam[]
