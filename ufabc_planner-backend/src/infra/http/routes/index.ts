@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { academicYearRoutes } from './academicYears.routes';
 import { classRoutes } from './classes.routes';
+import { examsRoutes } from './exams.routes';
 import { quartersRoutes } from './quarters.routes';
 import { subjectsRoutes } from './subjects.routes';
 import { tasksRoutes } from './tasks.routes';
@@ -14,5 +15,6 @@ router.use('/quarters', quartersRoutes);
 router.use('/subjects', subjectsRoutes);
 router.use('/classes', classRoutes);
 router.use('/tasks', tasksRoutes);
+router.use('/exams', examsRoutes);
 
 export { router };
