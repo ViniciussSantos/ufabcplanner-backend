@@ -67,7 +67,10 @@ $ yarn
 # Suba um container do docker com uma instância do postgreSQL
 $ docker-compose up
 
-# Quando o container for criado com sucesso, rode as migrations
+# Após a criação do container, rodamos os teste de integração
+$ yarn test
+
+# Com os testes realizados, rode as migrations
 $ yarn dev:migration
 
 # para finalizar, inicie a API
