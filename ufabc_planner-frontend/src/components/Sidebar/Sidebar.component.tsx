@@ -13,7 +13,7 @@ const Sidebar = () => {
       const { icon: Icon, title } = pagesProps[key];
 
       return (
-        <SidebarButton linkTo={`/${key}`}>
+        <SidebarButton key={key} linkTo={`/${key}`}>
           <Icon />
 
           {title}

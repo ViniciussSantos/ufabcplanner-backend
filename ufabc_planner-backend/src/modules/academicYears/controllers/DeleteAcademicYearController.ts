@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { validateInput } from 'utils/errors/validation';
-import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYearDTO';
+import { validateInput } from 'infra/http/errors/validation';
+import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYea.dto';
 import { DeleteAcademicYearService } from '../services/DeleteAcademicYearService';
 
 export class DeleteAcademicYearController {

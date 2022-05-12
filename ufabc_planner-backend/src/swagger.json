@@ -9,10 +9,9 @@
   "paths": {
     "/academicyears/": {
       "post": {
-        "tag": ["academic Year"],
-        "sumary": "create an academic year",
-        "description": "create a new academic year",
+        "summary": "creates a new academic year",
         "security": [{ "bearerAuth": [] }],
+        "tags": ["academic year"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -43,7 +42,7 @@
             "description": "Created"
           },
           "400": {
-            "description": "academic year already exists"
+            "description": "End Date is before the start date"
           }
         }
       }
@@ -51,9 +50,8 @@
 
     "/academicyears/get/user": {
       "get": {
-        "tag": ["academic Year"],
-        "summary": "delete academic year",
-        "description": "delete an academic year",
+        "tags": ["academic year"],
+        "summary": "Returns an array of all academic years created by a specific user",
         "security": [{ "bearerAuth": [] }],
         "responses": {
           "200": {
@@ -89,11 +87,9 @@
 
     "/academicyears/delete/{id}": {
       "delete": {
-        "tag": ["academic Year"],
-
-        "summary": "delete academic year",
-        "description": "delete an academic year",
+        "summary": "deletes an academic year and everything related to it",
         "security": [{ "bearerAuth": [] }],
+        "tags": ["academic year"],
         "parameters": [
           {
             "name": "id",
@@ -117,9 +113,8 @@
     },
     "/academicyears/update/{id}": {
       "patch": {
-        "tag": ["academic Year"],
-        "summary": "update academic year",
-        "description": "update an academic year",
+        "summary": "updates an academic year start date, end date or year",
+        "tags": ["academic year"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
@@ -138,9 +133,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "string"
-                  },
                   "year": {
                     "type": "string"
                   },
@@ -163,20 +155,80 @@
 
         "responses": {
           "204": {
-            "description": "Success",
+            "description": "Success"
+          },
+          "400": {
+            "description": "academic year doesn't exist"
+          }
+        }
+      }
+    },
+
+    "/quarters/": {
+      "summary": "creates a quarter\"",
+      "post": {
+        "summary": "creates a new quarter and binds it to an academic year",
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["quarter"],
+        "responses": {
+          "201": {
+            "description": "created",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "year": {
-                      "type": "string"
-                    },
-                    "startDate": {
-                      "type": "string"
-                    },
-                    "endDate": {
-                      "type": "string"
+                "examples": {
+                  "correct": {
+                    "value": {
+                      "academicYearId": "b47be6d8-24ae-4976-826d-0f9339d3eb21",
+                      "startDate": "2022-06-01",
+                      "endDate": "2022-06-30"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "End Date is before the initial date"
+          }
+        }
+      }
+    },
+
+    "/quarters/get/academicyear": {
+      "summary": "GET quarter using academic year Id",
+      "post": {
+        "summary": "get all the quarters related to an academic year",
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["quarter"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "academicYearId": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "academicYearId": "b47be6d8-24ae-4976-826d-0f9339d3eb21"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "all the quarter related to an academic year",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "correct": {
+                    "value": {
+                      "id": "string",
+                      "academicYearId": "b47be6d8-24ae-4976-826d-0f9339d3eb21",
+                      "startDate": "2022-06-01",
+                      "endDate": "2022-07-01"
                     }
                   }
                 }
@@ -185,6 +237,62 @@
           },
           "400": {
             "description": "academic year doesn't exist"
+          }
+        }
+      }
+    },
+
+    "/quarters//delete/{id}": {
+      "summary": "delete a quarter\"",
+      "post": {
+        "summary": "deletes a quarter and everything related to it",
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["quarter"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "quarter id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "deleted"
+          },
+          "400": {
+            "description": "Quarter doesn't exist"
+          }
+        }
+      }
+    },
+    "/quarters/update/{id}": {
+      "summary": "updates a quarter\"",
+      "post": {
+        "summary": "updates a quarter",
+        "description": "updates a quarter start date and end date",
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["quarter"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "quarter id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "updated"
+          },
+          "400": {
+            "description": "End Date is before the initial date"
           }
         }
       }

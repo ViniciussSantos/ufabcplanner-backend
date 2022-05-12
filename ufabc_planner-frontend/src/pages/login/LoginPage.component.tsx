@@ -5,33 +5,21 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { InitialPageLayout } from '../../components/InitialPageLayout';
 
-import api from '../../services/api';
+import { useAuth } from '../../contexts/auth';
+import { ICredentials } from '../../interfaces/credentials';
 
 const LoginPage = () => {
   const formRef = useRef(null);
 
+  const { login } = useAuth();
+
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = useCallback((authToken: string) => {
-    localStorage.setItem('auth_token', authToken)
-
-    window.location.reload();
-  }, []);
-
-  const handleSubmit = useCallback(async (data: any) => {
+  const handleSubmit = useCallback(async (data: ICredentials) => {
     setLoading(true);
 
-    await api
-      .post('/users/login', data)
-      .then(({ data }) => data.token ? handleLogin(data.token) : alert('A API foi incapaz de gerar seu token de autenticação'))
-      .catch(error => {
-        error?.response?.data?.message
-          ? alert(error?.response?.data?.message)
-          : alert('Houve um erro ao tentar cadastrar o usuário...');
-
-        setLoading(false);
-      });
-  }, [handleLogin]);
+    await login(data, true).then(() => setLoading(false));
+  }, [login]);
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>

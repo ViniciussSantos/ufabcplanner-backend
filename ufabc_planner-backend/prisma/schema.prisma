@@ -16,103 +16,120 @@ model User {
   name         String
   password     String
   academicYear AcademicYear[]
-  created_at   DateTime       @default(now())
-  updated_at   DateTime       @updatedAt
+  Subject      Subject[]
+  Class        Class[]
+  Task         Task[]
+  Exam         Exam[]
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
 
   @@map("users")
 }
 
- model AcademicYear {
+model AcademicYear {
   id         String    @id @default(uuid())
   user       User      @relation(fields: [userId], references: [id])
   userId     String
   year       String
+  //TODO: Usar @map para resolver problema de diferença entre coluna no banco e o cliente
   start_date DateTime  @db.Date
-  end_date   DateTime @db.Date
-  //quarter    Quarter[]
+  end_date   DateTime  @db.Date
+  quarter    Quarter[]
   created_at DateTime  @default(now())
 
 
-   @@map("academic_years")
- }
+  @@map("academic_years")
+}
 
-// model Quarter {
-//   id             String       @id @default(uuid())
-//   academy_year   AcademicYear @relation(fields: [academy_yearId], references: [id])
-//   academy_yearId String
-//   Subject        Subject[]
-//   start_date     DateTime
-//   end_date       DateTime
+model Quarter {
+  id            String       @id @default(uuid())
+  //https://www.prisma.io/docs/concepts/components/prisma-schema/relations/referential-actions
+  //TODO: adicionar referential actions para que quando deletarmos um ano acadêmico
+  //deletar todos os quadrimestres atrelados
+  academy_year  AcademicYear @relation(fields: [academyYearId], references: [id], onDelete: Cascade)
+  academyYearId String       @map("academy_year_id")
+  startDate     DateTime     @map("start_date") @db.Date
+  endDate       DateTime     @map("end_date") @db.Date
+  Subject       Subject[]
 
-//   @@map("quarters")
-// }
+  @@map("quarters")
+}
 
-// model Subject {
-//   id          String  @id @default(uuid())
-//   name        String
-//   description String
-//   quarter     Quarter @relation(fields: [quarterId], references: [id])
-//   quarterId   String
-//   Class       Class[]
-//   Task        Task[]
-//   Exam        Exam[]
+model Subject {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  quarter     Quarter @relation(fields: [quarterId], references: [id], onDelete: Cascade)
+  quarterId   String  @map("quarter_id")
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String  @map("user_id")
+  Class       Class[]
+  Task        Task[]
+  Exam        Exam[]
 
-//   @@map("subjects")
-// }
+  @@map("subjects")
+}
 
-// model Class {
-//   id            String       @id @default(uuid())
-//   professor     String?
-//   room          String?
-//   campus        String?
-//   building      String?
-//   //arrumar types do start_time, end_time e weekday
-//   start_time    DateTime     @db.Time(4)
-//   end_time      DateTime     @db.Time(4)
-//   weekday       Weekdays
-//   biweekly_type BiweeklyType
-//   subject       Subject      @relation(fields: [subjectId], references: [id])
-//   subjectId     String
+model Class {
+  id           String        @id @default(uuid())
+  professor    String?
+  room         String?
+  campus       String?
+  building     String?
+  startTime    String        @map("start_time")
+  endTime      String        @map("end_time")
+  weekday      Weekdays
+  biweeklyType BiweeklyType? @map("biweekly_type")
+  subject      Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId    String        @map("subject_id")
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String        @map("user_id")
 
-//   @@map("classes")
-// }
+  @@map("classes")
+}
 
-// model Task {
-//   id          String   @id @default(uuid())
-//   subject     Subject  @relation(fields: [subjectId], references: [id])
-//   subjectId   String
-//   title       String
-//   dueDate     DateTime
-//   description String?
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  dueDate     DateTime @map("due_date") @db.Date
+  description String?
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId   String   @map("subject_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String   @map("user_id")
 
+  @@map("tasks")
+}
 
-//   @@map("tasks")
-// }
+model Exam {
+  id          String   @id @default(uuid())
+  name        String
+  dueDate     DateTime @map("due_date") @db.Date
+  time        String
+  description String?
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId   String   @map("subject_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String   @map("user_id")
 
-// model Exam {
-//   id          String   @id @default(uuid())
-//   subject     Subject  @relation(fields: [subjectId], references: [id])
-//   subjectId   String
-//   name        String
-//   // arrumar dateTime
-//   startDate   DateTime
-//   time        DateTime
-//   description String?
+  @@map("exams")
+}
 
-//   @@map("exams")
-// }
+enum BiweeklyType {
+  week1
+  week2
 
-// enum BiweeklyType {
-//   week1
-//   week2
-// }
+  @@map("biweekly_type")
+}
 
-// enum Weekdays {
-//   seg
-//   ter
-//   quar
-//   quin
-//   sex
-//   sab
-//   dom
-// }
+enum Weekdays {
+  seg
+  ter
+  quar
+  quin
+  sex
+  sab
+  dom
+
+  @@map("weekdays")
+}

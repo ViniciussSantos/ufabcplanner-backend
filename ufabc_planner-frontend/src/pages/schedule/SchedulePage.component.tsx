@@ -1,108 +1,214 @@
-import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FiEdit, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiCalendar, FiEdit, FiTrash2 } from "react-icons/fi";
 
 import { Box } from "../../components/Box";
 import { BoxesContainer } from "../../components/BoxesContainer";
-import { Button } from "../../components/Button";
-import { IconButton } from "../../components/IconButton";
-import { Modal, ModalRef } from "../../components/Modal";
+import { List } from "../../components/List";
 import { PageLayout } from "../../components/PageLayout";
+import { AcademicYearFormModal, AcademicYearFormModalRef } from "../../components/specific/academic_years/AcademicYearFormModal";
+import { QuarterFormModal, QuarterFormModalRef } from "../../components/specific/quarters/QuarterFormModal";
+import { SubjectFormModal, SubjectFormModalRef } from "../../components/specific/subjects/SubjectFormModal";
+import { ClassesModal, ClassesModalRef } from "../../components/specific/classes/ClassesModal";
 
 import { IAcademicYear } from "../../interfaces/academicYear";
+import { IQuarter } from "../../interfaces/quarter";
+import { ISubject } from "../../interfaces/subject";
 
 import api from "../../services/api";
 
 import { toShortDate } from "../../utils/date";
 
-import styles from './SchedulePage.module.scss';
-
 const SchedulePage = () => {
-  const modalRef = useRef<ModalRef>(null);
+  const formModalRef = useRef<AcademicYearFormModalRef>(null);
+  const quarterFormModalRef = useRef<QuarterFormModalRef>(null);
+  const subjectFormModalRef = useRef<SubjectFormModalRef>(null);
+  const classesModalRef = useRef<ClassesModalRef>(null);
 
-  const [academicYears, setAcademicYears] = useState<IAcademicYear[]>([]);
+  const [academicYears, setAcademicYears] = useState<{ data: IAcademicYear[], loading: boolean }>({ data: [], loading: false });
+  const [quarters, setQuarters] = useState<{ data: IQuarter[], loading: boolean }>({ data: [], loading: false });
+  const [subjects, setSubjects] = useState<{ data: ISubject[], loading: boolean }>({ data: [], loading: false });
+
   const [currentYear, setCurrentYear] = useState<IAcademicYear | null>(null);
+  const [currentQuarter, setCurrentQuarter] = useState<IQuarter | null>(null);
 
   const handleGetAcademicYears = useCallback(async () => {
-    await api
-    .get('/academicyears/get/user', { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
-    .then(({ data }) => setAcademicYears(data))
-    .catch(error => alert(error));
-  }, []);
+    setAcademicYears(prevYears => ({ ...prevYears, loading: true }));
 
-  const handleCreateAcademicYear = useCallback(async () => {
     await api
-      .post('/academicyears/', { year: '2023', startDate: '2023-01-01', endDate: '2023-12-31' }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
-      .then(() => handleGetAcademicYears())
-      .catch(error => alert(error));
-  }, [handleGetAcademicYears]);
-
-  const handleDeleteAcademicYear = useCallback(async (academicYear: { id: string }) => {
-    await api
-      .delete(`/academicyears/delete/${academicYear.id}`, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
-      .then(() => setAcademicYears(prevYears => prevYears.filter(year => year.id !== academicYear.id)))
+      .get('/academicyears/get/user')
+      .then(({ data }) => setAcademicYears({ data: data.sort((a: IAcademicYear, b: IAcademicYear) => Number(a.year) - Number(b.year)), loading: false  }))
       .catch(error => alert(error));
   }, []);
 
-  const handleEditAcademicYear = useCallback(async (academicYear: { id: string }) => {
-    // await api
-    //   .put(`/academicyears/update/${academicYear.id}`, { year: '2021', start_date: '2021-01-02', end_date: '2022-12-15' }, { headers: { 'Authorization': `Basic ${localStorage.getItem('auth_token')}`  } })
-    //   .then(() => handleGetAcademicYears())
-    //   .catch(error => alert(error));
+  const handleGetQuarters = useCallback(async () => {
+    if (!currentYear) return;
 
-    modalRef.current?.handleOpenModal();
+    setQuarters(prevQuarters => ({ ...prevQuarters, loading: true }));
+
+    await api
+      .get(`/quarters/get/academicYear/${currentYear?.id}`)
+      .then(({ data }) => setQuarters({ data: data.sort((a: IQuarter, b: IQuarter) => Number(a.startDate) - Number(b.startDate)), loading: false }))
+      .catch(error => alert(error));
+  }, [currentYear]);
+
+  const handleGetSubjects = useCallback(async () => {
+    if (!currentQuarter) return;
+
+    setSubjects(prevSubjects => ({ ...prevSubjects, loading: true }));
+
+    await api
+      .get(`/subjects/get/quarter/${currentQuarter?.id}`)
+      .then(({ data }) => setSubjects({ data, loading: false }))
+      .catch(error => alert(error));
+  }, [currentQuarter]);
+
+  const handleDeleteAcademicYear = useCallback(async (academicYear: IAcademicYear) => {
+    if (window.confirm(`Tem certeza que quer deletar o ano acadêmico de ${academicYear.year}?`)) {
+      setAcademicYears(prevAcademicYears => ({ ...prevAcademicYears, loading: true }));
+
+      await api
+        .delete(`/academicyears/delete/${academicYear.id}`)
+        .then(() => {
+          setAcademicYears(prevYears => ({
+            data: prevYears.data.filter(year => year.id !== academicYear.id),
+            loading: false,
+          }));
+
+          alert('Ano acadêmico deletado com sucesso!');
+        })
+        .catch(error => alert(error));
+    }
+  }, []);
+
+  const handleDeleteQuarter = useCallback(async (quarter: IQuarter) => {
+    if (window.confirm(`Tem certeza que quer deletar o quadrimestre?`)) {
+      setQuarters(prevQuarters => ({ ...prevQuarters, loading: true }));
+
+      await api
+        .delete(`/quarters/delete/${quarter.id}`)
+        .then(() => {
+          setQuarters(prevQuarters => ({
+            data: prevQuarters.data.filter(q => q.id !== quarter.id),
+            loading: false,
+          }));
+
+          alert('Quadrimestre deletado com sucesso!');
+        })
+        .catch(error => alert(error));
+    }
+  }, []);
+
+  const handleDeleteSubject = useCallback(async (subject: ISubject) => {
+    if (window.confirm(`Tem certeza que quer deletar a matéria ${subject.name}?`)) {
+      setSubjects(prevSubjects => ({ ...prevSubjects, loading: true }));
+
+      await api
+        .delete(`/subjects/delete/${subject.id}`)
+        .then(() => {
+          setSubjects(prevSubjects => ({
+            data: prevSubjects.data.filter(s => s.id !== subject.id),
+            loading: false,
+          }));
+
+          alert('Matéria deletada com sucesso!');
+        })
+        .catch(error => alert(error));
+    }
   }, []);
 
   useEffect(() => {
     handleGetAcademicYears();
   }, [handleGetAcademicYears]);
 
+  useEffect(() => {
+    handleGetQuarters();
+  }, [handleGetQuarters]);
+
+  useEffect(() => {
+    handleGetSubjects();
+  }, [handleGetSubjects]);
+
   return (
     <PageLayout>
       <BoxesContainer>
-        <Box style={{ display: 'flex', flexDirection: 'column', maxWidth: '400px', height: 'calc(100vh - 192px' }}>
-          <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>Anos acadêmicos</b>
-
-            <Button onClick={() => handleCreateAcademicYear()} style={{ width: '40px', height: '40px' }}>
-              <FiPlus size={20}/>
-            </Button>
-          </div>
-
-          <div className={styles.years_container}>
-            {academicYears.map((academicYear: IAcademicYear) =>
-              <div className={styles.year_item}>
-                <div
-                  className={clsx(styles.year_item_info, { [styles.selected]: academicYear.id === currentYear?.id })}
-                  onClick={() => setCurrentYear(academicYear)}
-                >
-                  <b>{academicYear.year}</b>
-
-                  <div>{toShortDate(new Date(academicYear.startDate))} até {toShortDate(new Date(academicYear.endDate))}</div>
-                </div>
-
-                <div className={styles.actions_container}>
-                  <IconButton btnType="primary" icon={FiEdit} onClick={() => handleEditAcademicYear(academicYear)} />
-
-                  <IconButton btnType="error" icon={FiTrash2} onClick={() => handleDeleteAcademicYear(academicYear)} />
-                </div>
-              </div>
-            )}
-          </div>
+        <Box
+          flex
+          maxWidth="360px"
+          height="calc(100vh - 192px)"
+          title="Anos acadêmicos"
+          onAdd={() => formModalRef.current?.handleOpenFormModal()}
+        >
+          <List
+            data={{
+              items: academicYears.data,
+              loading: academicYears.loading,
+              selectors: { title: 'year', id: 'id', descriptionGenerator: (academicYear: IAcademicYear) => `${toShortDate(new Date(academicYear.startDate))} até ${toShortDate(new Date(academicYear.endDate))}` }
+            }}
+            actions={[
+              { type: 'primary', icon: FiEdit, method: (item: IAcademicYear) => formModalRef.current?.handleOpenFormModal(item) },
+              { type: 'error', icon: FiTrash2, method: (item: IAcademicYear) => handleDeleteAcademicYear(item) },
+            ]}
+            onSelect={(academicYear: IAcademicYear) => { setCurrentYear(academicYear); setCurrentQuarter(null); setSubjects({ data: [], loading: false }) }}
+          />
         </Box>
 
-        <Box style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 192px' }}>
-          <div className={styles.box_header}>
-            <b style={{ fontSize: '22px' }}>{currentYear ? 'Matérias do ano selecionado' : 'Nenhum ano acadêmico selecionado'}</b>
-          </div>
+        <Box
+          flex
+          maxWidth="360px"
+          height="calc(100vh - 192px)"
+          title="Quadrimestres"
+          onAdd={() => quarterFormModalRef.current?.handleOpenFormModal()}
+        >
+          <List
+            data={{
+              items: quarters.data,
+              loading: quarters.loading,
+              selectors: { id: 'id', descriptionGenerator: (quarter: IQuarter) => `${toShortDate(new Date(quarter.startDate))} até ${toShortDate(new Date(quarter.endDate))}` }
+            }}
+            actions={[
+              { type: 'primary', icon: FiEdit, method: (item: IQuarter) => quarterFormModalRef.current?.handleOpenFormModal(item) },
+              { type: 'error', icon: FiTrash2, method: (item: IQuarter) => handleDeleteQuarter(item) },
+            ]}
+            overlapMessages={[
+              { show: !currentYear, message: 'Nenhum ano acadêmico selecionado' },
+              { show: !quarters.loading && !!currentYear && !quarters.data.length, message: 'Não há quadrimestres criados para esse ano acadêmico' },
+            ]}
+            onSelect={(quarter: IQuarter) => setCurrentQuarter(quarter)}
+          />
+        </Box>
 
-          <div style={{ padding: '16px' }}>
-            Ainda não há matérias para esse ano acadêmico
-          </div>
+        <Box
+          flex
+          height="calc(100vh - 192px)"
+          title="Matérias"
+          onAdd={() => subjectFormModalRef.current?.handleOpenFormModal()}
+        >
+          <List
+            data={{
+              items: subjects.data,
+              loading: subjects.loading,
+              selectors: { title: 'name', id: 'id', description: 'description' }
+            }}
+            actions={[
+              { type: 'primary', icon: FiEdit, method: (item: ISubject) => subjectFormModalRef.current?.handleOpenFormModal(item) },
+              { type: 'info', icon: FiCalendar, method: (item: ISubject) => classesModalRef.current?.handleOpenModal(item) },
+              { type: 'error', icon: FiTrash2, method: (item: ISubject) => handleDeleteSubject(item) }
+            ]}
+            overlapMessages={[
+              { show: !currentQuarter, message: 'Nenhum quadrimestre selecionado' },
+              { show: !subjects.loading && !!currentQuarter && !subjects.data.length, message: 'Não há matérias criadas para esse quadrimestre' },
+            ]}
+          />
         </Box>
       </BoxesContainer>
 
-      <Modal ref={modalRef} title="Editar/Criar Ano Acadêmico">a</Modal>
+      <AcademicYearFormModal ref={formModalRef} onSuccess={() => handleGetAcademicYears()} />
+
+      <QuarterFormModal ref={quarterFormModalRef} academicYearId={currentYear?.id || ''} onSuccess={() => handleGetQuarters()}/>
+
+      <SubjectFormModal ref={subjectFormModalRef} quarterId={currentQuarter?.id || ''} onSuccess={() => handleGetSubjects()}/>
+
+      <ClassesModal ref={classesModalRef} />
     </PageLayout>
   );
 };
