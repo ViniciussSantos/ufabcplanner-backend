@@ -8,17 +8,17 @@
 
 <p align="center">
 
-<a href="https://github.com/ES-UFABC/UFABCplanner/commits/main">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ES-UFABC/UFABCplanner">
+<a href="https://github.com/ufabcplanner/UFABCplanner/commits/main">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ufabcplanner/UFABCplanner">
   </a>
 
-  <a href="https://github.com/ES-UFABC/UFABCplanner/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/ES-UFABC/UFABCplanner">
+  <a href="https://github.com/ufabcplanner/UFABCplanner/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/ufabcplanner/UFABCplanner">
   </a>
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ES-UFABC/UFABCplanner">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ufabcplanner/UFABCplanner">
 
-  <img alt="GitHub" src="https://img.shields.io/github/license/ES-UFABC/UFABCplanner">
+  <img alt="GitHub" src="https://img.shields.io/github/license/ufabcplanner/UFABCplanner">
 </p>
 
 <p align="center">
@@ -31,13 +31,13 @@
 
 ## 👨🏻‍💻 Sobre o projeto
 
-<p >O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações.</p>
+<p >O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações. Este é o repositório para o backend do projeto</p>
 
 ## 🚀 Tecnologias
 
 - [Node.js](https://nodejs.org/en/)
-- [ReactJS](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Prisma](https://www.prisma.io/)
 
 ## 💻 Instalando
 
@@ -50,7 +50,7 @@
 **Clone o repo e acesse a pasta**
 
 ```bash
-$ git clone https://github.com/ES-UFABC/UFABCplanner.git && cd UFABCplanner
+$ git clone https://github.com/ufabcplanner/UFABCplanner.git && cd UFABCplanner
 ```
 
 **Siga os passos abaixo**
@@ -102,7 +102,7 @@ $ yarn start
 # Fork usando a CLI oficial do  GitHub
 # Se você não tem a CLI do github instalada, utilize o site.
 
-$ gh repo fork ES-UFABC/UFABCplanner
+$ gh repo fork ufabcplanner/UFABCplanner
 ```
 
 **Siga os passos abaixo**
