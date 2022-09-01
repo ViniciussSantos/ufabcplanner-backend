@@ -8,17 +8,17 @@
 
 <p align="center">
 
-<a href="https://github.com/ufabcplanner/UFABCplanner/commits/main">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/ufabcplanner/UFABCplanner">
+<a href="https://github.com/UFABCplanner/ufabcplanner-backend/commits/dev">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/UFABCplanner/ufabcplanner-backend">
   </a>
 
-  <a href="https://github.com/ufabcplanner/UFABCplanner/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/ufabcplanner/UFABCplanner">
+  <a href="https://github.com/UFABCplanner/ufabcplanner-backend/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/UFABCplanner/ufabcplanner-backend">
   </a>
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ufabcplanner/UFABCplanner">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/UFABCplanner/ufabcplanner-backend">
 
-  <img alt="GitHub" src="https://img.shields.io/github/license/ufabcplanner/UFABCplanner">
+  <img alt="GitHub" src="https://img.shields.io/github/license/UFABCplanner/ufabcplanner-backend">
 </p>
 
 <p align="center">
@@ -31,7 +31,7 @@
 
 ## 👨🏻‍💻 Sobre o projeto
 
-<p >O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações. Este é o repositório para o backend do projeto</p>
+<p >O projeto é baseado na necessidade de um organizador de estudos voltado aos padrões da UFABC, comportando todo o sistema de quadrimestres, aulas quinzenais e avaliações.</p>
 
 ## 🚀 Tecnologias
 
@@ -50,7 +50,7 @@
 **Clone o repo e acesse a pasta**
 
 ```bash
-$ git clone https://github.com/ufabcplanner/UFABCplanner.git && cd UFABCplanner
+$ git clone https://github.com/UFABCplanner/ufabcplanner-backend.git && cd UFABCplanner
 ```
 
 **Siga os passos abaixo**
@@ -58,11 +58,9 @@ $ git clone https://github.com/ufabcplanner/UFABCplanner.git && cd UFABCplanner
 ### Backend
 
 ```bash
-# Dentro da pasta root, vá para a pasta backend
-$ cd ufabc_planner-backend
 
 # Instale as dependências
-$ yarn
+$ yarn install
 
 # Suba um container do docker com uma instância do postgreSQL
 $ docker-compose up
@@ -79,21 +77,6 @@ $ yarn dev
 # Parabéns, você iniciou o projeto!
 ```
 
-### Frontend
-
-_Obs.: Antes de continuar, verifique se a API foi iniciada_
-
-```bash
-# Dentro da pasta root, vá para a pasta frontend
-$ cd ufabc_planner-frontend
-
-# Instale as dependências
-$ yarn
-
-# Inicie o client
-$ yarn start
-```
-
 ## 🤔 Como Contribuir
 
 **Faça um fork do repo**
@@ -102,7 +85,7 @@ $ yarn start
 # Fork usando a CLI oficial do  GitHub
 # Se você não tem a CLI do github instalada, utilize o site.
 
-$ gh repo fork ufabcplanner/UFABCplanner
+$ gh repo fork UFABCplanner/ufabcplanner-backend
 ```
 
 **Siga os passos abaixo**
