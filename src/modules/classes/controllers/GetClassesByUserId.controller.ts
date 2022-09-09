@@ -3,7 +3,7 @@ import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { GetClassesBySubjectIdDTO } from '../dtos/GetClassesBySubjectId.dto';
 import { GetClassesByUserIdDTO } from '../dtos/GetClassesByUserId.dto';
-import { GetClassesByUserIdService } from '../services/GetClassesByUserIdService';
+import { GetClassesByUserIdService } from '../services/GetClassesByUserId.service';
 
 export class GetClassesByUserIdController {
   async execute(request: Request, response: Response) {

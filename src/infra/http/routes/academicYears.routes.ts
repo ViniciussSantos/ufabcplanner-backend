@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { ensureAuthenticated } from 'infra/http/middlewares/ensureAuthenticated';
-import { CreateAcademicYearController } from 'modules/academicYears/controllers/CreateAcademicYearController';
-import { DeleteAcademicYearController } from 'modules/academicYears/controllers/DeleteAcademicYearController';
-import { GetAcademicYearByUserIdController } from 'modules/academicYears/controllers/GetAcademicYearByUserIdController';
-import { UpdateAcademicYearController } from 'modules/academicYears/controllers/UpdateAcademicYearController';
+import { CreateAcademicYearController } from 'modules/academicYears/controllers/CreateAcademicYear.controller';
+import { DeleteAcademicYearController } from 'modules/academicYears/controllers/DeleteAcademicYear.controller';
+import { GetAcademicYearByUserIdController } from 'modules/academicYears/controllers/GetAcademicYearByUserId.controller';
+import { UpdateAcademicYearController } from 'modules/academicYears/controllers/UpdateAcademicYear.controller';
 
 const academicYearRoutes = Router();
 

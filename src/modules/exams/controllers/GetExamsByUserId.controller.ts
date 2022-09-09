@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { GetExamsByUserIdDTO } from '../dtos/GetExamsByUserId.dto';
-import { GetExamsByUserIdService } from '../services/GetExamsByUserIdService';
+import { GetExamsByUserIdService } from '../services/GetExamsByUserId.service';
 
 export class GetExamsByUserIdController {
   async execute(request: Request, response: Response) {

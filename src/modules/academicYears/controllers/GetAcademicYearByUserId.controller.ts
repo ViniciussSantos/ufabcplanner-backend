@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { GetAcademicYearByUserIdService } from '../services/GetAcademicYearByUserIdService';
+import { GetAcademicYearByUserIdService } from '../services/GetAcademicYearByUserId.service';
 
 export class GetAcademicYearByUserIdController {
   async handle(request: Request, response: Response): Promise<Response> {

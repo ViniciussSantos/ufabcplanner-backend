@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { DeleteExamDTO } from '../dtos/DeleteExam.dto';
-import { DeleteExamService } from '../services/DeleteExamService';
+import { DeleteExamService } from '../services/DeleteExam.service';
 
 export class DeleteExamController {
   async execute(request: Request, response: Response) {

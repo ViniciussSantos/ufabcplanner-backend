@@ -3,7 +3,7 @@ import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { CreateTaskDTO } from '../dtos/CreateTask.dto';
 import { ICreateTask } from '../dtos/interfaces/ICreateTask';
-import { CreateTaskService } from '../services/CreateTaskService';
+import { CreateTaskService } from '../services/CreateTask.service';
 
 export class CreateTaskController {
   async execute(request: Request, response: Response) {

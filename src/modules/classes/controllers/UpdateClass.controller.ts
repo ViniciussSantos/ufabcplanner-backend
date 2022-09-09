@@ -3,7 +3,7 @@ import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { IUpdateClass } from '../dtos/interfaces/IUpdateClass';
 import { UpdateClassDTO } from '../dtos/UpdateClass.dto';
-import { UpdateClassService } from '../services/UpdateClassService';
+import { UpdateClassService } from '../services/UpdateClass.service';
 
 export class UpdateClassController {
   async execute(request: Request, response: Response) {

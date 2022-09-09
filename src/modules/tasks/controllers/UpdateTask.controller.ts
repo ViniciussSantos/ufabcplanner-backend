@@ -3,7 +3,7 @@ import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { IUpdateTask } from '../dtos/interfaces/IUpdateTask';
 import { UpdateTaskDTO } from '../dtos/UpdateTask.dto';
-import { UpdateTaskService } from '../services/UpdateTaskService';
+import { UpdateTaskService } from '../services/UpdateTask.service';
 
 export class UpdateTaskController {
   async execute(request: Request, response: Response) {

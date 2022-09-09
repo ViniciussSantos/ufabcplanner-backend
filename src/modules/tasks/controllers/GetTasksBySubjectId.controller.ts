@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { GetTasksBySubjectIdDTO } from '../dtos/GetTasksBySubjecId.dto';
-import { GetTasksBySubjectIdService } from '../services/GetTasksBySubjectIdService';
+import { GetTasksBySubjectIdService } from '../services/GetTasksBySubjectId.service';
 
 export class GetTasksBySubjectIdController {
   async execute(request: Request, response: Response) {

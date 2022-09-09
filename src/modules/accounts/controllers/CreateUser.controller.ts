@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { validateInput } from 'infra/http/errors/validation';
 import { CreateUserDTO } from '../dtos/CreateUser.dto';
-import { CreateUserService } from '../services/CreateUserService';
+import { CreateUserService } from '../services/CreateUser.service';
 
 export class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {

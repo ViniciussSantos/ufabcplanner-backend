@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
-import { CreateQuarterService } from '../services/CreateQuarterService';
+import { CreateQuarterService } from '../services/CreateQuarter.service';
 
 export class CreateQuarterController {
   async handle(request: Request, response: Response): Promise<Response> {

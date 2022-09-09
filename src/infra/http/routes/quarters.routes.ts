@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { CreateQuarterController } from 'modules/quarters/controllers/CreateQuarterController';
-import { DeleteQuarterController } from 'modules/quarters/controllers/DeleteQuarterController';
-import { GetQuarterByAcademicYearIdController } from 'modules/quarters/controllers/GetQuarterByAcademicYearIdController';
-import { UpdateQuarterController } from 'modules/quarters/controllers/UpdateQuarterController';
+import { CreateQuarterController } from 'modules/quarters/controllers/CreateQuarter.controller';
+import { DeleteQuarterController } from 'modules/quarters/controllers/DeleteQuarter.controller';
+import { GetQuarterByAcademicYearIdController } from 'modules/quarters/controllers/GetQuarterByAcademicYearId.controller';
+import { UpdateQuarterController } from 'modules/quarters/controllers/UpdateQuarter.controller';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const quartersRoutes = Router();

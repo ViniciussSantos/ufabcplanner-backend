@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { DeleteSubjectDTO } from '../dtos/DeleteSubject.dto';
-import { DeleteSubjectService } from '../services/DeleteSubjectService';
+import { DeleteSubjectService } from '../services/DeleteSubject.service';
 
 export class DeleteSubjectController {
   async handle(request: Request, response: Response): Promise<Response> {

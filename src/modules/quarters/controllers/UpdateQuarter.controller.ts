@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { UpdateQuarterDTO } from '../dtos/UpdateQuarter.dto';
-import { UpdateQuarterService } from '../services/UpdateQuarterService';
+import { UpdateQuarterService } from '../services/UpdateQuarter.service';
 
 export class UpdateQuarterController {
   async handle(request: Request, response: Response): Promise<Response> {

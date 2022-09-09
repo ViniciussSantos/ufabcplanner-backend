@@ -3,7 +3,7 @@ import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
 import { CreateExamDTO } from '../dtos/CreateExam.dto';
 import { ICreateExam } from '../dtos/interfaces/ICreateExam';
-import { CreateExamService } from '../services/CreateExamService';
+import { CreateExamService } from '../services/CreateExam.service';
 
 export class CreateExamController {
   async execute(request: Request, response: Response) {

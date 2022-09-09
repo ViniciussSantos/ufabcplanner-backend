@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { validateInput } from 'infra/http/errors/validation';
 import { CreateAcademyYearDTO } from '../dtos/CreateAcademyYear.dto';
-import { CreateAcademicYearService } from '../services/CreateAcademicYearService';
+import { CreateAcademicYearService } from '../services/CreateAcademicYear.service';
 
 export class CreateAcademicYearController {
   async handle(request: Request, response: Response): Promise<Response> {
