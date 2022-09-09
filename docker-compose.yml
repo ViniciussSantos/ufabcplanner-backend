@@ -5,9 +5,9 @@ services:
     image: 'bitnami/postgresql'
     restart: always
     ports:
-      - '5500:5500'
+      - '${DATABASE_PORT}:${DATABASE_PORT}'
     environment:
-      - POSTGRESQL_USERNAME=postgres
-      - POSTGRESQL_PASSWORD=postgres
-      - POSTGRESQL_DATABASE=mydb
+      - POSTGRESQL_USERNAME=${DATABASE_USER}
+      - POSTGRESQL_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRESQL_DATABASE=${DATABASE_NAME}
 
