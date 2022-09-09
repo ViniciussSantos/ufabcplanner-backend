@@ -9,6 +9,7 @@ export class UpdateSubjectService {
     @inject('PrismaSubjectRepository')
     private subjectRepository: ISubjectRepository
   ) {}
+
   async execute(params: UpdateSubjectDTO): Promise<void> {
     if (!(await this.subjectRepository.subjectExists(params.id))) {
       throw new AppError('A matéria não existe');

@@ -8,11 +8,13 @@ export class PrismaSubjectRepository implements ISubjectRepository {
   async subjectExists(id: string): Promise<boolean> {
     const subject = await prisma.subject.findUnique({
       where: {
-        id: id,
+        id,
       },
     });
 
-    if (!subject) return false;
+    if (!subject) {
+      return false;
+    }
 
     return true;
   }
@@ -28,7 +30,7 @@ export class PrismaSubjectRepository implements ISubjectRepository {
   async deleteSubject(id: string): Promise<void> {
     await prisma.subject.delete({
       where: {
-        id: id,
+        id,
       },
     });
   }
@@ -44,10 +46,11 @@ export class PrismaSubjectRepository implements ISubjectRepository {
       },
     });
   }
+
   getSubjectByQuarterId(quarterId: string): Promise<Subject[]> {
     return prisma.subject.findMany({
       where: {
-        quarterId: quarterId,
+        quarterId,
       },
     });
   }
@@ -55,7 +58,7 @@ export class PrismaSubjectRepository implements ISubjectRepository {
   getSubjectByUserId(userId: string): Promise<Subject[]> {
     return prisma.subject.findMany({
       where: {
-        userId: userId,
+        userId,
       },
     });
   }

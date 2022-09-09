@@ -15,6 +15,7 @@ export class CreateQuarterService {
     @inject('DayjsDateProvider')
     private dateProvider: IDateProvider
   ) {}
+
   async execute(params: createQuarterDTO) {
     const { academicYearId, startDate, endDate } = params;
     const startDateUTC = this.dateProvider.toDate(startDate);

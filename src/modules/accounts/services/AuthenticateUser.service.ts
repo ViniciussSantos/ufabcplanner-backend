@@ -1,6 +1,5 @@
 import { compare } from 'bcryptjs';
 import auth from 'config/auth';
-import { prisma } from 'infra/prisma/client';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
@@ -19,7 +18,7 @@ export class AuthenticateUserService {
   ) {}
 
   async execute({ email, password }: AuthenticateUserDTO): Promise<IResponse> {
-    const { expires_in_token, secret_token } = auth;
+    const { expiresInToken, secretToken } = auth;
 
     const user = await this.usersRepository.findByEmail(email);
 
@@ -38,10 +37,10 @@ export class AuthenticateUserService {
         name: user.name,
         email: user.email,
       },
-      secret_token,
+      secretToken,
       {
         subject: user.id,
-        expiresIn: expires_in_token,
+        expiresIn: expiresInToken,
       }
     );
 

@@ -10,7 +10,9 @@ export class PrismaQuarterRepository implements IQuarterRepository {
       },
     });
 
-    if (!quarter) return false;
+    if (!quarter) {
+      return false;
+    }
 
     return true;
   }
@@ -43,7 +45,7 @@ export class PrismaQuarterRepository implements IQuarterRepository {
     });
   }
 
-  async getQuarterByAcademicYearId(academicYearId: string): Promise<Quarter[]> {
+  getQuarterByAcademicYearId(academicYearId: string): Promise<Quarter[]> {
     return prisma.quarter.findMany({
       where: {
         academyYearId: academicYearId,

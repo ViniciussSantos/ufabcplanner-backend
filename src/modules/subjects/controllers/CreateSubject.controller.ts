@@ -11,6 +11,7 @@ export class CreateSubjectController {
     const { id: userId } = request.user;
 
     const createSubjectDto = await validateInput(CreateSubjectDTO, { userId, ...requestBody });
+
     await container.resolve(CreateSubjectService).execute(createSubjectDto);
 
     return response.status(201).send();

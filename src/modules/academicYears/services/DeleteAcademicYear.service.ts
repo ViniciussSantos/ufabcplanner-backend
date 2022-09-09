@@ -17,8 +17,12 @@ export class DeleteAcademicYearService {
 
     const academicYear = await this.academicYearRepository.getByAcademicYearId(academicYearId);
 
-    if (!academicYear) throw new AppError('Ano acadêmico não existe');
-    if (academicYear.userId !== userId) throw new AppError('Usuário não é dono desse ano academico');
+    if (!academicYear) {
+      throw new AppError('Ano acadêmico não existe');
+    }
+    if (academicYear.userId !== userId) {
+      throw new AppError('Usuário não é dono desse ano academico');
+    }
 
     await this.academicYearRepository.delete(academicYearId);
   }

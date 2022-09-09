@@ -8,6 +8,7 @@ export class CreateTaskService {
     @inject('PrismaTaskRepository')
     private TaskRepository: ITaskRepository
   ) {}
+
   async handle(params: CreateTaskDTO): Promise<void> {
     await this.TaskRepository.createTask(params);
   }

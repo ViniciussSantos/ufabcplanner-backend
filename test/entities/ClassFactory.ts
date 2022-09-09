@@ -20,10 +20,10 @@ export async function createClass(user: User, subject: Subject): Promise<Class> 
   return Class;
 }
 
-export async function getClassById(id: string) {
+export function getClassById(id: string) {
   return prisma.class.findUnique({
     where: {
-      id: id,
+      id,
     },
   });
 }

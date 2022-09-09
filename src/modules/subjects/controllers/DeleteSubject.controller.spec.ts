@@ -8,16 +8,16 @@ import { createUser, authenticateUser } from '../../../../test/entities/UserFact
 
 describe('create subject (e2e)', () => {
   beforeAll(async () => {
-    deleteAll();
+    await deleteAll();
   });
 
   afterAll(async () => {
-    disconnect();
+    await disconnect();
   });
 
   it('should delete a subject successfully', async () => {
     const user = await createUser();
-    const token = await authenticateUser(user);
+    const token = authenticateUser(user);
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
     const subject = await createSubject(quarter, user);

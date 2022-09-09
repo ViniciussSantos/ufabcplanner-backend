@@ -8,16 +8,16 @@ import { generateRandomEmail } from '../../../../test/utils';
 
 describe('Create Quarter (e2e)', () => {
   beforeAll(async () => {
-    deleteAll();
+    await deleteAll();
   });
 
   afterAll(async () => {
-    disconnect();
+    await disconnect();
   });
 
   it('Should create a quarter successfully', async () => {
     const user = await createUser();
-    const token = await authenticateUser(user);
+    const token = authenticateUser(user);
     const academicYear = await createAcademicYear(user);
 
     const response = await supertest(app)

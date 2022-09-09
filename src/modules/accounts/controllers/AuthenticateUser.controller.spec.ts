@@ -1,16 +1,15 @@
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
 import { deleteAll, disconnect } from '../../../../test/database';
-import { createUser, getUserByEmail } from '../../../../test/entities/UserFactory';
-import { generateRandomEmail } from '../../../../test/utils';
+import { createUser } from '../../../../test/entities/UserFactory';
 
 describe('Create User (e2e)', () => {
   beforeAll(async () => {
-    deleteAll();
+    await deleteAll();
   });
 
   afterAll(async () => {
-    disconnect();
+    await disconnect();
   });
   it('should authenticate user correctly', async () => {
     const user = await createUser();

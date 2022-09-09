@@ -1,5 +1,4 @@
 import { Config } from '@jest/types';
-import { pathsToModuleNameMapper } from 'ts-jest';
 
 const config: Config.InitialOptions = {
   preset: 'ts-jest',
@@ -13,4 +12,5 @@ const config: Config.InitialOptions = {
     },
   },
 };
+
 export default config;

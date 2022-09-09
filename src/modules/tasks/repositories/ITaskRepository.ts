@@ -8,5 +8,5 @@ export interface ITaskRepository {
   updateTask(params: UpdateTaskDTO): Promise<void>;
   getTasksBySubjectId(subjectId: string): Promise<Task[]>;
   getTasksByUserId(userId: string): Promise<Task[]>;
-  taskExists(id: string): Promise<Boolean>;
+  taskExists(id: string): Promise<boolean>;
 }

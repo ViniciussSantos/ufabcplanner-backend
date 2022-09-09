@@ -14,6 +14,7 @@ export class DeleteQuarterService {
     @inject('DayjsDateProvider')
     private dateProvider: IDateProvider
   ) {}
+
   async execute(params: DeleteQuarterDTO) {
     if (!(await this.QuarterRepository.quarterExists(params.id))) {
       throw new AppError('Quadrimestre não existe');

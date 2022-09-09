@@ -14,6 +14,7 @@ export class CreateUserService {
 
   async execute({ email, name, password }: CreateUserDTO): Promise<void> {
     const userExists = await this.usersRepository.exists(email);
+
     if (userExists) {
       throw new AppError('E-mail já utilizado, usuário já existente!');
     }

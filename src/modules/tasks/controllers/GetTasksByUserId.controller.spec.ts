@@ -9,16 +9,16 @@ import { createUser, authenticateUser } from '../../../../test/entities/UserFact
 
 describe('Get tasks by user Id (e2e)', () => {
   beforeAll(async () => {
-    deleteAll();
+    await deleteAll();
   });
 
   afterAll(async () => {
-    disconnect();
+    await disconnect();
   });
 
   it('Should return a task successfully using the user id', async () => {
     const user = await createUser();
-    const token = await authenticateUser(user);
+    const token = authenticateUser(user);
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
     const subject = await createSubject(quarter, user);

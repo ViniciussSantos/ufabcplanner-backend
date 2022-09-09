@@ -8,6 +8,7 @@ export class UpdateExamService {
     @inject('PrismaExamRepository')
     private examRepository: IExamRepository
   ) {}
+
   async handle(params: UpdateExamDTO): Promise<void> {
     await this.examRepository.updateExam(params);
   }

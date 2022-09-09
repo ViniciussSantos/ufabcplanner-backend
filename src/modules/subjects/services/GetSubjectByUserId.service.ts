@@ -9,6 +9,7 @@ export class GetSubjectByUserIdService {
     @inject('PrismaSubjectRepository')
     private subjectRepository: ISubjectRepository
   ) {}
+
   async execute({ id }: GetSubjectByUserIdDTO): Promise<Subject[]> {
     return this.subjectRepository.getSubjectByUserId(id);
   }

@@ -15,6 +15,7 @@ export class GetQuarterByAcademicYearIdService {
     @inject('PrismaQuarterRepository')
     private QuarterRepository: IQuarterRepository
   ) {}
+
   async execute(params: GetQuarterByAcademicYearIdDTO): Promise<Quarter[]> {
     if (!(await this.academicYearRepository.exists(params.academicYearId))) {
       throw new AppError('Ano acadêmico não existe');

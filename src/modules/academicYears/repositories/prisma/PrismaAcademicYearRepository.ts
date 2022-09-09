@@ -31,10 +31,10 @@ export class PrismaAcademicYearRepository implements IAcademicYearRepository {
     });
   }
 
-  async getByUserId(userId: string): Promise<AcademicYear[]> {
+  getByUserId(userId: string): Promise<AcademicYear[]> {
     return prisma.academicYear.findMany({
       where: {
-        userId: userId,
+        userId,
       },
     });
   }
@@ -59,12 +59,14 @@ export class PrismaAcademicYearRepository implements IAcademicYearRepository {
       },
     });
 
-    if (!academicYear) return false;
+    if (!academicYear) {
+      return false;
+    }
 
     return true;
   }
 
-  async getByAcademicYearId(academicYearId: string): Promise<AcademicYear | null> {
+  getByAcademicYearId(academicYearId: string): Promise<AcademicYear | null> {
     return prisma.academicYear.findUnique({
       where: {
         id: academicYearId,

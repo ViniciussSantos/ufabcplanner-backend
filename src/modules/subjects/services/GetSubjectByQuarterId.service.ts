@@ -13,6 +13,7 @@ export class GetSubjectByQuarterIdService {
     @inject('PrismaSubjectRepository')
     private subjectRepository: ISubjectRepository
   ) {}
+
   async execute(params: GetSubjectByQuarterIdDTO): Promise<Subject[]> {
     if (!(await this.QuarterRepository.quarterExists(params.quarterId))) {
       throw new AppError('Quadrimestre não existe');

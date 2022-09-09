@@ -7,16 +7,16 @@ import { createUser, authenticateUser } from '../../../../test/entities/UserFact
 
 describe('Get quarters by academic year (e2e)', () => {
   beforeAll(async () => {
-    deleteAll();
+    await deleteAll();
   });
 
   afterAll(async () => {
-    disconnect();
+    await disconnect();
   });
 
   it('should return a quarter', async () => {
     const user = await createUser();
-    const token = await authenticateUser(user);
+    const token = authenticateUser(user);
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
 

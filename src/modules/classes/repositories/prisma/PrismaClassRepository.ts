@@ -1,7 +1,5 @@
 import { Class } from '@prisma/client';
-import dayjs from 'dayjs';
 import { prisma } from 'infra/prisma/client';
-import { includes } from 'lodash';
 import { CreateClassDTO } from 'modules/classes/dtos/CreateClass.dto';
 import { UpdateClassDTO } from 'modules/classes/dtos/UpdateClass.dto';
 import { IClassRepository } from '../IClassRepository';
@@ -10,14 +8,17 @@ export class PrismaClassRepository implements IClassRepository {
   async classExists(id: string): Promise<boolean> {
     const classExists = await prisma.class.findUnique({
       where: {
-        id: id,
+        id,
       },
     });
 
-    if (!classExists) return false;
+    if (!classExists) {
+      return false;
+    }
 
     return true;
   }
+
   async createClass(params: CreateClassDTO): Promise<void> {
     await prisma.class.create({
       data: { ...params },
@@ -27,7 +28,7 @@ export class PrismaClassRepository implements IClassRepository {
   async deleteClass(id: string): Promise<void> {
     await prisma.class.delete({
       where: {
-        id: id,
+        id,
       },
     });
   }
@@ -43,18 +44,18 @@ export class PrismaClassRepository implements IClassRepository {
     });
   }
 
-  async getClassesBySubjectId(subjectId: string): Promise<Class[]> {
+  getClassesBySubjectId(subjectId: string): Promise<Class[]> {
     return prisma.class.findMany({
       where: {
-        subjectId: subjectId,
+        subjectId,
       },
     });
   }
 
-  async getClassesByUserId(userId: string): Promise<Class[]> {
+  getClassesByUserId(userId: string): Promise<Class[]> {
     return prisma.class.findMany({
       where: {
-        userId: userId,
+        userId,
       },
       include: {
         subject: {

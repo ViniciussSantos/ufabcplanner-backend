@@ -13,6 +13,7 @@ export class UpdateQuarterService {
     @inject('DayjsDateProvider')
     private dateProvider: IDateProvider
   ) {}
+
   async execute(params: UpdateQuarterDTO) {
     const { id, startDate, endDate } = params;
 

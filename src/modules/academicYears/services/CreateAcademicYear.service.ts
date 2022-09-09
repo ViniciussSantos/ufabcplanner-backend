@@ -1,4 +1,3 @@
-import { prisma } from 'infra/prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { CreateAcademyYearDTO } from '../dtos/CreateAcademyYear.dto';
@@ -25,8 +24,8 @@ export class CreateAcademicYearService {
     }
 
     await this.academicYearRepository.create({
-      userId: userId,
-      year: year,
+      userId,
+      year,
       start_date: startDateUTC,
       end_date: endDateUTC,
     });

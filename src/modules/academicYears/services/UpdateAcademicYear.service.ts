@@ -30,8 +30,8 @@ export class UpdateAcademicYearService {
     }
 
     await this.academicYearRepository.update({
-      id: id,
-      year: year,
+      id,
+      year,
       startDate: startDateUTC,
       endDate: endDateUTC,
     });

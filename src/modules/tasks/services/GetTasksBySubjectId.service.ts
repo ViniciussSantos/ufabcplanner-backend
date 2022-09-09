@@ -9,7 +9,8 @@ export class GetTasksBySubjectIdService {
     @inject('PrismaTaskRepository')
     private TaskRepository: ITaskRepository
   ) {}
-  async handle({ id }: GetTasksBySubjectIdDTO): Promise<Task[]> {
+
+  handle({ id }: GetTasksBySubjectIdDTO): Promise<Task[]> {
     return this.TaskRepository.getTasksBySubjectId(id);
   }
 }

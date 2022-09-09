@@ -1,8 +1,8 @@
-import { Subject, User } from '@prisma/client';
+import { Exam, Subject, User } from '@prisma/client';
 import dayjs from 'dayjs';
 import { prisma } from 'infra/prisma/client';
 
-export async function createExam(subject: Subject, user: User) {
+export function createExam(subject: Subject, user: User): Promise<Exam> {
   return prisma.exam.create({
     data: {
       subjectId: subject.id,
@@ -15,10 +15,10 @@ export async function createExam(subject: Subject, user: User) {
   });
 }
 
-export async function findExamById(id: string) {
+export function findExamById(id: string): Promise<Exam | null> {
   return prisma.exam.findUnique({
     where: {
-      id: id,
+      id,
     },
   });
 }

@@ -8,6 +8,7 @@ export class UpdateTaskService {
     @inject('PrismaTaskRepository')
     private TaskRepository: ITaskRepository
   ) {}
+
   async handle(params: UpdateTaskDTO): Promise<void> {
     await this.TaskRepository.updateTask(params);
   }

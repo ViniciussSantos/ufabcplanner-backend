@@ -9,6 +9,7 @@ export class DeleteTaskService {
     @inject('PrismaTaskRepository')
     private TaskRepository: ITaskRepository
   ) {}
+
   async handle({ id }: DeleteTaskDTO): Promise<void> {
     if (!(await this.TaskRepository.taskExists(id))) {
       throw new AppError('Essa task não existe');

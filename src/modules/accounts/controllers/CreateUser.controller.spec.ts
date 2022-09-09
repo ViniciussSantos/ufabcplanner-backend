@@ -5,11 +5,11 @@ import { getUserByEmail } from '../../../../test/entities/UserFactory';
 
 describe('Create User (e2e)', () => {
   beforeAll(async () => {
-    deleteAll();
+    await deleteAll();
   });
 
   afterAll(async () => {
-    disconnect();
+    await disconnect();
   });
   it('should register user correctly', async () => {
     const response = await supertest(app).post('/users/').send({
