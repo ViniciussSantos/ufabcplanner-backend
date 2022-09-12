@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { CreateSubjectController } from 'modules/subjects/controllers/CreateSubjectController';
-import { DeleteSubjectController } from 'modules/subjects/controllers/DeleteSubjectController';
-import { GetSubjectByQuarterIdController } from 'modules/subjects/controllers/GetSubjectByQuarterIdController';
-import { GetSubjectByUserIdController } from 'modules/subjects/controllers/GetSubjectByUserIdController';
-import { UpdateSubjectController } from 'modules/subjects/controllers/UpdateSubjectController';
+import { CreateSubjectController } from 'modules/subjects/controllers/CreateSubject.controller';
+import { DeleteSubjectController } from 'modules/subjects/controllers/DeleteSubject.controller';
+import { GetSubjectByQuarterIdController } from 'modules/subjects/controllers/GetSubjectByQuarterId.controller';
+import { GetSubjectByUserIdController } from 'modules/subjects/controllers/GetSubjectByUserId.controller';
+import { UpdateSubjectController } from 'modules/subjects/controllers/UpdateSubject.controller';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const subjectsRoutes = Router();

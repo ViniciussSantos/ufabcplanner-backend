@@ -2,7 +2,7 @@ import { Subject, Task, User } from '@prisma/client';
 import dayjs from 'dayjs';
 import { prisma } from 'infra/prisma/client';
 
-export async function createTask(subject: Subject, user: User): Promise<Task> {
+export function createTask(subject: Subject, user: User): Promise<Task> {
   return prisma.task.create({
     data: {
       subjectId: subject.id,
@@ -14,6 +14,6 @@ export async function createTask(subject: Subject, user: User): Promise<Task> {
   });
 }
 
-export async function getTaskById(id: string): Promise<Task | null> {
-  return prisma.task.findUnique({ where: { id: id } });
+export function getTaskById(id: string): Promise<Task | null> {
+  return prisma.task.findUnique({ where: { id } });
 }

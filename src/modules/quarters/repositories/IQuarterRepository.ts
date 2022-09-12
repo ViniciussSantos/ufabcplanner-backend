@@ -1,5 +1,4 @@
 import { Quarter } from '@prisma/client';
-import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
 
 export interface IQuarterRepository {
   quarterExists(quarterId: string): Promise<boolean>;

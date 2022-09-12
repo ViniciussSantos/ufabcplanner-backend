@@ -7,11 +7,13 @@ export class PrismaUserRepository implements IUsersRepository {
   async exists(email: string): Promise<boolean> {
     const user = await prisma.user.findUnique({
       where: {
-        email: email,
+        email,
       },
     });
 
-    if (!user) return false;
+    if (!user) {
+      return false;
+    }
 
     return true;
   }
@@ -19,11 +21,13 @@ export class PrismaUserRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {
-        email: email,
+        email,
       },
     });
 
-    if (!user) return null;
+    if (!user) {
+      return null;
+    }
 
     return user;
   }

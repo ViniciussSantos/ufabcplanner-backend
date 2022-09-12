@@ -1,5 +1,4 @@
 import { Config } from '@jest/types';
-import { pathsToModuleNameMapper } from 'ts-jest';
 
 const config: Config.InitialOptions = {
   preset: 'ts-jest',
@@ -7,10 +6,9 @@ const config: Config.InitialOptions = {
   modulePaths: ['<rootDir>/src/'],
   testEnvironment: 'node',
   rootDir: '.',
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-    },
+  transform: {
+    '^.+\\.ts$': 'ts-jest',
   },
 };
+
 export default config;

@@ -7,7 +7,7 @@ interface IPayload {
   sub: string;
 }
 
-export async function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
+export function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -17,7 +17,7 @@ export async function ensureAuthenticated(request: Request, response: Response, 
   const [, token] = authHeader.split(' ');
 
   try {
-    const { sub: userId } = verify(token, auth.secret_token) as IPayload;
+    const { sub: userId } = verify(token, auth.secretToken) as IPayload;
 
     request.user = {
       id: userId,

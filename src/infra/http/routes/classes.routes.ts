@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { CreateClassController } from 'modules/classes/controllers/CreateClassController';
-import { DeleteClassController } from 'modules/classes/controllers/DeleteClassController';
-import { GetClassesBySubjectIdController } from 'modules/classes/controllers/GetClassesBySubjectIdController';
-import { GetClassesByUserIdController } from 'modules/classes/controllers/GetClassesByUserIdController';
-import { UpdateClassController } from 'modules/classes/controllers/UpdateClassController';
-import { container } from 'tsyringe';
+import { CreateClassController } from 'modules/classes/controllers/CreateClass.controller';
+import { DeleteClassController } from 'modules/classes/controllers/DeleteClass.controller';
+import { GetClassesBySubjectIdController } from 'modules/classes/controllers/GetClassesBySubjectId.controller';
+import { GetClassesByUserIdController } from 'modules/classes/controllers/GetClassesByUserId.controller';
+import { UpdateClassController } from 'modules/classes/controllers/UpdateClass.controller';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const createClassController = new CreateClassController();

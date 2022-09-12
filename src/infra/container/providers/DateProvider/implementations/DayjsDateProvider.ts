@@ -10,6 +10,7 @@ export class DayjsDateProvider implements IDateProvider {
   toDate(date: string): Date {
     return dayjs(date).toDate();
   }
+
   convertToUTC(date: Date): string {
     return dayjs(date).utc().format();
   }

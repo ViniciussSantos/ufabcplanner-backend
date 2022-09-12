@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { CreateExamController } from 'modules/exams/controllers/CreateExamController';
-import { DeleteExamController } from 'modules/exams/controllers/DeleteExamController';
-import { GetExamsBySubjectIdController } from 'modules/exams/controllers/GetExamsBySubjectIdController';
-import { GetExamsByUserIdController } from 'modules/exams/controllers/GetExamsByUserIdController';
-import { UpdateExamController } from 'modules/exams/controllers/UpdateExamController';
+import { CreateExamController } from 'modules/exams/controllers/CreateExam.controller';
+import { DeleteExamController } from 'modules/exams/controllers/DeleteExam.controller';
+import { GetExamsBySubjectIdController } from 'modules/exams/controllers/GetExamsBySubjectId.controller';
+import { GetExamsByUserIdController } from 'modules/exams/controllers/GetExamsByUserId.controller';
+import { UpdateExamController } from 'modules/exams/controllers/UpdateExam.controller';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const createExamController = new CreateExamController();

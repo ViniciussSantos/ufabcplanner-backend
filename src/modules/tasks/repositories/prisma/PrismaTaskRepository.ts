@@ -11,7 +11,7 @@ export class PrismaTaskRepository implements ITaskRepository {
   }
 
   async deleteTask(id: string): Promise<void> {
-    await prisma.task.delete({ where: { id: id } });
+    await prisma.task.delete({ where: { id } });
   }
 
   async updateTask(params: UpdateTaskDTO): Promise<void> {
@@ -24,7 +24,7 @@ export class PrismaTaskRepository implements ITaskRepository {
   getTasksBySubjectId(subjectId: string): Promise<Task[]> {
     return prisma.task.findMany({
       where: {
-        subjectId: subjectId,
+        subjectId,
       },
     });
   }
@@ -32,7 +32,7 @@ export class PrismaTaskRepository implements ITaskRepository {
   getTasksByUserId(userId: string): Promise<Task[]> {
     return prisma.task.findMany({
       where: {
-        userId: userId,
+        userId,
       },
       include: {
         subject: {
@@ -45,14 +45,16 @@ export class PrismaTaskRepository implements ITaskRepository {
     });
   }
 
-  async taskExists(id: string): Promise<Boolean> {
+  async taskExists(id: string): Promise<boolean> {
     const taskExists = await prisma.task.findUnique({
       where: {
-        id: id,
+        id,
       },
     });
 
-    if (!taskExists) return false;
+    if (!taskExists) {
+      return false;
+    }
 
     return true;
   }

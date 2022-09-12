@@ -15,7 +15,7 @@ export async function createAcademicYear(user: User): Promise<AcademicYear> {
   return AcademicYear;
 }
 
-export async function getAcademicYearById(academicYearId: string): Promise<AcademicYear | null> {
+export function getAcademicYearById(academicYearId: string): Promise<AcademicYear | null> {
   return prisma.academicYear.findUnique({
     where: {
       id: academicYearId,

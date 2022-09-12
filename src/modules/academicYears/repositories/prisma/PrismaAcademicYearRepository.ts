@@ -1,7 +1,5 @@
 import { AcademicYear } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
-import { CreateAcademyYearDTO } from 'modules/academicYears/dtos/CreateAcademyYear.dto';
-import { UpdateAcademyYearDTO } from 'modules/academicYears/dtos/UpdateAcademicYear.dto';
 import { IAcademicYearRepository } from '../IAcademicYearRepository';
 
 type updateAcademicYear = {
@@ -31,10 +29,10 @@ export class PrismaAcademicYearRepository implements IAcademicYearRepository {
     });
   }
 
-  async getByUserId(userId: string): Promise<AcademicYear[]> {
+  getByUserId(userId: string): Promise<AcademicYear[]> {
     return prisma.academicYear.findMany({
       where: {
-        userId: userId,
+        userId,
       },
     });
   }
@@ -59,12 +57,14 @@ export class PrismaAcademicYearRepository implements IAcademicYearRepository {
       },
     });
 
-    if (!academicYear) return false;
+    if (!academicYear) {
+      return false;
+    }
 
     return true;
   }
 
-  async getByAcademicYearId(academicYearId: string): Promise<AcademicYear | null> {
+  getByAcademicYearId(academicYearId: string): Promise<AcademicYear | null> {
     return prisma.academicYear.findUnique({
       where: {
         id: academicYearId,

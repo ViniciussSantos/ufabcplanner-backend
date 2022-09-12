@@ -14,13 +14,15 @@ export class PrismaExamRepository implements IExamRepository {
       },
     });
   }
+
   async deleteExam(id: string): Promise<void> {
     await prisma.exam.delete({
       where: {
-        id: id,
+        id,
       },
     });
   }
+
   async updateExam(params: UpdateExamDTO): Promise<void> {
     await prisma.exam.update({
       where: {
@@ -32,28 +34,33 @@ export class PrismaExamRepository implements IExamRepository {
       },
     });
   }
-  async getExamsBySubjectId(subjectId: string): Promise<Exam[]> {
+
+  getExamsBySubjectId(subjectId: string): Promise<Exam[]> {
     return prisma.exam.findMany({
       where: {
-        subjectId: subjectId,
+        subjectId,
       },
     });
   }
-  async getExamsByUserId(userId: string): Promise<Exam[]> {
+
+  getExamsByUserId(userId: string): Promise<Exam[]> {
     return prisma.exam.findMany({
       where: {
-        userId: userId,
+        userId,
       },
     });
   }
+
   async ExamExists(id: string): Promise<boolean> {
     const exam = await prisma.exam.findUnique({
       where: {
-        id: id,
+        id,
       },
     });
 
-    if (!exam) return false;
+    if (!exam) {
+      return false;
+    }
 
     return true;
   }

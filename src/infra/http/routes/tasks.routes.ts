@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { CreateTaskController } from 'modules/tasks/controllers/CreateTaskController';
-import { DeleteTaskController } from 'modules/tasks/controllers/DeleteTaskController';
-import { GetTasksBySubjectIdController } from 'modules/tasks/controllers/GetTasksBySubjectIdController';
-import { GetTasksByUserIdController } from 'modules/tasks/controllers/GetTasksByUserIdController';
-import { UpdateTaskController } from 'modules/tasks/controllers/UpdateTaskController';
+import { CreateTaskController } from 'modules/tasks/controllers/CreateTask.controller';
+import { DeleteTaskController } from 'modules/tasks/controllers/DeleteTask.controller';
+import { GetTasksBySubjectIdController } from 'modules/tasks/controllers/GetTasksBySubjectId.controller';
+import { GetTasksByUserIdController } from 'modules/tasks/controllers/GetTasksByUserId.controller';
+import { UpdateTaskController } from 'modules/tasks/controllers/UpdateTask.controller';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const tasksRoutes = Router();
