@@ -1,11 +1,11 @@
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
-import { deleteAll, disconnect } from '../../../../test/database';
-import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
-import { createClass } from '../../../../test/entities/ClassFactory';
-import { createQuarter } from '../../../../test/entities/QuarterFactory';
-import { createSubject } from '../../../../test/entities/SubjectFactory';
-import { authenticateUser, createUser } from '../../../../test/entities/UserFactory';
+import { deleteAll, closeConnection } from '../../database';
+import { createAcademicYear } from '../../entities/AcademicYearFactory';
+import { createClass } from '../../entities/ClassFactory';
+import { createQuarter } from '../../entities/QuarterFactory';
+import { createSubject } from '../../entities/SubjectFactory';
+import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Get classes by user id (e2e)', () => {
   beforeAll(async () => {
@@ -13,7 +13,7 @@ describe('Get classes by user id (e2e)', () => {
   });
 
   afterAll(async () => {
-    await disconnect();
+    await closeConnection();
   });
 
   it('Should return a class successfully using the user id', async () => {

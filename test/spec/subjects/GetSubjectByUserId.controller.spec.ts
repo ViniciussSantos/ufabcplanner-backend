@@ -1,18 +1,18 @@
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
-import { deleteAll, disconnect } from '../../../../test/database';
-import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
-import { createQuarter } from '../../../../test/entities/QuarterFactory';
-import { createSubject } from '../../../../test/entities/SubjectFactory';
-import { createUser, authenticateUser } from '../../../../test/entities/UserFactory';
+import { deleteAll, closeConnection } from '../../database';
+import { createAcademicYear } from '../../entities/AcademicYearFactory';
+import { createQuarter } from '../../entities/QuarterFactory';
+import { createSubject } from '../../entities/SubjectFactory';
+import { createUser, authenticateUser } from '../../entities/UserFactory';
 
-describe('get subject by quarter id (e2e)', () => {
+describe('get subject by user id (e2e)', () => {
   beforeAll(async () => {
     await deleteAll();
   });
 
   afterAll(async () => {
-    await disconnect();
+    await closeConnection();
   });
 
   it('should return an array of subjects', async () => {
@@ -23,15 +23,13 @@ describe('get subject by quarter id (e2e)', () => {
     const subject = await createSubject(quarter, user);
 
     const response = await supertest(app)
-      .get('/subjects/get/quarter/' + quarter.id)
-      .set('authorization', 'Bearer ' + token)
-      .send({
-        quarterId: quarter.id,
-      });
+      .get('/subjects/get/user')
+      .set('authorization', 'Bearer ' + token);
+
+    expect(response.status).toBe(200);
 
     const responseBody = JSON.parse(response.text);
 
-    expect(response.status).toBe(200);
     expect(responseBody.length).toBe(1);
     expect(responseBody[0].id).toBe(subject.id);
   });

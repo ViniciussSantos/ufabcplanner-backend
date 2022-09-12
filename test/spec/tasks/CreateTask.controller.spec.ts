@@ -1,10 +1,10 @@
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
-import { deleteAll, disconnect } from '../../../../test/database';
-import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
-import { createQuarter } from '../../../../test/entities/QuarterFactory';
-import { createSubject } from '../../../../test/entities/SubjectFactory';
-import { createUser, authenticateUser } from '../../../../test/entities/UserFactory';
+import { deleteAll, closeConnection } from '../../database';
+import { createAcademicYear } from '../../entities/AcademicYearFactory';
+import { createQuarter } from '../../entities/QuarterFactory';
+import { createSubject } from '../../entities/SubjectFactory';
+import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Create task (e2e)', () => {
   beforeAll(async () => {
@@ -12,7 +12,7 @@ describe('Create task (e2e)', () => {
   });
 
   afterAll(async () => {
-    await disconnect();
+    await closeConnection();
   });
 
   it('Should create a task successfully', async () => {

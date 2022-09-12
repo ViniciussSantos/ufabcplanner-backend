@@ -1,7 +1,7 @@
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
-import { deleteAll, disconnect } from '../../../../test/database';
-import { createUser } from '../../../../test/entities/UserFactory';
+import { deleteAll, closeConnection } from '../../database';
+import { createUser } from '../../entities/UserFactory';
 
 describe('Create User (e2e)', () => {
   beforeAll(async () => {
@@ -9,7 +9,7 @@ describe('Create User (e2e)', () => {
   });
 
   afterAll(async () => {
-    await disconnect();
+    await closeConnection();
   });
   it('should authenticate user correctly', async () => {
     const user = await createUser();

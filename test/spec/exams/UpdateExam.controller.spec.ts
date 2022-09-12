@@ -1,11 +1,11 @@
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
-import { deleteAll, disconnect } from '../../../../test/database';
-import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
-import { createExam } from '../../../../test/entities/ExamFactory';
-import { createQuarter } from '../../../../test/entities/QuarterFactory';
-import { createSubject } from '../../../../test/entities/SubjectFactory';
-import { createUser, authenticateUser } from '../../../../test/entities/UserFactory';
+import { deleteAll, closeConnection } from '../../database';
+import { createAcademicYear } from '../../entities/AcademicYearFactory';
+import { createExam } from '../../entities/ExamFactory';
+import { createQuarter } from '../../entities/QuarterFactory';
+import { createSubject } from '../../entities/SubjectFactory';
+import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('update exam(e2e)', () => {
   beforeAll(async () => {
@@ -13,7 +13,7 @@ describe('update exam(e2e)', () => {
   });
 
   afterAll(async () => {
-    await disconnect();
+    await closeConnection();
   });
 
   it('Should update a examsuccessfully', async () => {

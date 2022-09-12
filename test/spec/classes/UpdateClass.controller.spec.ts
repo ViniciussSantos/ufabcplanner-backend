@@ -1,12 +1,12 @@
 import { BiweeklyType, Weekdays } from '@prisma/client';
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
-import { deleteAll, disconnect } from '../../../../test/database';
-import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
-import { createClass, getClassById } from '../../../../test/entities/ClassFactory';
-import { createQuarter } from '../../../../test/entities/QuarterFactory';
-import { createSubject } from '../../../../test/entities/SubjectFactory';
-import { authenticateUser, createUser } from '../../../../test/entities/UserFactory';
+import { deleteAll, closeConnection } from '../../database';
+import { createAcademicYear } from '../../entities/AcademicYearFactory';
+import { createClass, getClassById } from '../../entities/ClassFactory';
+import { createQuarter } from '../../entities/QuarterFactory';
+import { createSubject } from '../../entities/SubjectFactory';
+import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Create class (e2e)', () => {
   beforeAll(async () => {
@@ -14,7 +14,7 @@ describe('Create class (e2e)', () => {
   });
 
   afterAll(async () => {
-    await disconnect();
+    await closeConnection();
   });
 
   it('Should update a class successfully', async () => {

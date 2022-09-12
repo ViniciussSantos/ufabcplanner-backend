@@ -1,7 +1,7 @@
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
-import { deleteAll, disconnect } from '../../../../test/database';
-import { getUserByEmail } from '../../../../test/entities/UserFactory';
+import { deleteAll, closeConnection } from '../../database';
+import { getUserByEmail } from '../../entities/UserFactory';
 
 describe('Create User (e2e)', () => {
   beforeAll(async () => {
@@ -9,8 +9,9 @@ describe('Create User (e2e)', () => {
   });
 
   afterAll(async () => {
-    await disconnect();
+    await closeConnection();
   });
+
   it('should register user correctly', async () => {
     const response = await supertest(app).post('/users/').send({
       name: 'teste',

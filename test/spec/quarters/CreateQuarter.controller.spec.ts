@@ -1,9 +1,9 @@
 import { app } from 'infra/http/app';
 import { prisma } from 'infra/prisma/client';
 import supertest from 'supertest';
-import { deleteAll, disconnect } from '../../../../test/database';
-import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
-import { authenticateUser, createUser } from '../../../../test/entities/UserFactory';
+import { deleteAll, closeConnection } from '../../database';
+import { createAcademicYear } from '../../entities/AcademicYearFactory';
+import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Create Quarter (e2e)', () => {
   beforeAll(async () => {
@@ -11,7 +11,7 @@ describe('Create Quarter (e2e)', () => {
   });
 
   afterAll(async () => {
-    await disconnect();
+    await closeConnection();
   });
 
   it('Should create a quarter successfully', async () => {
