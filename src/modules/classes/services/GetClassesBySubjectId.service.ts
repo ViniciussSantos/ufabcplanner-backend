@@ -11,7 +11,7 @@ export class GetClassesBySubjectIdService {
     @inject('PrismaClassRepository')
     private ClassRepository: IClassRepository,
     @inject('PrismaSubjectRepository')
-    private subjectRepository: ISubjectRepository
+    private subjectRepository: ISubjectRepository,
   ) {}
 
   async handle({ id }: GetClassesBySubjectIdDTO): Promise<Class[]> {

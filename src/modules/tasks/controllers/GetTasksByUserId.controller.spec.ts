@@ -22,7 +22,8 @@ describe('Get tasks by user Id (e2e)', () => {
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
     const subject = await createSubject(quarter, user);
-    const task = await createTask(subject, user);
+
+    await createTask(subject, user);
 
     const response = await supertest(app)
       .get('/tasks/get/user')

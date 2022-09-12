@@ -1,9 +1,7 @@
 import { Quarter } from '@prisma/client';
-import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvider';
 import { AppError } from 'infra/http/errors/AppError';
 import { IAcademicYearRepository } from 'modules/academicYears/repositories/IAcademicYearRepository';
 import { injectable, inject } from 'tsyringe';
-import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
 import { GetQuarterByAcademicYearIdDTO } from '../dtos/GetQuarterByAcademicYearId.dto';
 import { IQuarterRepository } from '../repositories/IQuarterRepository';
 
@@ -13,7 +11,7 @@ export class GetQuarterByAcademicYearIdService {
     @inject('PrismaAcademicYearRepository')
     private academicYearRepository: IAcademicYearRepository,
     @inject('PrismaQuarterRepository')
-    private QuarterRepository: IQuarterRepository
+    private QuarterRepository: IQuarterRepository,
   ) {}
 
   async execute(params: GetQuarterByAcademicYearIdDTO): Promise<Quarter[]> {

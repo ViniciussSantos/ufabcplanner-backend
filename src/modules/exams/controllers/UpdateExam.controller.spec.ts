@@ -1,4 +1,3 @@
-import { Weekdays, BiweeklyType } from '@prisma/client';
 import { app } from 'infra/http/app';
 import supertest from 'supertest';
 import { deleteAll, disconnect } from '../../../../test/database';

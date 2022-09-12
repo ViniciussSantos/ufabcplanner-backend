@@ -6,7 +6,7 @@ import { IExamRepository } from '../repositories/IExamRepository';
 export class DeleteExamService {
   constructor(
     @inject('PrismaExamRepository')
-    private ExamRepository: IExamRepository
+    private ExamRepository: IExamRepository,
   ) {}
 
   async handle({ id }: DeleteExamDTO): Promise<void> {

@@ -18,7 +18,8 @@ describe('Get quarters by academic year (e2e)', () => {
     const user = await createUser();
     const token = authenticateUser(user);
     const academicYear = await createAcademicYear(user);
-    const quarter = await createQuarter(academicYear);
+
+    await createQuarter(academicYear);
 
     const response = await supertest(app)
       .get('/quarters/get/academicyear/' + academicYear.id)

@@ -7,7 +7,7 @@ import { ITaskRepository } from '../repositories/ITaskRepository';
 export class DeleteTaskService {
   constructor(
     @inject('PrismaTaskRepository')
-    private TaskRepository: ITaskRepository
+    private TaskRepository: ITaskRepository,
   ) {}
 
   async handle({ id }: DeleteTaskDTO): Promise<void> {

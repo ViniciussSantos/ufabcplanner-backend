@@ -22,7 +22,8 @@ describe('Get classes by user id (e2e)', () => {
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
     const subject = await createSubject(quarter, user);
-    const classConst = await createClass(user, subject);
+
+    await createClass(user, subject);
 
     const response = await supertest(app)
       .get('/classes/get/user')

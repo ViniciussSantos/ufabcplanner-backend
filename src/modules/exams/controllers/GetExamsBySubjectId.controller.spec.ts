@@ -22,7 +22,8 @@ describe('Get exames by subject Id (e2e)', () => {
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
     const subject = await createSubject(quarter, user);
-    const exam = await createExam(subject, user);
+
+    await createExam(subject, user);
 
     const response = await supertest(app)
       .get('/exams/get/subject/' + subject.id)

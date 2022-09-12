@@ -7,7 +7,7 @@ import { ITaskRepository } from '../repositories/ITaskRepository';
 export class GetTasksByUserIdService {
   constructor(
     @inject('PrismaTaskRepository')
-    private TaskRepository: ITaskRepository
+    private TaskRepository: ITaskRepository,
   ) {}
 
   handle({ id }: GetTasksByUserIdDTO): Promise<Task[]> {

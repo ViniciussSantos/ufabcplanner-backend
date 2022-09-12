@@ -1,5 +1,5 @@
 import { BiweeklyType, Weekdays } from '@prisma/client';
-import { IsUUID, IsNotEmpty, IsOptional, IsString, isMilitaryTime, IsMilitaryTime, IsEnum } from 'class-validator';
+import { IsUUID, IsNotEmpty, IsOptional, IsString, IsMilitaryTime, IsEnum } from 'class-validator';
 import { messages } from 'infra/http/errors/messages';
 import { ICreateClass } from './interfaces/ICreateClass';
 

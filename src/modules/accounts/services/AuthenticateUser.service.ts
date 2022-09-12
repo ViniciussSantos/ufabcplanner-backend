@@ -14,7 +14,7 @@ interface IResponse {
 export class AuthenticateUserService {
   constructor(
     @inject('PrismaUserRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
 
   async execute({ email, password }: AuthenticateUserDTO): Promise<IResponse> {
@@ -41,7 +41,7 @@ export class AuthenticateUserService {
       {
         subject: user.id,
         expiresIn: expiresInToken,
-      }
+      },
     );
 
     return { token };

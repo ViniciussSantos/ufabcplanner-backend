@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumberString, IsOptional, IsUUID } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumberString, IsUUID } from 'class-validator';
 import { messages } from 'infra/http/errors/messages';
 import { IUpdateAcademyYear } from './interfaces/IUpdateAcademicYear';
 

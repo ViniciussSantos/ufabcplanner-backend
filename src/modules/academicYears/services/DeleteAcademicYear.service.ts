@@ -1,15 +1,13 @@
-import { CreateUserService } from 'modules/accounts/services/CreateUserService';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYea.dto';
-import { prisma } from 'infra/prisma/client';
 import { IAcademicYearRepository } from '../repositories/IAcademicYearRepository';
 
 @injectable()
 export class DeleteAcademicYearService {
   constructor(
     @inject('PrismaAcademicYearRepository')
-    private academicYearRepository: IAcademicYearRepository
+    private academicYearRepository: IAcademicYearRepository,
   ) {}
 
   async execute(params: DeleteAcademyYearDTO, userId: string): Promise<void> {

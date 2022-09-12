@@ -1,4 +1,4 @@
-import { IsEmail, isNotEmpty, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { messages } from 'infra/http/errors/messages';
 import { ICreateUser } from './interfaces/ICreateUser';
 

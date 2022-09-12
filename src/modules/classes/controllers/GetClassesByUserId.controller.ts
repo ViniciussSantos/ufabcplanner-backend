@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
 import { container } from 'tsyringe';
-import { GetClassesBySubjectIdDTO } from '../dtos/GetClassesBySubjectId.dto';
 import { GetClassesByUserIdDTO } from '../dtos/GetClassesByUserId.dto';
 import { GetClassesByUserIdService } from '../services/GetClassesByUserId.service';
 

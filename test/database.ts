@@ -9,15 +9,7 @@ export async function deleteAll() {
   const deleteTask = prisma.task.deleteMany();
   const deleteExam = prisma.exam.deleteMany();
 
-  await prisma.$transaction([
-    deleteExam,
-    deleteTask,
-    deleteClass,
-    deleteSubject,
-    deleteQuarter,
-    deleteAcademicYear,
-    deleteUser,
-  ]);
+  await prisma.$transaction([deleteExam, deleteTask, deleteClass, deleteSubject, deleteQuarter, deleteAcademicYear, deleteUser]);
 }
 
 export async function disconnect() {

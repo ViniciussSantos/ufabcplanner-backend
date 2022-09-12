@@ -1,7 +1,6 @@
 import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvider';
 import { AppError } from 'infra/http/errors/AppError';
 import { injectable, inject } from 'tsyringe';
-import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
 import { UpdateQuarterDTO } from '../dtos/UpdateQuarter.dto';
 import { IQuarterRepository } from '../repositories/IQuarterRepository';
 
@@ -11,7 +10,7 @@ export class UpdateQuarterService {
     @inject('PrismaQuarterRepository')
     private QuarterRepository: IQuarterRepository,
     @inject('DayjsDateProvider')
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
   ) {}
 
   async execute(params: UpdateQuarterDTO) {

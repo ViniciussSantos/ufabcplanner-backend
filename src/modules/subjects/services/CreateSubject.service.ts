@@ -10,7 +10,7 @@ export class CreateSubjectService {
     @inject('PrismaQuarterRepository')
     private QuarterRepository: IQuarterRepository,
     @inject('PrismaSubjectRepository')
-    private subjectRepository: ISubjectRepository
+    private subjectRepository: ISubjectRepository,
   ) {}
 
   async execute(params: CreateSubjectDTO): Promise<void> {

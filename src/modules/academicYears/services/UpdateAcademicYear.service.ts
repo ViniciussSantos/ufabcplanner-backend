@@ -1,5 +1,3 @@
-import { AcademicYear } from '@prisma/client';
-import { prisma } from 'infra/prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYear.dto';
@@ -12,7 +10,7 @@ export class UpdateAcademicYearService {
     @inject('PrismaAcademicYearRepository')
     private academicYearRepository: IAcademicYearRepository,
     @inject('DayjsDateProvider')
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
   ) {}
 
   async execute(params: UpdateAcademyYearDTO): Promise<void> {

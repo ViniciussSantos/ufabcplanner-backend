@@ -7,7 +7,7 @@ import { IClassRepository } from '../repositories/IClassRepository';
 export class UpdateClassService {
   constructor(
     @inject('PrismaClassRepository')
-    private ClassRepository: IClassRepository
+    private ClassRepository: IClassRepository,
   ) {}
 
   async handle(params: UpdateClassDTO) {

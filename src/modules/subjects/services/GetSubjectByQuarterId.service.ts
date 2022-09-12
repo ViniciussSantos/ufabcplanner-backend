@@ -11,7 +11,7 @@ export class GetSubjectByQuarterIdService {
     @inject('PrismaQuarterRepository')
     private QuarterRepository: IQuarterRepository,
     @inject('PrismaSubjectRepository')
-    private subjectRepository: ISubjectRepository
+    private subjectRepository: ISubjectRepository,
   ) {}
 
   async execute(params: GetSubjectByQuarterIdDTO): Promise<Subject[]> {

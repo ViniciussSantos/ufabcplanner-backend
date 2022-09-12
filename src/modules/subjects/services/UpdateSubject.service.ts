@@ -7,7 +7,7 @@ import { ISubjectRepository } from '../repositories/ISubjectRepository';
 export class UpdateSubjectService {
   constructor(
     @inject('PrismaSubjectRepository')
-    private subjectRepository: ISubjectRepository
+    private subjectRepository: ISubjectRepository,
   ) {}
 
   async execute(params: UpdateSubjectDTO): Promise<void> {

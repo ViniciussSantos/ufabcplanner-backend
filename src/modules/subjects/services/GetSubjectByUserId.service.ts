@@ -7,10 +7,10 @@ import { ISubjectRepository } from '../repositories/ISubjectRepository';
 export class GetSubjectByUserIdService {
   constructor(
     @inject('PrismaSubjectRepository')
-    private subjectRepository: ISubjectRepository
+    private subjectRepository: ISubjectRepository,
   ) {}
 
-  async execute({ id }: GetSubjectByUserIdDTO): Promise<Subject[]> {
+  execute({ id }: GetSubjectByUserIdDTO): Promise<Subject[]> {
     return this.subjectRepository.getSubjectByUserId(id);
   }
 }

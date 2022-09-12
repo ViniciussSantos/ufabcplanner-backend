@@ -1,5 +1,4 @@
 import { hash } from 'bcryptjs';
-import { prisma } from 'infra/prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { CreateUserDTO } from '../dtos/CreateUser.dto';
@@ -9,7 +8,7 @@ import { IUsersRepository } from '../repositories/IUsersRepository';
 export class CreateUserService {
   constructor(
     @inject('PrismaUserRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
 
   async execute({ email, name, password }: CreateUserDTO): Promise<void> {

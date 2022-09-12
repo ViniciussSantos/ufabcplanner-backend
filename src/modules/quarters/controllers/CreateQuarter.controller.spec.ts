@@ -4,7 +4,6 @@ import supertest from 'supertest';
 import { deleteAll, disconnect } from '../../../../test/database';
 import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
 import { authenticateUser, createUser } from '../../../../test/entities/UserFactory';
-import { generateRandomEmail } from '../../../../test/utils';
 
 describe('Create Quarter (e2e)', () => {
   beforeAll(async () => {

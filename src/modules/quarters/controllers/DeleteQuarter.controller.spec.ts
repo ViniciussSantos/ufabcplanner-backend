@@ -4,7 +4,6 @@ import { deleteAll, disconnect } from '../../../../test/database';
 import { createAcademicYear } from '../../../../test/entities/AcademicYearFactory';
 import { createQuarter } from '../../../../test/entities/QuarterFactory';
 import { createUser, authenticateUser } from '../../../../test/entities/UserFactory';
-import { generateRandomEmail } from '../../../../test/utils';
 
 describe('Delete Quarter (e2e)', () => {
   beforeAll(async () => {

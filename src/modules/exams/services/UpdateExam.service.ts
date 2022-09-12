@@ -6,7 +6,7 @@ import { IExamRepository } from '../repositories/IExamRepository';
 export class UpdateExamService {
   constructor(
     @inject('PrismaExamRepository')
-    private examRepository: IExamRepository
+    private examRepository: IExamRepository,
   ) {}
 
   async handle(params: UpdateExamDTO): Promise<void> {

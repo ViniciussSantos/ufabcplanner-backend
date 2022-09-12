@@ -13,7 +13,7 @@ export class CreateQuarterService {
     @inject('PrismaAcademicYearRepository')
     private academicYearRepository: IAcademicYearRepository,
     @inject('DayjsDateProvider')
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
   ) {}
 
   async execute(params: createQuarterDTO) {

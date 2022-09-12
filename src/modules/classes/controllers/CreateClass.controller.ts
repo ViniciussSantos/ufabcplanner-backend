@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { validateInput } from 'infra/http/errors/validation';
-import { container, injectable } from 'tsyringe';
+import { container } from 'tsyringe';
 import { CreateClassDTO } from '../dtos/CreateClass.dto';
 import { ICreateClass } from '../dtos/interfaces/ICreateClass';
 import { CreateClassService } from '../services/CreateClass.service';

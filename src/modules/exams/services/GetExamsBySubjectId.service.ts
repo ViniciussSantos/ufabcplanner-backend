@@ -7,10 +7,10 @@ import { IExamRepository } from '../repositories/IExamRepository';
 export class GetExamsBySubjectIdService {
   constructor(
     @inject('PrismaExamRepository')
-    private ExamRepository: IExamRepository
+    private ExamRepository: IExamRepository,
   ) {}
 
-  async handle({ id }: GetTasksBySubjectIdDTO): Promise<Exam[]> {
+  handle({ id }: GetTasksBySubjectIdDTO): Promise<Exam[]> {
     return this.ExamRepository.getExamsBySubjectId(id);
   }
 }

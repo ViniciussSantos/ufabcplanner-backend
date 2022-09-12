@@ -7,7 +7,7 @@ import { IClassRepository } from '../repositories/IClassRepository';
 export class DeleteClassService {
   constructor(
     @inject('PrismaClassRepository')
-    private ClassRepository: IClassRepository
+    private ClassRepository: IClassRepository,
   ) {}
 
   async handle({ id }: DeleteClassDTO) {
