@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { CreateTaskDTO } from '../dtos/CreateTask.dto';
 import { ICreateTask } from '../dtos/interfaces/ICreateTask';
@@ -10,7 +10,7 @@ export class CreateTaskController {
     const requestBody = request.body as Omit<ICreateTask, 'userId'>;
     const { id: userId } = request.user;
 
-    const createTaskDTO = await validateInput(CreateTaskDTO, { userId, ...requestBody });
+    const createTaskDTO = await transformAndValidate(CreateTaskDTO, { userId, ...requestBody });
 
     await container.resolve(CreateTaskService).handle(createTaskDTO);
 

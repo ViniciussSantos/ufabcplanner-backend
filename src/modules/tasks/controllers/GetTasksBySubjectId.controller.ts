@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { GetTasksBySubjectIdDTO } from '../dtos/GetTasksBySubjecId.dto';
 import { GetTasksBySubjectIdService } from '../services/GetTasksBySubjectId.service';
@@ -8,7 +8,7 @@ export class GetTasksBySubjectIdController {
   async execute(request: Request, response: Response) {
     const { id } = request.params;
 
-    const getTasksBySubjectIdDTO = await validateInput(GetTasksBySubjectIdDTO, { id });
+    const getTasksBySubjectIdDTO = await transformAndValidate(GetTasksBySubjectIdDTO, { id });
 
     const tasks = await container.resolve(GetTasksBySubjectIdService).handle(getTasksBySubjectIdDTO);
 

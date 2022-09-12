@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { CreateClassDTO } from '../dtos/CreateClass.dto';
 import { ICreateClass } from '../dtos/interfaces/ICreateClass';
@@ -10,7 +10,7 @@ export class CreateClassController {
     const requestBody = request.body as Omit<ICreateClass, 'userId'>;
     const { id: userId } = request.user;
 
-    const createClassDTO = await validateInput(CreateClassDTO, { userId, ...requestBody });
+    const createClassDTO = await transformAndValidate(CreateClassDTO, { userId, ...requestBody });
 
     await container.resolve(CreateClassService).handle(createClassDTO);
 

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYear.dto';
 import { UpdateAcademicYearService } from '../services/UpdateAcademicYear.service';
 
@@ -11,7 +11,7 @@ export class UpdateAcademicYearController {
 
     const updateAcademicYearService = container.resolve(UpdateAcademicYearService);
 
-    const updateAcademicYearDTO = await validateInput(UpdateAcademyYearDTO, {
+    const updateAcademicYearDTO = await transformAndValidate(UpdateAcademyYearDTO, {
       id,
       year,
       startDate,

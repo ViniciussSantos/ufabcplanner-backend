@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { IUpdateExam } from '../dtos/interfaces/IUpdateExam';
 import { UpdateExamDTO } from '../dtos/UpdateExam.dto';
@@ -10,7 +10,7 @@ export class UpdateExamController {
     const responseBody = request.body as Omit<IUpdateExam, 'id'>;
     const { id } = request.params;
 
-    const updateExamDTO = await validateInput(UpdateExamDTO, { id, ...responseBody });
+    const updateExamDTO = await transformAndValidate(UpdateExamDTO, { id, ...responseBody });
 
     await container.resolve(UpdateExamService).handle(updateExamDTO);
 

@@ -12,6 +12,6 @@ export async function deleteAll() {
   await prisma.$transaction([deleteExam, deleteTask, deleteClass, deleteSubject, deleteQuarter, deleteAcademicYear, deleteUser]);
 }
 
-export async function disconnect() {
+export async function closeConnection() {
   await prisma.$disconnect();
 }

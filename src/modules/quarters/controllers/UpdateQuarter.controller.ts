@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { UpdateQuarterDTO } from '../dtos/UpdateQuarter.dto';
 import { UpdateQuarterService } from '../services/UpdateQuarter.service';
@@ -9,7 +9,7 @@ export class UpdateQuarterController {
     const { id } = request.params;
     const { startDate, endDate } = request.body;
 
-    const updateQuarterDto = await validateInput(UpdateQuarterDTO, {
+    const updateQuarterDto = await transformAndValidate(UpdateQuarterDTO, {
       id,
       startDate,
       endDate,

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { DeleteQuarterDTO } from '../dtos/DeleteQuarter.dto';
 import { DeleteQuarterService } from '../services/DeleteQuarter.service';
@@ -8,7 +8,7 @@ export class DeleteQuarterController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const deleteQuarterDto = await validateInput(DeleteQuarterDTO, { id });
+    const deleteQuarterDto = await transformAndValidate(DeleteQuarterDTO, { id });
 
     await container.resolve(DeleteQuarterService).execute(deleteQuarterDto);
 

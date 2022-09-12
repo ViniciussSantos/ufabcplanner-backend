@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { IUpdateTask } from '../dtos/interfaces/IUpdateTask';
 import { UpdateTaskDTO } from '../dtos/UpdateTask.dto';
@@ -10,7 +10,7 @@ export class UpdateTaskController {
     const responseBody = request.body as Omit<IUpdateTask, 'id'>;
     const { id } = request.params;
 
-    const updateTaskDTO = await validateInput(UpdateTaskDTO, { id, ...responseBody });
+    const updateTaskDTO = await transformAndValidate(UpdateTaskDTO, { id, ...responseBody });
 
     await container.resolve(UpdateTaskService).handle(updateTaskDTO);
 

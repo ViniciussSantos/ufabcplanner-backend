@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYea.dto';
 import { DeleteAcademicYearService } from '../services/DeleteAcademicYear.service';
 
@@ -12,7 +12,7 @@ export class DeleteAcademicYearController {
 
     const createAcademicYearService = container.resolve(DeleteAcademicYearService);
 
-    const deleteAcademyYearDTO = await validateInput(DeleteAcademyYearDTO, { academicYearId });
+    const deleteAcademyYearDTO = await transformAndValidate(DeleteAcademyYearDTO, { academicYearId });
 
     await createAcademicYearService.execute(deleteAcademyYearDTO, userId);
 

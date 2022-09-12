@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { AuthenticateUserDTO } from '../dtos/AuthenticateUser.dto';
 import { AuthenticateUserService } from '../services/AuthenticateUser.service';
 
@@ -9,7 +9,7 @@ class AuthenticateUserController {
     const { email, password } = request.body;
 
     const authenticateUserService = container.resolve(AuthenticateUserService);
-    const authenticateUserDTO = await validateInput(AuthenticateUserDTO, { email, password });
+    const authenticateUserDTO = await transformAndValidate(AuthenticateUserDTO, { email, password });
 
     const token = await authenticateUserService.execute(authenticateUserDTO);
 

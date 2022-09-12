@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { CreateSubjectDTO } from '../dtos/CreateSubject.dto';
 import { ICreateSubject } from '../dtos/interfaces/ICreateSubject';
@@ -10,7 +10,7 @@ export class CreateSubjectController {
     const requestBody = request.body as Omit<ICreateSubject, 'userId'>;
     const { id: userId } = request.user;
 
-    const createSubjectDto = await validateInput(CreateSubjectDTO, { userId, ...requestBody });
+    const createSubjectDto = await transformAndValidate(CreateSubjectDTO, { userId, ...requestBody });
 
     await container.resolve(CreateSubjectService).execute(createSubjectDto);
 

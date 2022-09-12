@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { validateInput } from 'infra/http/errors/validation';
+import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
 import { container } from 'tsyringe';
 import { UpdateSubjectDTO } from '../dtos/UpdateSubject.dto';
 import { UpdateSubjectService } from '../services/UpdateSubject.service';
@@ -9,7 +9,7 @@ export class UpdateSubjectController {
     const { id } = request.params;
     const { name, description } = request.body;
 
-    const UpdateSubjectDto = await validateInput(UpdateSubjectDTO, {
+    const UpdateSubjectDto = await transformAndValidate(UpdateSubjectDTO, {
       id,
       name,
       description,
