@@ -6,10 +6,8 @@ const config: Config.InitialOptions = {
   modulePaths: ['<rootDir>/src/'],
   testEnvironment: 'node',
   rootDir: '.',
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-    },
+  transform: {
+    '^.+\\.ts$': 'ts-jest',
   },
 };
 
