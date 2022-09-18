@@ -3,8 +3,10 @@ import dayjs from 'dayjs';
 import { prisma } from 'infra/prisma/client';
 import { CreateExamDTO } from 'modules/exams/dtos/CreateExam.dto';
 import { UpdateExamDTO } from 'modules/exams/dtos/UpdateExam.dto';
+import { singleton } from 'tsyringe';
 import { IExamRepository } from '../IExamRepository';
 
+@singleton()
 export class PrismaExamRepository implements IExamRepository {
   async createExam(params: CreateExamDTO): Promise<void> {
     await prisma.exam.create({

@@ -2,8 +2,10 @@ import { Class } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
 import { CreateClassDTO } from 'modules/classes/dtos/CreateClass.dto';
 import { UpdateClassDTO } from 'modules/classes/dtos/UpdateClass.dto';
+import { singleton } from 'tsyringe';
 import { IClassRepository } from '../IClassRepository';
 
+@singleton()
 export class PrismaClassRepository implements IClassRepository {
   async classExists(id: string): Promise<boolean> {
     const classExists = await prisma.class.findUnique({
