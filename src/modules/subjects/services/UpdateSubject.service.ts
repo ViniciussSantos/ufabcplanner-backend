@@ -1,14 +1,11 @@
 import { AppError } from 'infra/http/errors/AppError';
-import { inject, injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { UpdateSubjectDTO } from '../dtos/UpdateSubject.dto';
-import { ISubjectRepository } from '../repositories/ISubjectRepository';
+import { PrismaSubjectRepository } from '../repositories/prisma/PrismaSubjectRepository';
 
-@injectable()
+@singleton()
 export class UpdateSubjectService {
-  constructor(
-    @inject('PrismaSubjectRepository')
-    private subjectRepository: ISubjectRepository,
-  ) {}
+  constructor(private subjectRepository: PrismaSubjectRepository) {}
 
   async execute(params: UpdateSubjectDTO): Promise<void> {
     if (!(await this.subjectRepository.subjectExists(params.id))) {

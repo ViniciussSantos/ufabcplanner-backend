@@ -1,19 +1,16 @@
-import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvider';
 import { AppError } from 'infra/http/errors/AppError';
-import { IAcademicYearRepository } from 'modules/academicYears/repositories/IAcademicYearRepository';
-import { inject, injectable } from 'tsyringe';
+import { DayjsDateProvider } from 'infra/services/DayjsDateProvider';
+import { PrismaAcademicYearRepository } from 'modules/academicYears/repositories/prisma/PrismaAcademicYearRepository';
 import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
-import { IQuarterRepository } from '../repositories/IQuarterRepository';
+import { PrismaQuarterRepository } from '../repositories/prisma/PrismaQuarterRepository';
+import { singleton } from 'tsyringe';
 
-@injectable()
+@singleton()
 export class CreateQuarterService {
   constructor(
-    @inject('PrismaQuarterRepository')
-    private QuarterRepository: IQuarterRepository,
-    @inject('PrismaAcademicYearRepository')
-    private academicYearRepository: IAcademicYearRepository,
-    @inject('DayjsDateProvider')
-    private dateProvider: IDateProvider,
+    private quarterRepository: PrismaQuarterRepository,
+    private academicYearRepository: PrismaAcademicYearRepository,
+    private dateProvider: DayjsDateProvider,
   ) {}
 
   async execute(params: createQuarterDTO) {
@@ -29,7 +26,7 @@ export class CreateQuarterService {
       throw new AppError('Data final é antes da data inicial');
     }
 
-    await this.QuarterRepository.createQuarter({
+    await this.quarterRepository.createQuarter({
       academyYearId: academicYearId,
       startDate: startDateUTC,
       endDate: endDateUTC,

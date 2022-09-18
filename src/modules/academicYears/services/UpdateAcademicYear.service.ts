@@ -1,17 +1,12 @@
-import { inject, injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYear.dto';
-import { IDateProvider } from 'infra/container/providers/DateProvider/IDateProvider';
-import { IAcademicYearRepository } from '../repositories/IAcademicYearRepository';
+import { PrismaAcademicYearRepository } from '../repositories/prisma/PrismaAcademicYearRepository';
+import { DayjsDateProvider } from 'infra/services/DayjsDateProvider';
 
-@injectable()
+@singleton()
 export class UpdateAcademicYearService {
-  constructor(
-    @inject('PrismaAcademicYearRepository')
-    private academicYearRepository: IAcademicYearRepository,
-    @inject('DayjsDateProvider')
-    private dateProvider: IDateProvider,
-  ) {}
+  constructor(private academicYearRepository: PrismaAcademicYearRepository, private dateProvider: DayjsDateProvider) {}
 
   async execute(params: UpdateAcademyYearDTO): Promise<void> {
     const { id, year, startDate, endDate } = params;

@@ -1,15 +1,12 @@
-import { injectable, inject } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { DeleteExamDTO } from '../dtos/DeleteExam.dto';
-import { IExamRepository } from '../repositories/IExamRepository';
+import { PrismaExamRepository } from '../repositories/prisma/PrismaExamRepository';
 
-@injectable()
+@singleton()
 export class DeleteExamService {
-  constructor(
-    @inject('PrismaExamRepository')
-    private ExamRepository: IExamRepository,
-  ) {}
+  constructor(private examRepository: PrismaExamRepository) {}
 
-  async handle({ id }: DeleteExamDTO): Promise<void> {
-    await this.ExamRepository.deleteExam(id);
+  async execute({ id }: DeleteExamDTO): Promise<void> {
+    await this.examRepository.deleteExam(id);
   }
 }

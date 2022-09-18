@@ -1,20 +1,17 @@
 import { AppError } from 'infra/http/errors/AppError';
-import { injectable, inject } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { DeleteQuarterDTO } from '../dtos/DeleteQuarter.dto';
-import { IQuarterRepository } from '../repositories/IQuarterRepository';
+import { PrismaQuarterRepository } from '../repositories/prisma/PrismaQuarterRepository';
 
-@injectable()
+@singleton()
 export class DeleteQuarterService {
-  constructor(
-    @inject('PrismaQuarterRepository')
-    private QuarterRepository: IQuarterRepository,
-  ) {}
+  constructor(private quarterRepository: PrismaQuarterRepository) {}
 
   async execute(params: DeleteQuarterDTO) {
-    if (!(await this.QuarterRepository.quarterExists(params.id))) {
+    if (!(await this.quarterRepository.quarterExists(params.id))) {
       throw new AppError('Quadrimestre não existe');
     }
 
-    await this.QuarterRepository.deleteQuarter(params.id);
+    await this.quarterRepository.deleteQuarter(params.id);
   }
 }

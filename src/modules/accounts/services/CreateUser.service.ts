@@ -1,15 +1,12 @@
 import { hash } from 'bcryptjs';
-import { inject, injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { CreateUserDTO } from '../dtos/CreateUser.dto';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { PrismaUserRepository } from '../repositories/prisma/PrismaUserRepository';
 
-@injectable()
+@singleton()
 export class CreateUserService {
-  constructor(
-    @inject('PrismaUserRepository')
-    private usersRepository: IUsersRepository,
-  ) {}
+  constructor(private usersRepository: PrismaUserRepository) {}
 
   async execute({ email, name, password }: CreateUserDTO): Promise<void> {
     const userExists = await this.usersRepository.exists(email);

@@ -1,16 +1,13 @@
 import { Class } from '@prisma/client';
-import { injectable, inject } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { GetClassesByUserIdDTO } from '../dtos/GetClassesByUserId.dto';
-import { IClassRepository } from '../repositories/IClassRepository';
+import { PrismaClassRepository } from '../repositories/prisma/PrismaClassRepository';
 
-@injectable()
+@singleton()
 export class GetClassesByUserIdService {
-  constructor(
-    @inject('PrismaClassRepository')
-    private ClassRepository: IClassRepository,
-  ) {}
+  constructor(private classRepository: PrismaClassRepository) {}
 
-  handle({ id }: GetClassesByUserIdDTO): Promise<Class[]> {
-    return this.ClassRepository.getClassesByUserId(id);
+  execute({ id }: GetClassesByUserIdDTO): Promise<Class[]> {
+    return this.classRepository.getClassesByUserId(id);
   }
 }

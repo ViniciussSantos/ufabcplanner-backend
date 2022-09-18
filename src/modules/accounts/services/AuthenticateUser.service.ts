@@ -1,21 +1,18 @@
 import { compare } from 'bcryptjs';
 import auth from 'config/auth';
 import { sign } from 'jsonwebtoken';
-import { inject, injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { AuthenticateUserDTO } from '../dtos/AuthenticateUser.dto';
-import { IUsersRepository } from '../repositories/IUsersRepository';
+import { PrismaUserRepository } from '../repositories/prisma/PrismaUserRepository';
 
 interface IResponse {
   token: string;
 }
 
-@injectable()
+@singleton()
 export class AuthenticateUserService {
-  constructor(
-    @inject('PrismaUserRepository')
-    private usersRepository: IUsersRepository,
-  ) {}
+  constructor(private usersRepository: PrismaUserRepository) {}
 
   async execute({ email, password }: AuthenticateUserDTO): Promise<IResponse> {
     const { expiresInToken, secretToken } = auth;
