@@ -1,15 +1,12 @@
-import { injectable, inject } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { CreateExamDTO } from '../dtos/CreateExam.dto';
-import { IExamRepository } from '../repositories/IExamRepository';
+import { PrismaExamRepository } from '../repositories/prisma/PrismaExamRepository';
 
-@injectable()
+@singleton()
 export class CreateExamService {
-  constructor(
-    @inject('PrismaExamRepository')
-    private ExamRepository: IExamRepository,
-  ) {}
+  constructor(private examRepository: PrismaExamRepository) {}
 
-  async handle(params: CreateExamDTO): Promise<void> {
-    await this.ExamRepository.createExam(params);
+  async execute(params: CreateExamDTO): Promise<void> {
+    await this.examRepository.createExam(params);
   }
 }

@@ -1,20 +1,17 @@
 import { AppError } from 'infra/http/errors/AppError';
-import { injectable, inject } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { UpdateClassDTO } from '../dtos/UpdateClass.dto';
-import { IClassRepository } from '../repositories/IClassRepository';
+import { PrismaClassRepository } from '../repositories/prisma/PrismaClassRepository';
 
-@injectable()
+@singleton()
 export class UpdateClassService {
-  constructor(
-    @inject('PrismaClassRepository')
-    private ClassRepository: IClassRepository,
-  ) {}
+  constructor(private classRepository: PrismaClassRepository) {}
 
-  async handle(params: UpdateClassDTO) {
-    if (!(await this.ClassRepository.classExists(params.id))) {
+  async execute(params: UpdateClassDTO) {
+    if (!(await this.classRepository.classExists(params.id))) {
       throw new AppError('classe não existe');
     }
 
-    await this.ClassRepository.updateClass(params);
+    await this.classRepository.updateClass(params);
   }
 }

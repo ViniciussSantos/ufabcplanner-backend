@@ -1,10 +1,13 @@
 import { Request, Response } from 'express';
 import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
-import { container } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { UpdateQuarterDTO } from '../dtos/UpdateQuarter.dto';
 import { UpdateQuarterService } from '../services/UpdateQuarter.service';
 
+@singleton()
 export class UpdateQuarterController {
+  constructor(private updateQuarterService: UpdateQuarterService) {}
+
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const { startDate, endDate } = request.body;
@@ -15,7 +18,7 @@ export class UpdateQuarterController {
       endDate,
     });
 
-    container.resolve(UpdateQuarterService).execute(updateQuarterDto);
+    await this.updateQuarterService.execute(updateQuarterDto);
 
     return response.status(204).send();
   }

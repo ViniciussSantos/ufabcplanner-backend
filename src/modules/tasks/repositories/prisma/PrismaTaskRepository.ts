@@ -3,8 +3,10 @@ import dayjs from 'dayjs';
 import { prisma } from 'infra/prisma/client';
 import { CreateTaskDTO } from 'modules/tasks/dtos/CreateTask.dto';
 import { UpdateTaskDTO } from 'modules/tasks/dtos/UpdateTask.dto';
+import { singleton } from 'tsyringe';
 import { ITaskRepository } from '../ITaskRepository';
 
+@singleton()
 export class PrismaTaskRepository implements ITaskRepository {
   async createTask(params: CreateTaskDTO): Promise<void> {
     await prisma.task.create({ data: { ...params, dueDate: dayjs(params.dueDate, 'YYYY-MM-DD').toDate() } });

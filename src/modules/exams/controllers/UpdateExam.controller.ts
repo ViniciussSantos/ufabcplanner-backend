@@ -1,18 +1,21 @@
 import { Request, Response } from 'express';
 import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
-import { container } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { IUpdateExam } from '../dtos/interfaces/IUpdateExam';
 import { UpdateExamDTO } from '../dtos/UpdateExam.dto';
 import { UpdateExamService } from '../services/UpdateExam.service';
 
+@singleton()
 export class UpdateExamController {
-  async execute(request: Request, response: Response) {
+  constructor(private updateExamService: UpdateExamService) {}
+
+  async handle(request: Request, response: Response) {
     const responseBody = request.body as Omit<IUpdateExam, 'id'>;
     const { id } = request.params;
 
     const updateExamDTO = await transformAndValidate(UpdateExamDTO, { id, ...responseBody });
 
-    await container.resolve(UpdateExamService).handle(updateExamDTO);
+    await this.updateExamService.execute(updateExamDTO);
 
     return response.status(204).send();
   }

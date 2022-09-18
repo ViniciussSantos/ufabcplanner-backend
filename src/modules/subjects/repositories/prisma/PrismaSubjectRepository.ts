@@ -2,8 +2,10 @@ import { Subject } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
 import { CreateSubjectDTO } from 'modules/subjects/dtos/CreateSubject.dto';
 import { UpdateSubjectDTO } from 'modules/subjects/dtos/UpdateSubject.dto';
+import { singleton } from 'tsyringe';
 import { ISubjectRepository } from '../ISubjectRepository';
 
+@singleton()
 export class PrismaSubjectRepository implements ISubjectRepository {
   async subjectExists(id: string): Promise<boolean> {
     const subject = await prisma.subject.findUnique({

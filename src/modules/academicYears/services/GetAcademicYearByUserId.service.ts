@@ -1,13 +1,10 @@
 import { AcademicYear } from '@prisma/client';
-import { inject, injectable } from 'tsyringe';
-import { IAcademicYearRepository } from '../repositories/IAcademicYearRepository';
+import { singleton } from 'tsyringe';
+import { PrismaAcademicYearRepository } from '../repositories/prisma/PrismaAcademicYearRepository';
 
-@injectable()
+@singleton()
 export class GetAcademicYearByUserIdService {
-  constructor(
-    @inject('PrismaAcademicYearRepository')
-    private academicYearRepository: IAcademicYearRepository,
-  ) {}
+  constructor(private academicYearRepository: PrismaAcademicYearRepository) {}
 
   async execute(userId: string): Promise<Partial<AcademicYear>[]> {
     const academicYears = await this.academicYearRepository.getByUserId(userId);

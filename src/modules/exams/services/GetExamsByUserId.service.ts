@@ -1,16 +1,13 @@
 import { Exam } from '@prisma/client';
-import { injectable, inject } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { GetExamsByUserIdDTO } from '../dtos/GetExamsByUserId.dto';
-import { IExamRepository } from '../repositories/IExamRepository';
+import { PrismaExamRepository } from '../repositories/prisma/PrismaExamRepository';
 
-@injectable()
+@singleton()
 export class GetExamsByUserIdService {
-  constructor(
-    @inject('PrismaExamRepository')
-    private ExamRepository: IExamRepository,
-  ) {}
+  constructor(private examRepository: PrismaExamRepository) {}
 
-  handle({ id }: GetExamsByUserIdDTO): Promise<Exam[]> {
-    return this.ExamRepository.getExamsByUserId(id);
+  execute({ id }: GetExamsByUserIdDTO): Promise<Exam[]> {
+    return this.examRepository.getExamsByUserId(id);
   }
 }

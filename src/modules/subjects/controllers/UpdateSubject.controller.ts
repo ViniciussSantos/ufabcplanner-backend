@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
-import { container } from 'tsyringe';
+import { container, singleton } from 'tsyringe';
 import { UpdateSubjectDTO } from '../dtos/UpdateSubject.dto';
 import { UpdateSubjectService } from '../services/UpdateSubject.service';
 
+@singleton()
 export class UpdateSubjectController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;

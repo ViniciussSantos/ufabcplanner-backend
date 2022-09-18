@@ -1,16 +1,13 @@
 import { Task } from '@prisma/client';
-import { inject, injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { GetTasksByUserIdDTO } from '../dtos/GetTasksByUserId.dto';
-import { ITaskRepository } from '../repositories/ITaskRepository';
+import { PrismaTaskRepository } from '../repositories/prisma/PrismaTaskRepository';
 
-@injectable()
+@singleton()
 export class GetTasksByUserIdService {
-  constructor(
-    @inject('PrismaTaskRepository')
-    private TaskRepository: ITaskRepository,
-  ) {}
+  constructor(private taskRepository: PrismaTaskRepository) {}
 
-  handle({ id }: GetTasksByUserIdDTO): Promise<Task[]> {
-    return this.TaskRepository.getTasksByUserId(id);
+  execute({ id }: GetTasksByUserIdDTO): Promise<Task[]> {
+    return this.taskRepository.getTasksByUserId(id);
   }
 }

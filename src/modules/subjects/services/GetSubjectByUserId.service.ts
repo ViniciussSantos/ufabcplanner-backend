@@ -1,14 +1,11 @@
 import { Subject } from '@prisma/client';
-import { injectable, inject } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { GetSubjectByUserIdDTO } from '../dtos/GetSubjectByUserId.dto';
-import { ISubjectRepository } from '../repositories/ISubjectRepository';
+import { PrismaSubjectRepository } from '../repositories/prisma/PrismaSubjectRepository';
 
-@injectable()
+@singleton()
 export class GetSubjectByUserIdService {
-  constructor(
-    @inject('PrismaSubjectRepository')
-    private subjectRepository: ISubjectRepository,
-  ) {}
+  constructor(private subjectRepository: PrismaSubjectRepository) {}
 
   execute({ id }: GetSubjectByUserIdDTO): Promise<Subject[]> {
     return this.subjectRepository.getSubjectByUserId(id);

@@ -1,20 +1,17 @@
 import { AppError } from 'infra/http/errors/AppError';
-import { inject, injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { DeleteTaskDTO } from '../dtos/DeleteTask.dto';
-import { ITaskRepository } from '../repositories/ITaskRepository';
+import { PrismaTaskRepository } from '../repositories/prisma/PrismaTaskRepository';
 
-@injectable()
+@singleton()
 export class DeleteTaskService {
-  constructor(
-    @inject('PrismaTaskRepository')
-    private TaskRepository: ITaskRepository,
-  ) {}
+  constructor(private taskRepository: PrismaTaskRepository) {}
 
-  async handle({ id }: DeleteTaskDTO): Promise<void> {
-    if (!(await this.TaskRepository.taskExists(id))) {
+  async execute({ id }: DeleteTaskDTO): Promise<void> {
+    if (!(await this.taskRepository.taskExists(id))) {
       throw new AppError('Essa task não existe');
     }
 
-    await this.TaskRepository.deleteTask(id);
+    await this.taskRepository.deleteTask(id);
   }
 }

@@ -1,20 +1,17 @@
 import { AppError } from 'infra/http/errors/AppError';
-import { inject, injectable } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { CreateClassDTO } from '../dtos/CreateClass.dto';
-import { IClassRepository } from '../repositories/IClassRepository';
+import { PrismaClassRepository } from '../repositories/prisma/PrismaClassRepository';
 
-@injectable()
+@singleton()
 export class CreateClassService {
-  constructor(
-    @inject('PrismaClassRepository')
-    private ClassRepository: IClassRepository,
-  ) {}
+  constructor(private classRepository: PrismaClassRepository) {}
 
-  async handle(params: CreateClassDTO): Promise<void> {
+  async execute(params: CreateClassDTO): Promise<void> {
     if (params.startTime > params.endTime) {
       throw new AppError('horário final é antes do horário inicial');
     }
 
-    await this.ClassRepository.createClass(params);
+    await this.classRepository.createClass(params);
   }
 }
