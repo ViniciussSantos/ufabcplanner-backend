@@ -1,16 +1,19 @@
 import { Request, Response } from 'express';
 import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
-import { container } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { DeleteExamDTO } from '../dtos/DeleteExam.dto';
 import { DeleteExamService } from '../services/DeleteExam.service';
 
+@singleton()
 export class DeleteExamController {
-  async execute(request: Request, response: Response) {
+  constructor(private deleteExamService: DeleteExamService) {}
+
+  async handle(request: Request, response: Response) {
     const { id } = request.params;
 
     const deleteExamDto = await transformAndValidate(DeleteExamDTO, { id });
 
-    await container.resolve(DeleteExamService).handle(deleteExamDto);
+    await this.deleteExamService.execute(deleteExamDto);
 
     return response.status(204).send();
   }

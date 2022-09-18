@@ -1,16 +1,19 @@
 import { Request, Response } from 'express';
 import { transformAndValidate } from 'infra/http/errors/transformAndValidate';
-import { container } from 'tsyringe';
+import { singleton } from 'tsyringe';
 import { GetClassesByUserIdDTO } from '../dtos/GetClassesByUserId.dto';
 import { GetClassesByUserIdService } from '../services/GetClassesByUserId.service';
 
+@singleton()
 export class GetClassesByUserIdController {
-  async execute(request: Request, response: Response) {
+  constructor(private getClassesByUserIdService: GetClassesByUserIdService) {}
+
+  async handle(request: Request, response: Response) {
     const { id } = request.user;
 
     const getClassesByUserIdDTO = await transformAndValidate(GetClassesByUserIdDTO, { id });
 
-    const classes = await container.resolve(GetClassesByUserIdService).handle(getClassesByUserIdDTO);
+    const classes = await this.getClassesByUserIdService.execute(getClassesByUserIdDTO);
 
     response.json(classes).send();
   }
