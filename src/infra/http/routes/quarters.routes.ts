@@ -3,18 +3,22 @@ import { CreateQuarterController } from 'modules/quarters/controllers/CreateQuar
 import { DeleteQuarterController } from 'modules/quarters/controllers/DeleteQuarter.controller';
 import { GetQuarterByAcademicYearIdController } from 'modules/quarters/controllers/GetQuarterByAcademicYearId.controller';
 import { UpdateQuarterController } from 'modules/quarters/controllers/UpdateQuarter.controller';
+import { container } from 'tsyringe';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const quartersRoutes = Router();
 
-const createQuarterController = new CreateQuarterController();
-const deleteQuarterController = new DeleteQuarterController();
-const updateQuarterController = new UpdateQuarterController();
-const getQuarterByACademicYearIdController = new GetQuarterByAcademicYearIdController();
-
-quartersRoutes.post('/', ensureAuthenticated, createQuarterController.handle);
-quartersRoutes.get('/get/academicyear/:id', ensureAuthenticated, getQuarterByACademicYearIdController.handle);
-quartersRoutes.delete('/delete/:id', ensureAuthenticated, deleteQuarterController.handle);
-quartersRoutes.put('/update/:id', ensureAuthenticated, updateQuarterController.handle);
+quartersRoutes.post('/', ensureAuthenticated, (request, response) => {
+  container.resolve(CreateQuarterController).handle(request, response);
+});
+quartersRoutes.get('/get/academicyear/:id', ensureAuthenticated, (request, response) => {
+  container.resolve(GetQuarterByAcademicYearIdController).handle(request, response);
+});
+quartersRoutes.delete('/delete/:id', ensureAuthenticated, (request, response) => {
+  container.resolve(DeleteQuarterController).handle(request, response);
+});
+quartersRoutes.put('/update/:id', ensureAuthenticated, (request, response) => {
+  container.resolve(UpdateQuarterController).handle(request, response);
+});
 
 export { quartersRoutes };

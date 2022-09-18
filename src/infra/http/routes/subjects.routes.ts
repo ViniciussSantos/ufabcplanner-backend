@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { container } from 'tsyringe';
 import { CreateSubjectController } from 'modules/subjects/controllers/CreateSubject.controller';
 import { DeleteSubjectController } from 'modules/subjects/controllers/DeleteSubject.controller';
 import { GetSubjectByQuarterIdController } from 'modules/subjects/controllers/GetSubjectByQuarterId.controller';
@@ -8,16 +9,20 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const subjectsRoutes = Router();
 
-const createSubjectController = new CreateSubjectController();
-const deleteSubjectController = new DeleteSubjectController();
-const updateSubjectController = new UpdateSubjectController();
-const getSubjectByQuarterIdController = new GetSubjectByQuarterIdController();
-const getSubjectByUserIdController = new GetSubjectByUserIdController();
-
-subjectsRoutes.post('/', ensureAuthenticated, createSubjectController.handle);
-subjectsRoutes.get('/get/quarter/:id', ensureAuthenticated, getSubjectByQuarterIdController.handle);
-subjectsRoutes.get('/get/user', ensureAuthenticated, getSubjectByUserIdController.handle);
-subjectsRoutes.delete('/delete/:id', ensureAuthenticated, deleteSubjectController.handle);
-subjectsRoutes.put('/update/:id', ensureAuthenticated, updateSubjectController.handle);
+subjectsRoutes.post('/', ensureAuthenticated, (request, response) => {
+  container.resolve(CreateSubjectController).handle(request, response);
+});
+subjectsRoutes.get('/get/quarter/:id', ensureAuthenticated, (request, response) => {
+  container.resolve(GetSubjectByQuarterIdController).handle(request, response);
+});
+subjectsRoutes.get('/get/user', ensureAuthenticated, (request, response) => {
+  container.resolve(GetSubjectByUserIdController).handle(request, response);
+});
+subjectsRoutes.delete('/delete/:id', ensureAuthenticated, (request, response) => {
+  container.resolve(DeleteSubjectController).handle(request, response);
+});
+subjectsRoutes.put('/update/:id', ensureAuthenticated, (request, response) => {
+  container.resolve(UpdateSubjectController).handle(request, response);
+});
 
 export { subjectsRoutes };

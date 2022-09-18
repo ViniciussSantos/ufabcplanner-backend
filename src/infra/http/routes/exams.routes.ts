@@ -4,20 +4,23 @@ import { DeleteExamController } from 'modules/exams/controllers/DeleteExam.contr
 import { GetExamsBySubjectIdController } from 'modules/exams/controllers/GetExamsBySubjectId.controller';
 import { GetExamsByUserIdController } from 'modules/exams/controllers/GetExamsByUserId.controller';
 import { UpdateExamController } from 'modules/exams/controllers/UpdateExam.controller';
+import { container } from 'tsyringe';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
-
-const createExamController = new CreateExamController();
-const deleteExamController = new DeleteExamController();
-const updateExamController = new UpdateExamController();
-const getExamsBySubjectIdController = new GetExamsBySubjectIdController();
-const getExamsByUserIdController = new GetExamsByUserIdController();
 
 const examsRoutes = Router();
 
-examsRoutes.post('/', ensureAuthenticated, createExamController.execute);
-examsRoutes.delete('/delete/:id', ensureAuthenticated, deleteExamController.execute);
-examsRoutes.get('/get/subject/:id', ensureAuthenticated, getExamsBySubjectIdController.execute);
-examsRoutes.get('/get/user', ensureAuthenticated, getExamsByUserIdController.execute);
-examsRoutes.put('/update/:id', ensureAuthenticated, updateExamController.execute);
+examsRoutes.post('/', ensureAuthenticated, (request, response) => container.resolve(CreateExamController).handle(request, response));
+examsRoutes.delete('/delete/:id', ensureAuthenticated, (request, response) =>
+  container.resolve(DeleteExamController).handle(request, response),
+);
+examsRoutes.get('/get/subject/:id', ensureAuthenticated, (request, response) =>
+  container.resolve(GetExamsBySubjectIdController).handle(request, response),
+);
+examsRoutes.get('/get/user', ensureAuthenticated, (request, response) =>
+  container.resolve(GetExamsByUserIdController).handle(request, response),
+);
+examsRoutes.put('/update/:id', ensureAuthenticated, (request, response) =>
+  container.resolve(UpdateExamController).handle(request, response),
+);
 
 export { examsRoutes };

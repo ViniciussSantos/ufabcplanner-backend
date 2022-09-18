@@ -4,17 +4,22 @@ import { CreateAcademicYearController } from 'modules/academicYears/controllers/
 import { DeleteAcademicYearController } from 'modules/academicYears/controllers/DeleteAcademicYear.controller';
 import { GetAcademicYearByUserIdController } from 'modules/academicYears/controllers/GetAcademicYearByUserId.controller';
 import { UpdateAcademicYearController } from 'modules/academicYears/controllers/UpdateAcademicYear.controller';
+import { container } from 'tsyringe';
 
 const academicYearRoutes = Router();
 
-const createAcademicYearController = new CreateAcademicYearController();
-const deleteAcademicYearController = new DeleteAcademicYearController();
-const updateAcademicYearController = new UpdateAcademicYearController();
-const getAcademicYearByUserIdController = new GetAcademicYearByUserIdController();
+academicYearRoutes.post('/', ensureAuthenticated, (request, response) =>
+  container.resolve(CreateAcademicYearController).handle(request, response),
+);
+academicYearRoutes.delete('/delete/:id', ensureAuthenticated, (request, response) =>
+  container.resolve(DeleteAcademicYearController).handle(request, response),
+);
 
-academicYearRoutes.post('/', ensureAuthenticated, createAcademicYearController.handle);
-academicYearRoutes.delete('/delete/:id', ensureAuthenticated, deleteAcademicYearController.handle);
-academicYearRoutes.put('/update/:id', ensureAuthenticated, updateAcademicYearController.handle);
-academicYearRoutes.get('/get/user', ensureAuthenticated, getAcademicYearByUserIdController.handle);
+academicYearRoutes.put('/update/:id', ensureAuthenticated, (request, response) =>
+  container.resolve(UpdateAcademicYearController).handle(request, response),
+);
+academicYearRoutes.get('/get/user', ensureAuthenticated, (request, response) =>
+  container.resolve(GetAcademicYearByUserIdController).handle(request, response),
+);
 
 export { academicYearRoutes };
