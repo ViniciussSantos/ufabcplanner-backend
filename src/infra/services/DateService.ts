@@ -1,12 +1,11 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { singleton } from 'tsyringe';
-import { IDateProvider } from './IDateProvider';
 
 dayjs.extend(utc);
 
 @singleton()
-export class DayjsDateProvider implements IDateProvider {
+export class DateService {
   toDate(date: string): Date {
     return dayjs(date).toDate();
   }

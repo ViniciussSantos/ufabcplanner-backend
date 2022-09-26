@@ -2,11 +2,11 @@ import { singleton } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYear.dto';
 import { PrismaAcademicYearRepository } from '../repositories/prisma/PrismaAcademicYearRepository';
-import { DayjsDateProvider } from 'infra/services/DayjsDateProvider';
+import { DateService } from 'infra/services/DateService';
 
 @singleton()
 export class UpdateAcademicYearService {
-  constructor(private academicYearRepository: PrismaAcademicYearRepository, private dateProvider: DayjsDateProvider) {}
+  constructor(private academicYearRepository: PrismaAcademicYearRepository, private dateService: DateService) {}
 
   async execute(params: UpdateAcademyYearDTO): Promise<void> {
     const { id, year, startDate, endDate } = params;
@@ -15,10 +15,10 @@ export class UpdateAcademicYearService {
       throw new AppError('Este ano acadêmico não existe!');
     }
 
-    const startDateUTC = this.dateProvider.toDate(startDate);
-    const endDateUTC = this.dateProvider.toDate(endDate);
+    const startDateUTC = this.dateService.toDate(startDate);
+    const endDateUTC = this.dateService.toDate(endDate);
 
-    if (this.dateProvider.compareIfBefore(startDateUTC, endDateUTC)) {
+    if (this.dateService.compareIfBefore(startDateUTC, endDateUTC)) {
       throw new AppError('Data final é antes da data inicial');
     }
 
