@@ -1,12 +1,12 @@
 import { singleton } from 'tsyringe';
 import { CreateTaskDTO } from '../dtos/CreateTask.dto';
-import { PrismaTaskRepository } from '../repositories/prisma/PrismaTaskRepository';
+import { TaskRepository } from '../repositories/TaskRepository';
 
 @singleton()
 export class CreateTaskService {
-  constructor(private taskRepository: PrismaTaskRepository) {}
+  constructor(private taskRepository: TaskRepository) {}
 
   async execute(params: CreateTaskDTO): Promise<void> {
-    await this.taskRepository.createTask(params);
+    await this.taskRepository.create(params);
   }
 }

@@ -1,13 +1,13 @@
 import { Exam } from '@prisma/client';
 import { GetTasksBySubjectIdDTO } from 'modules/tasks/dtos/GetTasksBySubjecId.dto';
 import { singleton } from 'tsyringe';
-import { PrismaExamRepository } from '../repositories/prisma/PrismaExamRepository';
+import { ExamRepository } from '../repositories/ExamRepository';
 
 @singleton()
 export class GetExamsBySubjectIdService {
-  constructor(private examRepository: PrismaExamRepository) {}
+  constructor(private examRepository: ExamRepository) {}
 
   execute({ id }: GetTasksBySubjectIdDTO): Promise<Exam[]> {
-    return this.examRepository.getExamsBySubjectId(id);
+    return this.examRepository.getBySubjectId(id);
   }
 }

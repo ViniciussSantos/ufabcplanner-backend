@@ -3,11 +3,10 @@ import { prisma } from 'infra/prisma/client';
 import { CreateSubjectDTO } from 'modules/subjects/dtos/CreateSubject.dto';
 import { UpdateSubjectDTO } from 'modules/subjects/dtos/UpdateSubject.dto';
 import { singleton } from 'tsyringe';
-import { ISubjectRepository } from '../ISubjectRepository';
 
 @singleton()
-export class PrismaSubjectRepository implements ISubjectRepository {
-  async subjectExists(id: string): Promise<boolean> {
+export class SubjectRepository {
+  async exists(id: string): Promise<boolean> {
     const subject = await prisma.subject.findUnique({
       where: {
         id,
@@ -21,7 +20,7 @@ export class PrismaSubjectRepository implements ISubjectRepository {
     return true;
   }
 
-  async createSubject(params: CreateSubjectDTO): Promise<void> {
+  async create(params: CreateSubjectDTO): Promise<void> {
     await prisma.subject.create({
       data: {
         ...params,
@@ -29,7 +28,7 @@ export class PrismaSubjectRepository implements ISubjectRepository {
     });
   }
 
-  async deleteSubject(id: string): Promise<void> {
+  async delete(id: string): Promise<void> {
     await prisma.subject.delete({
       where: {
         id,
@@ -37,19 +36,18 @@ export class PrismaSubjectRepository implements ISubjectRepository {
     });
   }
 
-  async updateSubject(quarter: UpdateSubjectDTO): Promise<void> {
+  async update({ id, ...params }: UpdateSubjectDTO): Promise<void> {
     await prisma.subject.update({
       where: {
-        id: quarter.id,
+        id,
       },
       data: {
-        name: quarter.name,
-        description: quarter.description,
+        ...params,
       },
     });
   }
 
-  getSubjectByQuarterId(quarterId: string): Promise<Subject[]> {
+  getByQuarterId(quarterId: string): Promise<Subject[]> {
     return prisma.subject.findMany({
       where: {
         quarterId,

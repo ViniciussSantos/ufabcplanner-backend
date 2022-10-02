@@ -1,12 +1,12 @@
 import { singleton } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYear.dto';
-import { PrismaAcademicYearRepository } from '../repositories/prisma/PrismaAcademicYearRepository';
+import { AcademicYearRepository } from '../repositories/AcademicYearRepository';
 import { DateService } from 'infra/services/DateService';
 
 @singleton()
 export class UpdateAcademicYearService {
-  constructor(private academicYearRepository: PrismaAcademicYearRepository, private dateService: DateService) {}
+  constructor(private academicYearRepository: AcademicYearRepository, private dateService: DateService) {}
 
   async execute(params: UpdateAcademyYearDTO): Promise<void> {
     const { id, year, startDate, endDate } = params;

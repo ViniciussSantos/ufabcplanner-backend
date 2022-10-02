@@ -2,11 +2,11 @@ import { hash } from 'bcryptjs';
 import { singleton } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { CreateUserDTO } from '../dtos/CreateUser.dto';
-import { PrismaUserRepository } from '../repositories/prisma/PrismaUserRepository';
+import { UserRepository } from '../repositories/UserRepository';
 
 @singleton()
 export class CreateUserService {
-  constructor(private usersRepository: PrismaUserRepository) {}
+  constructor(private usersRepository: UserRepository) {}
 
   async execute({ email, name, password }: CreateUserDTO): Promise<void> {
     const userExists = await this.usersRepository.exists(email);

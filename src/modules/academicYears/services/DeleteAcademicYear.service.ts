@@ -1,11 +1,11 @@
 import { singleton } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYea.dto';
-import { PrismaAcademicYearRepository } from '../repositories/prisma/PrismaAcademicYearRepository';
+import { AcademicYearRepository } from '../repositories/AcademicYearRepository';
 
 @singleton()
 export class DeleteAcademicYearService {
-  constructor(private academicYearRepository: PrismaAcademicYearRepository) {}
+  constructor(private academicYearRepository: AcademicYearRepository) {}
 
   async execute(params: DeleteAcademyYearDTO, userId: string): Promise<void> {
     const { academicYearId } = params;

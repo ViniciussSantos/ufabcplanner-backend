@@ -4,11 +4,10 @@ import { prisma } from 'infra/prisma/client';
 import { CreateExamDTO } from 'modules/exams/dtos/CreateExam.dto';
 import { UpdateExamDTO } from 'modules/exams/dtos/UpdateExam.dto';
 import { singleton } from 'tsyringe';
-import { IExamRepository } from '../IExamRepository';
 
 @singleton()
-export class PrismaExamRepository implements IExamRepository {
-  async createExam(params: CreateExamDTO): Promise<void> {
+export class ExamRepository {
+  async create(params: CreateExamDTO): Promise<void> {
     await prisma.exam.create({
       data: {
         ...params,
@@ -17,7 +16,7 @@ export class PrismaExamRepository implements IExamRepository {
     });
   }
 
-  async deleteExam(id: string): Promise<void> {
+  async delete(id: string): Promise<void> {
     await prisma.exam.delete({
       where: {
         id,
@@ -25,10 +24,10 @@ export class PrismaExamRepository implements IExamRepository {
     });
   }
 
-  async updateExam(params: UpdateExamDTO): Promise<void> {
+  async update({ id, ...params }: UpdateExamDTO): Promise<void> {
     await prisma.exam.update({
       where: {
-        id: params.id,
+        id,
       },
       data: {
         ...params,
@@ -37,7 +36,7 @@ export class PrismaExamRepository implements IExamRepository {
     });
   }
 
-  getExamsBySubjectId(subjectId: string): Promise<Exam[]> {
+  getBySubjectId(subjectId: string): Promise<Exam[]> {
     return prisma.exam.findMany({
       where: {
         subjectId,
@@ -45,7 +44,7 @@ export class PrismaExamRepository implements IExamRepository {
     });
   }
 
-  getExamsByUserId(userId: string): Promise<Exam[]> {
+  getByUserId(userId: string): Promise<Exam[]> {
     return prisma.exam.findMany({
       where: {
         userId,
@@ -53,7 +52,7 @@ export class PrismaExamRepository implements IExamRepository {
     });
   }
 
-  async ExamExists(id: string): Promise<boolean> {
+  async exists(id: string): Promise<boolean> {
     const exam = await prisma.exam.findUnique({
       where: {
         id,

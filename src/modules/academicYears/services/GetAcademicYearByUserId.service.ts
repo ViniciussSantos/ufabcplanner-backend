@@ -1,10 +1,10 @@
 import { AcademicYear } from '@prisma/client';
 import { singleton } from 'tsyringe';
-import { PrismaAcademicYearRepository } from '../repositories/prisma/PrismaAcademicYearRepository';
+import { AcademicYearRepository } from '../repositories/AcademicYearRepository';
 
 @singleton()
 export class GetAcademicYearByUserIdService {
-  constructor(private academicYearRepository: PrismaAcademicYearRepository) {}
+  constructor(private academicYearRepository: AcademicYearRepository) {}
 
   async execute(userId: string): Promise<Partial<AcademicYear>[]> {
     const academicYears = await this.academicYearRepository.getByUserId(userId);

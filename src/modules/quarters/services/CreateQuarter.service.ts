@@ -1,15 +1,15 @@
 import { AppError } from 'infra/http/errors/AppError';
 import { DateService } from 'infra/services/DateService';
-import { PrismaAcademicYearRepository } from 'modules/academicYears/repositories/prisma/PrismaAcademicYearRepository';
 import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
-import { PrismaQuarterRepository } from '../repositories/prisma/PrismaQuarterRepository';
+import { QuarterRepository } from '../repositories/QuarterRepository';
 import { singleton } from 'tsyringe';
+import { AcademicYearRepository } from 'modules/academicYears/repositories/AcademicYearRepository';
 
 @singleton()
 export class CreateQuarterService {
   constructor(
-    private quarterRepository: PrismaQuarterRepository,
-    private academicYearRepository: PrismaAcademicYearRepository,
+    private quarterRepository: QuarterRepository,
+    private academicYearRepository: AcademicYearRepository,
     private dateService: DateService,
   ) {}
 
