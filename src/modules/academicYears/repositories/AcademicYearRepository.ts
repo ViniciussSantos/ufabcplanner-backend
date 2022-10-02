@@ -1,7 +1,6 @@
 import { AcademicYear } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
 import { singleton } from 'tsyringe';
-import { IAcademicYearRepository } from '../IAcademicYearRepository';
 
 type updateAcademicYear = {
   id: string;
@@ -9,8 +8,9 @@ type updateAcademicYear = {
   startDate: Date;
   endDate: Date;
 };
+
 @singleton()
-export class PrismaAcademicYearRepository implements IAcademicYearRepository {
+export class AcademicYearRepository {
   async create(academicYear: Omit<AcademicYear, 'id' | 'created_at'>): Promise<void> {
     await prisma.academicYear.create({
       data: {
@@ -38,15 +38,15 @@ export class PrismaAcademicYearRepository implements IAcademicYearRepository {
     });
   }
 
-  async update(academicYear: updateAcademicYear): Promise<void> {
+  async update({ id, ...params }: updateAcademicYear): Promise<void> {
     await prisma.academicYear.update({
       where: {
-        id: academicYear.id,
+        id,
       },
       data: {
-        year: academicYear.year,
-        start_date: academicYear.startDate,
-        end_date: academicYear.endDate,
+        year: params.year,
+        start_date: params.startDate,
+        end_date: params.endDate,
       },
     });
   }

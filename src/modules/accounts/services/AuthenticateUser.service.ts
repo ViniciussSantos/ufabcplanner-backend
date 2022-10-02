@@ -4,7 +4,7 @@ import { sign } from 'jsonwebtoken';
 import { singleton } from 'tsyringe';
 import { AppError } from 'infra/http/errors/AppError';
 import { AuthenticateUserDTO } from '../dtos/AuthenticateUser.dto';
-import { PrismaUserRepository } from '../repositories/prisma/PrismaUserRepository';
+import { UserRepository } from '../repositories/UserRepository';
 
 interface IResponse {
   token: string;
@@ -12,7 +12,7 @@ interface IResponse {
 
 @singleton()
 export class AuthenticateUserService {
-  constructor(private usersRepository: PrismaUserRepository) {}
+  constructor(private usersRepository: UserRepository) {}
 
   async execute({ email, password }: AuthenticateUserDTO): Promise<IResponse> {
     const { expiresInToken, secretToken } = auth;

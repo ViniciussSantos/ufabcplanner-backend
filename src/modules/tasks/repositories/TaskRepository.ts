@@ -4,26 +4,25 @@ import { prisma } from 'infra/prisma/client';
 import { CreateTaskDTO } from 'modules/tasks/dtos/CreateTask.dto';
 import { UpdateTaskDTO } from 'modules/tasks/dtos/UpdateTask.dto';
 import { singleton } from 'tsyringe';
-import { ITaskRepository } from '../ITaskRepository';
 
 @singleton()
-export class PrismaTaskRepository implements ITaskRepository {
-  async createTask(params: CreateTaskDTO): Promise<void> {
+export class TaskRepository {
+  async create(params: CreateTaskDTO): Promise<void> {
     await prisma.task.create({ data: { ...params, dueDate: dayjs(params.dueDate, 'YYYY-MM-DD').toDate() } });
   }
 
-  async deleteTask(id: string): Promise<void> {
+  async delete(id: string): Promise<void> {
     await prisma.task.delete({ where: { id } });
   }
 
-  async updateTask(params: UpdateTaskDTO): Promise<void> {
+  async update({ id, ...params }: UpdateTaskDTO): Promise<void> {
     await prisma.task.update({
-      where: { id: params.id },
+      where: { id },
       data: { ...params, dueDate: dayjs(params.dueDate).toDate() },
     });
   }
 
-  getTasksBySubjectId(subjectId: string): Promise<Task[]> {
+  getBySubjectId(subjectId: string): Promise<Task[]> {
     return prisma.task.findMany({
       where: {
         subjectId,
@@ -31,7 +30,7 @@ export class PrismaTaskRepository implements ITaskRepository {
     });
   }
 
-  getTasksByUserId(userId: string): Promise<Task[]> {
+  getByUserId(userId: string): Promise<Task[]> {
     return prisma.task.findMany({
       where: {
         userId,
@@ -47,7 +46,7 @@ export class PrismaTaskRepository implements ITaskRepository {
     });
   }
 
-  async taskExists(id: string): Promise<boolean> {
+  async exists(id: string): Promise<boolean> {
     const taskExists = await prisma.task.findUnique({
       where: {
         id,

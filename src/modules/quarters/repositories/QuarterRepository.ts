@@ -1,10 +1,9 @@
 import { Quarter } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
 import { singleton } from 'tsyringe';
-import { IQuarterRepository } from '../IQuarterRepository';
 
 @singleton()
-export class PrismaQuarterRepository implements IQuarterRepository {
+export class QuarterRepository {
   async quarterExists(quarterId: string): Promise<boolean> {
     const quarter = await prisma.quarter.findUnique({
       where: {

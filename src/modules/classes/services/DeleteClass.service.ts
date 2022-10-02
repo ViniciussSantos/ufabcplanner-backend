@@ -1,17 +1,17 @@
 import { AppError } from 'infra/http/errors/AppError';
 import { singleton } from 'tsyringe';
 import { DeleteClassDTO } from '../dtos/DeleteClass.dto';
-import { PrismaClassRepository } from '../repositories/prisma/PrismaClassRepository';
+import { ClassRepository } from '../repositories/ClassRepository';
 
 @singleton()
 export class DeleteClassService {
-  constructor(private classRepository: PrismaClassRepository) {}
+  constructor(private classRepository: ClassRepository) {}
 
   async execute({ id }: DeleteClassDTO) {
-    if (!(await this.classRepository.classExists(id))) {
+    if (!(await this.classRepository.exists(id))) {
       throw new AppError('classe não existe');
     }
 
-    await this.classRepository.deleteClass(id);
+    await this.classRepository.delete(id);
   }
 }

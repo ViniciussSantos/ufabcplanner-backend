@@ -1,12 +1,12 @@
 import { singleton } from 'tsyringe';
 import { CreateExamDTO } from '../dtos/CreateExam.dto';
-import { PrismaExamRepository } from '../repositories/prisma/PrismaExamRepository';
+import { ExamRepository } from '../repositories/ExamRepository';
 
 @singleton()
 export class CreateExamService {
-  constructor(private examRepository: PrismaExamRepository) {}
+  constructor(private examRepository: ExamRepository) {}
 
   async execute(params: CreateExamDTO): Promise<void> {
-    await this.examRepository.createExam(params);
+    await this.examRepository.create(params);
   }
 }

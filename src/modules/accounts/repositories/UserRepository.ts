@@ -2,10 +2,9 @@ import { User } from '@prisma/client';
 import { prisma } from 'infra/prisma/client';
 import { CreateUserDTO } from 'modules/accounts/dtos/CreateUser.dto';
 import { singleton } from 'tsyringe';
-import { IUsersRepository } from '../IUsersRepository';
 
 @singleton()
-export class PrismaUserRepository implements IUsersRepository {
+export class UserRepository {
   async exists(email: string): Promise<boolean> {
     const user = await prisma.user.findUnique({
       where: {

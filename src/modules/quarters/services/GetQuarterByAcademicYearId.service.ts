@@ -1,13 +1,13 @@
 import { Quarter } from '@prisma/client';
 import { AppError } from 'infra/http/errors/AppError';
-import { PrismaAcademicYearRepository } from 'modules/academicYears/repositories/prisma/PrismaAcademicYearRepository';
+import { AcademicYearRepository } from 'modules/academicYears/repositories/AcademicYearRepository';
 import { singleton } from 'tsyringe';
 import { GetQuarterByAcademicYearIdDTO } from '../dtos/GetQuarterByAcademicYearId.dto';
-import { PrismaQuarterRepository } from '../repositories/prisma/PrismaQuarterRepository';
+import { QuarterRepository } from '../repositories/QuarterRepository';
 
 @singleton()
 export class GetQuarterByAcademicYearIdService {
-  constructor(private academicYearRepository: PrismaAcademicYearRepository, private quarterRepository: PrismaQuarterRepository) {}
+  constructor(private academicYearRepository: AcademicYearRepository, private quarterRepository: QuarterRepository) {}
 
   async execute(params: GetQuarterByAcademicYearIdDTO): Promise<Quarter[]> {
     if (!(await this.academicYearRepository.exists(params.academicYearId))) {
