@@ -14,10 +14,7 @@ export class AcademicYearRepository {
   async create(academicYear: Omit<AcademicYear, 'id' | 'created_at'>): Promise<void> {
     await prisma.academicYear.create({
       data: {
-        userId: academicYear.userId,
-        year: academicYear.year,
-        start_date: academicYear.start_date,
-        end_date: academicYear.end_date,
+        ...academicYear,
       },
     });
   }
@@ -44,9 +41,7 @@ export class AcademicYearRepository {
         id,
       },
       data: {
-        year: params.year,
-        start_date: params.startDate,
-        end_date: params.endDate,
+        ...params,
       },
     });
   }
