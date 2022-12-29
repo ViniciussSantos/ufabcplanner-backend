@@ -16,6 +16,7 @@ model User {
   name         String
   password     String
   academicYear AcademicYear[]
+  Quarter      Quarter[]
   Subject      Subject[]
   Class        Class[]
   Task         Task[]
@@ -46,6 +47,8 @@ model Quarter {
   startDate     DateTime     @map("start_date") @db.Date
   endDate       DateTime     @map("end_date") @db.Date
   Subject       Subject[]
+  User          User?        @relation(fields: [userId], references: [id])
+  userId        String?      @map("user_id")
 
   @@map("quarters")
 }
