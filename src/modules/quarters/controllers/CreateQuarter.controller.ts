@@ -10,8 +10,9 @@ export class CreateQuarterController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const { academicYearId, startDate, endDate } = request.body;
+    const { id: userId } = request.user;
 
-    const createQuarterDto = await transformAndValidate(createQuarterDTO, { academicYearId, startDate, endDate });
+    const createQuarterDto = await transformAndValidate(createQuarterDTO, { academicYearId, userId, startDate, endDate });
 
     await this.createQuarterService.execute(createQuarterDto);
 

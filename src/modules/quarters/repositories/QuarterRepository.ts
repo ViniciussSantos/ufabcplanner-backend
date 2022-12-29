@@ -34,7 +34,7 @@ export class QuarterRepository {
     });
   }
 
-  async updateQuarter(quarter: Omit<Quarter, 'academyYearId'>): Promise<void> {
+  async updateQuarter(quarter: Omit<Quarter, 'academyYearId' | 'userId'>): Promise<void> {
     await prisma.quarter.update({
       where: {
         id: quarter.id,
