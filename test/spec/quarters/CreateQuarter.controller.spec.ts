@@ -1,8 +1,8 @@
 import { app } from 'infra/http/app';
-import { prisma } from 'infra/prisma/client';
 import supertest from 'supertest';
 import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
+import { getFirstQuarterByAcademicYearId } from '../../entities/QuarterFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Create Quarter (e2e)', () => {
@@ -29,11 +29,8 @@ describe('Create Quarter (e2e)', () => {
       });
 
     expect(response.status).toBe(201);
-    const quarter = await prisma.quarter.findFirst({
-      where: {
-        academyYearId: academicYear.id,
-      },
-    });
+
+    const quarter = await getFirstQuarterByAcademicYearId(academicYear.id);
 
     expect(quarter).toBeTruthy();
   });
