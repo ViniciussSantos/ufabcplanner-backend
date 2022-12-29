@@ -2,7 +2,7 @@ import { app } from 'infra/http/app';
 import supertest from 'supertest';
 import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
-import { createExam } from '../../entities/ExamFactory';
+import { createExam, getExamById } from '../../entities/ExamFactory';
 import { createQuarter } from '../../entities/QuarterFactory';
 import { createSubject } from '../../entities/SubjectFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
@@ -28,6 +28,9 @@ describe('Delete exam (e2e)', () => {
       .delete('/exams/delete/' + exam.id)
       .set('authorization', 'Bearer ' + token);
 
+    const deletedExam = await getExamById(exam.id);
+
     expect(response.status).toBe(204);
+    expect(deletedExam).toBeNull();
   });
 });

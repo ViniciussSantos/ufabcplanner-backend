@@ -22,16 +22,14 @@ describe('Get exams by user id (e2e)', () => {
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
     const subject = await createSubject(quarter, user);
-
-    await createExam(subject, user);
+    const exam = await createExam(subject, user);
 
     const response = await supertest(app)
       .get('/exams/get/user')
       .set('authorization', 'Bearer ' + token);
 
-    const responseBody = JSON.parse(response.text);
-
     expect(response.status).toBe(200);
-    expect(responseBody.length).toBe(1);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0].id).toBe(exam.id);
   });
 });
