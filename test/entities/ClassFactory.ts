@@ -27,3 +27,11 @@ export function getClassById(id: string) {
     },
   });
 }
+
+export function getClassBySubjectId(subjectId: string): Promise<Class[]> {
+  return prisma.class.findMany({
+    where: {
+      subjectId,
+    },
+  });
+}
