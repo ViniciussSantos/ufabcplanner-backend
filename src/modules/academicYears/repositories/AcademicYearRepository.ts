@@ -11,7 +11,7 @@ type updateAcademicYear = {
 
 @singleton()
 export class AcademicYearRepository {
-  async create(academicYear: Omit<AcademicYear, 'id' | 'created_at'>): Promise<void> {
+  async create(academicYear: Omit<AcademicYear, 'id' | 'createdAt'>): Promise<void> {
     await prisma.academicYear.create({
       data: {
         ...academicYear,
