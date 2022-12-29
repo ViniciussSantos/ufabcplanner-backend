@@ -28,8 +28,8 @@ export function getClassById(id: string) {
   });
 }
 
-export function getClassBySubjectId(subjectId: string): Promise<Class[]> {
-  return prisma.class.findMany({
+export function getClassBySubjectId(subjectId: string) {
+  return prisma.class.findFirst({
     where: {
       subjectId,
     },

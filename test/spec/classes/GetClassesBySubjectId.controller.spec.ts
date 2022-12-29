@@ -22,16 +22,15 @@ describe('Get classes by subject Id (e2e)', () => {
     const academicYear = await createAcademicYear(user);
     const quarter = await createQuarter(academicYear);
     const subject = await createSubject(quarter, user);
-
-    await createClass(user, subject);
+    const { id: classId } = await createClass(user, subject);
 
     const response = await supertest(app)
       .get('/classes/get/subject/' + subject.id)
       .set('authorization', 'Bearer ' + token);
 
-    const responseBody = JSON.parse(response.text);
-
     expect(response.status).toBe(200);
-    expect(responseBody.length).toBe(1);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0].id).toBe(classId);
+    expect(response.body[0].subjectId).toBe(subject.id);
   });
 });
