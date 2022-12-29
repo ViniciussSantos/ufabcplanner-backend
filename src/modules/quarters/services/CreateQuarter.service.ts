@@ -14,7 +14,7 @@ export class CreateQuarterService {
   ) {}
 
   async execute(params: createQuarterDTO) {
-    const { academicYearId, startDate, endDate } = params;
+    const { academicYearId, userId, startDate, endDate } = params;
     const startDateUTC = this.dateService.toDate(startDate);
     const endDateUTC = this.dateService.toDate(endDate);
 
@@ -28,6 +28,7 @@ export class CreateQuarterService {
 
     await this.quarterRepository.createQuarter({
       academyYearId: academicYearId,
+      userId,
       startDate: startDateUTC,
       endDate: endDateUTC,
     });

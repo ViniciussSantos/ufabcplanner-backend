@@ -21,8 +21,8 @@ export class CreateAcademicYearService {
     await this.academicYearRepository.create({
       userId,
       year,
-      start_date: startDateUTC,
-      end_date: endDateUTC,
+      startDate: startDateUTC,
+      endDate: endDateUTC,
     });
   }
 }

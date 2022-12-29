@@ -7,6 +7,10 @@ export class createQuarterDTO implements ICreateQuarter {
   @IsNotEmpty({ message: messages.isNotEmpty })
   academicYearId: string;
 
+  @IsUUID('all', { message: messages.IsUUID })
+  @IsNotEmpty({ message: messages.isNotEmpty })
+  userId: string;
+
   @IsNotEmpty({ message: messages.isNotEmpty })
   @IsDateString({ message: messages.IsDateString })
   startDate: string;

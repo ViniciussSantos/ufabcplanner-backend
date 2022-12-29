@@ -7,8 +7,8 @@ export async function createAcademicYear(user: User): Promise<AcademicYear> {
     data: {
       userId: user.id,
       year: '2022',
-      end_date: dayjs().toDate(),
-      start_date: dayjs().toDate(),
+      endDate: dayjs().toDate(),
+      startDate: dayjs().toDate(),
     },
   });
 
