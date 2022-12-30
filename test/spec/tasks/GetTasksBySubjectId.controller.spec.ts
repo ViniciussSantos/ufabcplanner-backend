@@ -29,9 +29,8 @@ describe('Get tasks by subject Id (e2e)', () => {
       .get('/tasks/get/subject/' + subject.id)
       .set('authorization', 'Bearer ' + token);
 
-    const responseBody = JSON.parse(response.text);
-
     expect(response.status).toBe(200);
-    expect(responseBody.length).toBe(1);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0].subjectId).toBe(subject.id);
   });
 });
