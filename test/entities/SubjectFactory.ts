@@ -11,3 +11,19 @@ export function createSubject(quarter: Quarter, user: User): Promise<Subject> {
     },
   });
 }
+
+export function getFirstSubjectByQuarterId(quarterId: string): Promise<Subject | null> {
+  return prisma.subject.findFirst({
+    where: {
+      quarterId,
+    },
+  });
+}
+
+export function getSubjectById(id: string): Promise<Subject | null> {
+  return prisma.subject.findUnique({
+    where: {
+      id,
+    },
+  });
+}
