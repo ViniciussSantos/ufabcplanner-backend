@@ -3,15 +3,16 @@ import { hash } from 'bcryptjs';
 import auth from 'config/auth';
 import { prisma } from 'infra/prisma/client';
 import { sign } from 'jsonwebtoken';
-import { generateRandomEmail } from '../utils';
+import { validPassword } from '../constants';
+import { generateRandomEmail, generateRandomName } from '../utils';
 
 //TODO: necessário melhorar esta função
 export async function createUser(email?: string, name?: string, password?: string): Promise<User> {
   const user = await prisma.user.create({
     data: {
-      name: name || 'teste',
+      name: name || generateRandomName(),
       email: email || generateRandomEmail(),
-      password: await hash(password || '123', 8),
+      password: await hash(password || validPassword, 8),
     },
   });
 
