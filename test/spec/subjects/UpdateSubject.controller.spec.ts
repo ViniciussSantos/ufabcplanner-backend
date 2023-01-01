@@ -3,7 +3,7 @@ import supertest from 'supertest';
 import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
 import { createQuarter } from '../../entities/QuarterFactory';
-import { createSubject } from '../../entities/SubjectFactory';
+import { createSubject, getSubjectById } from '../../entities/SubjectFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('update subject (e2e)', () => {
@@ -30,6 +30,10 @@ describe('update subject (e2e)', () => {
         description: 'descrição teste',
       });
 
+    const modifiedSubject = await getSubjectById(subject.id);
+
     expect(response.status).toBe(204);
+    expect(modifiedSubject?.name).toBe('Paradigmas da programação');
+    expect(modifiedSubject?.description).toBe('descrição teste');
   });
 });

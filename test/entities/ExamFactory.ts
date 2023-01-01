@@ -15,7 +15,7 @@ export function createExam(subject: Subject, user: User): Promise<Exam> {
   });
 }
 
-export function findExamById(id: string): Promise<Exam | null> {
+export function getExamById(id: string): Promise<Exam | null> {
   return prisma.exam.findUnique({
     where: {
       id,

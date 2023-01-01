@@ -2,7 +2,7 @@ import { app } from 'infra/http/app';
 import supertest from 'supertest';
 import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
-import { createQuarter } from '../../entities/QuarterFactory';
+import { createQuarter, getQuarterById } from '../../entities/QuarterFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Delete Quarter (e2e)', () => {
@@ -25,5 +25,9 @@ describe('Delete Quarter (e2e)', () => {
       .set('authorization', 'Bearer ' + token);
 
     expect(response.status).toBe(204);
+
+    const deletedQuarter = await getQuarterById(quarter.id);
+
+    expect(deletedQuarter).toBeNull();
   });
 });

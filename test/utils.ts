@@ -1,14 +1,14 @@
-import lodash from 'lodash';
+import { camelCase, sample, words } from 'lodash';
 import { randomEmails, randomNames } from './constants';
 
-export function pickRandomObject<T>(params: T[]): T | undefined {
-  return lodash.sample(params);
+export function randomJoin(source: string[][], joiner = ''): string {
+  return source.map(it => sample(it)).join(joiner);
 }
 
-export function pickRandomName(): string {
-  return pickRandomObject(randomNames) || 'teste';
+export function generateRandomEmail(name: string = randomJoin(randomEmails.concat(randomNames))): string {
+  return `${camelCase(words(name).reverse().join(' '))}@mock.com`;
 }
 
-export function generateRandomEmail(): string {
-  return `${pickRandomName()}@${pickRandomObject(randomEmails)}`;
+export function generateRandomName(): string {
+  return randomJoin(randomNames);
 }

@@ -28,9 +28,7 @@ describe('get subject by user id (e2e)', () => {
 
     expect(response.status).toBe(200);
 
-    const responseBody = JSON.parse(response.text);
-
-    expect(responseBody.length).toBe(1);
-    expect(responseBody[0].id).toBe(subject.id);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0].id).toBe(subject.id);
   });
 });

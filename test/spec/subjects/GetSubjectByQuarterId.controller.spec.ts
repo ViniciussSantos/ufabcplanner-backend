@@ -29,10 +29,8 @@ describe('get subject by quarter id (e2e)', () => {
         quarterId: quarter.id,
       });
 
-    const responseBody = JSON.parse(response.text);
-
     expect(response.status).toBe(200);
-    expect(responseBody.length).toBe(1);
-    expect(responseBody[0].id).toBe(subject.id);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0].id).toBe(subject.id);
   });
 });

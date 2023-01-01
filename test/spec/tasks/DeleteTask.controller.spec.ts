@@ -4,7 +4,7 @@ import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
 import { createQuarter } from '../../entities/QuarterFactory';
 import { createSubject } from '../../entities/SubjectFactory';
-import { createTask } from '../../entities/TaskFactory';
+import { createTask, getTaskById } from '../../entities/TaskFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Delete task (e2e)', () => {
@@ -29,5 +29,9 @@ describe('Delete task (e2e)', () => {
       .set('authorization', 'Bearer ' + token);
 
     expect(response.status).toBe(204);
+
+    const taskDeleted = await getTaskById(task.id);
+
+    expect(taskDeleted).toBeNull();
   });
 });

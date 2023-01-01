@@ -4,6 +4,7 @@ import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
 import { createQuarter } from '../../entities/QuarterFactory';
 import { createSubject } from '../../entities/SubjectFactory';
+import { getFirstTaskBySubjectId } from '../../entities/TaskFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Create task (e2e)', () => {
@@ -33,5 +34,9 @@ describe('Create task (e2e)', () => {
       });
 
     expect(response.status).toBe(201);
+
+    const createdTask = await getFirstTaskBySubjectId(subject.id);
+
+    expect(createdTask).toBeTruthy();
   });
 });

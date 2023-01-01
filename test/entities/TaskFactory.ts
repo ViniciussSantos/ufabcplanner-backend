@@ -17,3 +17,7 @@ export function createTask(subject: Subject, user: User): Promise<Task> {
 export function getTaskById(id: string): Promise<Task | null> {
   return prisma.task.findUnique({ where: { id } });
 }
+
+export function getFirstTaskBySubjectId(subjectId: string): Promise<Task | null> {
+  return prisma.task.findFirst({ where: { subjectId } });
+}

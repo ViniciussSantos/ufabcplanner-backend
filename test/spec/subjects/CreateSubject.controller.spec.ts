@@ -3,6 +3,7 @@ import supertest from 'supertest';
 import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
 import { createQuarter } from '../../entities/QuarterFactory';
+import { getFirstSubjectByQuarterId } from '../../entities/SubjectFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('create subject (e2e)', () => {
@@ -30,5 +31,9 @@ describe('create subject (e2e)', () => {
       });
 
     expect(response.status).toBe(201);
+
+    const subject = await getFirstSubjectByQuarterId(quarter.id);
+
+    expect(subject).toBeTruthy();
   });
 });

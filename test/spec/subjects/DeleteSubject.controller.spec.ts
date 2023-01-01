@@ -3,7 +3,7 @@ import supertest from 'supertest';
 import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
 import { createQuarter } from '../../entities/QuarterFactory';
-import { createSubject } from '../../entities/SubjectFactory';
+import { createSubject, getSubjectById } from '../../entities/SubjectFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('create subject (e2e)', () => {
@@ -27,5 +27,9 @@ describe('create subject (e2e)', () => {
       .set('authorization', 'Bearer ' + token);
 
     expect(response.status).toBe(204);
+
+    const subjectDeleted = await getSubjectById(subject.id);
+
+    expect(subjectDeleted).toBeNull();
   });
 });

@@ -2,7 +2,7 @@ import { app } from 'infra/http/app';
 import supertest from 'supertest';
 import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
-import { createClass } from '../../entities/ClassFactory';
+import { createClass, getClassById } from '../../entities/ClassFactory';
 import { createQuarter } from '../../entities/QuarterFactory';
 import { createSubject } from '../../entities/SubjectFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
@@ -29,5 +29,9 @@ describe('Delete class (e2e)', () => {
       .set('authorization', 'Bearer ' + token);
 
     expect(response.status).toBe(204);
+
+    const deletedClass = await getClassById(classConst.id);
+
+    expect(deletedClass).toBeNull();
   });
 });

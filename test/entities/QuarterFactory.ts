@@ -11,3 +11,19 @@ export function createQuarter(params: AcademicYear): Promise<Quarter> {
     },
   });
 }
+
+export function getQuarterById(quarterId: string): Promise<Quarter | null> {
+  return prisma.quarter.findUnique({
+    where: {
+      id: quarterId,
+    },
+  });
+}
+
+export function getFirstQuarterByAcademicYearId(academicYearId: string): Promise<Quarter | null> {
+  return prisma.quarter.findFirst({
+    where: {
+      academyYearId: academicYearId,
+    },
+  });
+}

@@ -2,7 +2,7 @@ import { app } from 'infra/http/app';
 import supertest from 'supertest';
 import { deleteAll, closeConnection } from '../../database';
 import { createAcademicYear } from '../../entities/AcademicYearFactory';
-import { createQuarter } from '../../entities/QuarterFactory';
+import { createQuarter, getQuarterById } from '../../entities/QuarterFactory';
 import { createUser, authenticateUser } from '../../entities/UserFactory';
 
 describe('Update Quarter (e2e)', () => {
@@ -28,6 +28,10 @@ describe('Update Quarter (e2e)', () => {
         endDate: '2022-11-01',
       });
 
+    const modifiedQuarter = await getQuarterById(quarter.id);
+
     expect(response.status).toBe(204);
+    expect(modifiedQuarter?.startDate.toISOString().split('T')[0]).toBe('2022-10-01');
+    expect(modifiedQuarter?.endDate.toISOString().split('T')[0]).toBe('2022-11-01');
   });
 });

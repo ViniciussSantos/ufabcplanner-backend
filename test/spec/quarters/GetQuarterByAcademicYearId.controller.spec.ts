@@ -25,10 +25,8 @@ describe('Get quarters by academic year (e2e)', () => {
       .get('/quarters/get/academicyear/' + academicYear.id)
       .set('authorization', 'Bearer ' + token);
 
-    const responseBody = JSON.parse(response.text);
-
     expect(response.status).toBe(200);
-    expect(responseBody.length).toBe(1);
-    expect(responseBody[0].academyYearId).toBe(academicYear.id);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0].academyYearId).toBe(academicYear.id);
   });
 });
