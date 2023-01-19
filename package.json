@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "ts-node src/infra/http/server.ts",
     "format": "eslint . --fix --quiet; prettier --write .",
     "lint": "eslint . && prettier --check",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --exit-child --respawn src/infra/http/server.ts",
