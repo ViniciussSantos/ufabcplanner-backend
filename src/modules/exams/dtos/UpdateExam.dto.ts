@@ -19,7 +19,7 @@ export class UpdateExamDTO implements IUpdateExam {
   @IsDateString({ message: messages.IsDateString })
   dueDate: string;
 
-  @IsMilitaryTime()
+  @IsMilitaryTime({ message: messages.IsMilitaryTime })
   @IsNotEmpty({ message: messages.isNotEmpty })
   time: string;
 
