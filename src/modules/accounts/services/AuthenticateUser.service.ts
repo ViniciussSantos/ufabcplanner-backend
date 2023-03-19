@@ -2,9 +2,9 @@ import { compare } from 'bcryptjs';
 import auth from 'config/auth';
 import { sign } from 'jsonwebtoken';
 import { singleton } from 'tsyringe';
-import { AppError } from 'infra/http/errors/AppError';
 import { AuthenticateUserDTO } from '../dtos/AuthenticateUser.dto';
 import { UserRepository } from '../repositories/UserRepository';
+import { ForbiddenError } from 'infra/http/errors/ForbiddenError';
 
 interface IResponse {
   token: string;
@@ -20,13 +20,13 @@ export class AuthenticateUserService {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError('Senha ou e-mail incorreto');
+      throw new ForbiddenError('Senha ou e-mail incorreto');
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError('Senha ou e-mail incorreto');
+      throw new ForbiddenError('Senha ou e-mail incorreto');
     }
 
     const token = sign(

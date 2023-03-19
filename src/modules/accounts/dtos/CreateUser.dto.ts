@@ -4,15 +4,15 @@ import { ICreateUser } from './interfaces/ICreateUser';
 
 export class CreateUserDTO implements ICreateUser {
   @IsNotEmpty({ message: messages.isNotEmpty })
-  @IsString()
+  @IsString({ message: messages.IsString })
   name: string;
 
   @IsNotEmpty({ message: messages.isNotEmpty })
-  @IsEmail()
-  @IsString()
+  @IsEmail({}, { message: messages.IsEmail })
+  @IsString({ message: messages.IsString })
   email: string;
 
   @IsNotEmpty({ message: messages.isNotEmpty })
-  @IsString()
+  @IsString({ message: messages.IsString })
   password: string;
 }

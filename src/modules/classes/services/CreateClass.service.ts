@@ -1,4 +1,4 @@
-import { AppError } from 'infra/http/errors/AppError';
+import { BusinessLogicError } from 'infra/http/errors/BusinessLogicError';
 import { singleton } from 'tsyringe';
 import { CreateClassDTO } from '../dtos/CreateClass.dto';
 import { ClassRepository } from '../repositories/ClassRepository';
@@ -9,7 +9,7 @@ export class CreateClassService {
 
   async execute(params: CreateClassDTO): Promise<void> {
     if (params.startTime > params.endTime) {
-      throw new AppError('horário final é antes do horário inicial');
+      throw new BusinessLogicError('horário final é antes do horário inicial');
     }
 
     await this.classRepository.create(params);

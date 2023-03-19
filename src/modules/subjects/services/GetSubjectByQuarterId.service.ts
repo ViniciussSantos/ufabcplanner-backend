@@ -1,5 +1,5 @@
 import { Subject } from '@prisma/client';
-import { AppError } from 'infra/http/errors/AppError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 import { QuarterRepository } from 'modules/quarters/repositories/QuarterRepository';
 import { singleton } from 'tsyringe';
 import { GetSubjectByQuarterIdDTO } from '../dtos/GetSubjectByQuarterId.dto';
@@ -11,7 +11,7 @@ export class GetSubjectByQuarterIdService {
 
   async execute(params: GetSubjectByQuarterIdDTO): Promise<Subject[]> {
     if (!(await this.quarterRepository.quarterExists(params.quarterId))) {
-      throw new AppError('Quadrimestre não existe');
+      throw new ObjectNotFoundError('Quadrimestre', params.quarterId);
     }
 
     return this.subjectRepository.getByQuarterId(params.quarterId);

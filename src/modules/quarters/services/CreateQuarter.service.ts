@@ -1,9 +1,10 @@
-import { AppError } from 'infra/http/errors/AppError';
 import { DateService } from 'infra/services/DateService';
 import { createQuarterDTO } from '../dtos/CreateQuarter.dto.';
 import { QuarterRepository } from '../repositories/QuarterRepository';
 import { singleton } from 'tsyringe';
 import { AcademicYearRepository } from 'modules/academicYears/repositories/AcademicYearRepository';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
+import { BusinessLogicError } from 'infra/http/errors/BusinessLogicError';
 
 @singleton()
 export class CreateQuarterService {
@@ -19,11 +20,11 @@ export class CreateQuarterService {
     const endDateUTC = this.dateService.toDate(endDate);
 
     if (!(await this.academicYearRepository.exists(academicYearId))) {
-      throw new AppError('Ano acadêmico não existe');
+      throw new ObjectNotFoundError('ano acadêmico', academicYearId);
     }
 
     if (this.dateService.compareIfBefore(startDateUTC, endDateUTC)) {
-      throw new AppError('Data final é antes da data inicial');
+      throw new BusinessLogicError('Data final é antes da data inicial');
     }
 
     await this.quarterRepository.createQuarter({

@@ -1,4 +1,4 @@
-import { AppError } from 'infra/http/errors/AppError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 import { QuarterRepository } from 'modules/quarters/repositories/QuarterRepository';
 import { singleton } from 'tsyringe';
 import { CreateSubjectDTO } from '../dtos/CreateSubject.dto';
@@ -10,7 +10,7 @@ export class CreateSubjectService {
 
   async execute(params: CreateSubjectDTO): Promise<void> {
     if (!(await this.quarterRepository.quarterExists(params.quarterId))) {
-      throw new AppError('Quadrimestre não existe');
+      throw new ObjectNotFoundError('Quadrimestre', params.quarterId);
     }
 
     await this.subjectRepository.create(params);

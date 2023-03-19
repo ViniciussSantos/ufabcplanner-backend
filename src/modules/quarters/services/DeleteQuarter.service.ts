@@ -1,4 +1,4 @@
-import { AppError } from 'infra/http/errors/AppError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 import { singleton } from 'tsyringe';
 import { DeleteQuarterDTO } from '../dtos/DeleteQuarter.dto';
 import { QuarterRepository } from '../repositories/QuarterRepository';
@@ -9,7 +9,7 @@ export class DeleteQuarterService {
 
   async execute(params: DeleteQuarterDTO) {
     if (!(await this.quarterRepository.quarterExists(params.id))) {
-      throw new AppError('Quadrimestre não existe');
+      throw new ObjectNotFoundError('Quadrimestre', params.id);
     }
 
     await this.quarterRepository.deleteQuarter(params.id);

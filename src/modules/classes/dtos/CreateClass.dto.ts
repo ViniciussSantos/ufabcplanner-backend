@@ -28,11 +28,11 @@ export class CreateClassDTO implements ICreateClass {
   @IsString({ message: messages.IsString })
   building?: string;
 
-  @IsMilitaryTime()
+  @IsMilitaryTime({ message: messages.IsMilitaryTime })
   @IsNotEmpty({ message: messages.isNotEmpty })
   startTime: string;
 
-  @IsMilitaryTime()
+  @IsMilitaryTime({ message: messages.IsMilitaryTime })
   @IsNotEmpty({ message: messages.isNotEmpty })
   endTime: string;
 

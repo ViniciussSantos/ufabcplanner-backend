@@ -1,4 +1,4 @@
-import { AppError } from 'infra/http/errors/AppError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 import { singleton } from 'tsyringe';
 import { UpdateClassDTO } from '../dtos/UpdateClass.dto';
 import { ClassRepository } from '../repositories/ClassRepository';
@@ -9,7 +9,7 @@ export class UpdateClassService {
 
   async execute(params: UpdateClassDTO) {
     if (!(await this.classRepository.exists(params.id))) {
-      throw new AppError('classe não existe');
+      throw new ObjectNotFoundError('classe', params.id);
     }
 
     await this.classRepository.update(params);
