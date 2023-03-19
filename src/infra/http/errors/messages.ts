@@ -4,4 +4,5 @@ export const messages = {
   isNotEmpty: '$property não pode ser vazio',
   IsNumberString: '$property deve ser uma string de número',
   IsDateString: '$property deve ser uma string de data válida',
+  IsEmail: '$property deve ser um email válido',
 };
