@@ -1,13 +1,13 @@
 import { validate } from 'class-validator';
 import { ClassConstructor, plainToInstance } from 'class-transformer';
-import { AppError } from './AppError';
+import { ClassValidationError } from './ClassValidationError';
 
 export async function transformAndValidate<T extends Record<string, any>>(Dto: ClassConstructor<T>, obj: any) {
   const instance = plainToInstance(Dto, obj);
-  const errors = await validate(instance, { whitelist: true });
+  const errors = await validate(instance, { whitelist: true, validationError: { target: false, value: false } });
 
   if (errors.length) {
-    throw new AppError('Erros de validação foram encontrados', 400, 'ValidationError');
+    throw new ClassValidationError(errors);
   }
 
   return instance;
