@@ -1,7 +1,8 @@
 import { singleton } from 'tsyringe';
-import { AppError } from 'infra/http/errors/AppError';
 import { DeleteAcademyYearDTO } from '../dtos/DeleteAcademyYea.dto';
 import { AcademicYearRepository } from '../repositories/AcademicYearRepository';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
+import { OwnershipError } from 'infra/http/errors/OwnershipError';
 
 @singleton()
 export class DeleteAcademicYearService {
@@ -13,10 +14,10 @@ export class DeleteAcademicYearService {
     const academicYear = await this.academicYearRepository.getByAcademicYearId(academicYearId);
 
     if (!academicYear) {
-      throw new AppError('Ano acadêmico não existe');
+      throw new ObjectNotFoundError('Ano acadêmico', academicYearId);
     }
     if (academicYear.userId !== userId) {
-      throw new AppError('Usuário não é dono desse ano academico');
+      throw new OwnershipError('usuário', 'ano academico');
     }
 
     await this.academicYearRepository.delete(academicYearId);

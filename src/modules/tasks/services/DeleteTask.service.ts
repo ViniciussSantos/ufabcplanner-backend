@@ -1,4 +1,4 @@
-import { AppError } from 'infra/http/errors/AppError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 import { singleton } from 'tsyringe';
 import { DeleteTaskDTO } from '../dtos/DeleteTask.dto';
 import { TaskRepository } from '../repositories/TaskRepository';
@@ -9,7 +9,7 @@ export class DeleteTaskService {
 
   async execute({ id }: DeleteTaskDTO): Promise<void> {
     if (!(await this.taskRepository.exists(id))) {
-      throw new AppError('Essa task não existe');
+      throw new ObjectNotFoundError('tarefa', id);
     }
 
     await this.taskRepository.delete(id);

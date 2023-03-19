@@ -1,4 +1,4 @@
-import { AppError } from 'infra/http/errors/AppError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 import { singleton } from 'tsyringe';
 import { DeleteSubjectDTO } from '../dtos/DeleteSubject.dto';
 import { SubjectRepository } from '../repositories/SubjectRepository';
@@ -9,7 +9,7 @@ export class DeleteSubjectService {
 
   async execute(params: DeleteSubjectDTO): Promise<void> {
     if (!(await this.subjectRepository.exists(params.id))) {
-      throw new AppError('A matéria não existe');
+      throw new ObjectNotFoundError('matéria', params.id);
     }
 
     await this.subjectRepository.delete(params.id);

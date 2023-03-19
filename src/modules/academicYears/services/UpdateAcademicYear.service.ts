@@ -1,8 +1,9 @@
 import { singleton } from 'tsyringe';
-import { AppError } from 'infra/http/errors/AppError';
 import { UpdateAcademyYearDTO } from '../dtos/UpdateAcademicYear.dto';
 import { AcademicYearRepository } from '../repositories/AcademicYearRepository';
 import { DateService } from 'infra/services/DateService';
+import { BusinessLogicError } from 'infra/http/errors/BusinessLogicError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 
 @singleton()
 export class UpdateAcademicYearService {
@@ -12,14 +13,14 @@ export class UpdateAcademicYearService {
     const { id, year, startDate, endDate } = params;
 
     if (!(await this.academicYearRepository.exists(id))) {
-      throw new AppError('Este ano acadêmico não existe!');
+      throw new ObjectNotFoundError('ano acadêmico', id);
     }
 
     const startDateUTC = this.dateService.toDate(startDate);
     const endDateUTC = this.dateService.toDate(endDate);
 
     if (this.dateService.compareIfBefore(startDateUTC, endDateUTC)) {
-      throw new AppError('Data final é antes da data inicial');
+      throw new BusinessLogicError('Data final é antes da data inicial');
     }
 
     await this.academicYearRepository.update({

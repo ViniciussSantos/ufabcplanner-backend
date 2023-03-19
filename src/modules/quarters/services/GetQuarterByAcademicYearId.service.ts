@@ -1,5 +1,5 @@
 import { Quarter } from '@prisma/client';
-import { AppError } from 'infra/http/errors/AppError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 import { AcademicYearRepository } from 'modules/academicYears/repositories/AcademicYearRepository';
 import { singleton } from 'tsyringe';
 import { GetQuarterByAcademicYearIdDTO } from '../dtos/GetQuarterByAcademicYearId.dto';
@@ -11,7 +11,7 @@ export class GetQuarterByAcademicYearIdService {
 
   async execute(params: GetQuarterByAcademicYearIdDTO): Promise<Quarter[]> {
     if (!(await this.academicYearRepository.exists(params.academicYearId))) {
-      throw new AppError('Ano acadêmico não existe');
+      throw new ObjectNotFoundError('Ano acadêmico', params.academicYearId);
     }
 
     const quarters = await this.quarterRepository.getQuarterByAcademicYearId(params.academicYearId);

@@ -1,5 +1,5 @@
 import { Class } from '@prisma/client';
-import { AppError } from 'infra/http/errors/AppError';
+import { ObjectNotFoundError } from 'infra/http/errors/ObjectNotFoundError';
 import { SubjectRepository } from 'modules/subjects/repositories/SubjectRepository';
 import { singleton } from 'tsyringe';
 import { GetClassesBySubjectIdDTO } from '../dtos/GetClassesBySubjectId.dto';
@@ -11,7 +11,7 @@ export class GetClassesBySubjectIdService {
 
   async execute({ id }: GetClassesBySubjectIdDTO): Promise<Class[]> {
     if (!(await this.subjectRepository.exists(id))) {
-      throw new AppError('A matéria não existe');
+      throw new ObjectNotFoundError('matéria', id);
     }
 
     return this.classRepository.getBySubjectId(id);

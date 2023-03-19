@@ -1,8 +1,8 @@
 import { hash } from 'bcryptjs';
 import { singleton } from 'tsyringe';
-import { AppError } from 'infra/http/errors/AppError';
 import { CreateUserDTO } from '../dtos/CreateUser.dto';
 import { UserRepository } from '../repositories/UserRepository';
+import { ObjectAlreadyExistsError } from 'infra/http/errors/ObjectAlreadyExistsError';
 
 @singleton()
 export class CreateUserService {
@@ -12,7 +12,7 @@ export class CreateUserService {
     const userExists = await this.usersRepository.exists(email);
 
     if (userExists) {
-      throw new AppError('E-mail já utilizado, usuário já existente!');
+      throw new ObjectAlreadyExistsError('usuário');
     }
 
     const passwordHash = await hash(password, 8);

@@ -1,7 +1,7 @@
 import auth from 'config/auth';
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
-import { AppError } from 'infra/http/errors/AppError';
+import { UnauthorizedError } from '../errors/UnauthorizedError';
 
 interface IPayload {
   sub: string;
@@ -11,7 +11,7 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new AppError('Token não enviado', 401);
+    throw new UnauthorizedError('Token não enviado');
   }
 
   const [, token] = authHeader.split(' ');
@@ -25,6 +25,6 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
 
     next();
   } catch (error) {
-    throw new AppError('Token inválido', 401);
+    throw new UnauthorizedError('Token inválido');
   }
 }
