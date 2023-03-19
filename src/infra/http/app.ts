@@ -7,6 +7,8 @@ import { AppError } from 'infra/http/errors/AppError';
 import { router } from './routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import { InternalServerError } from './errors/InternalServerError';
+import { HttpStatus } from './errors/HttpStatus';
 
 const app = express();
 
@@ -37,16 +39,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof AppError) {
-    return response.status(err.statusCode).json({
-      name: err.name,
-      message: err.message,
-    });
+    return response.status(err.code).json(err.toJson());
   }
 
-  return response.status(500).json({
-    status: 'error',
-    message: `Internal server error - ${err.message}`,
-  });
+  return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new InternalServerError(err).toJson());
 });
 
 export { app };
